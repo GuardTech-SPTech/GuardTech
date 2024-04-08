@@ -96,14 +96,8 @@ fkArmazen INT,
 CONSTRAINT fkidArmazen FOREIGN KEY(fkArmazen) REFERENCES Armazem(idArmazem)
 );
 
-INSERT INTO Registro (lm35_temperatura, dht11_umidade, dataHora) VALUES
-	(25.5, 60.2, '2024-04-07 10:00:00', 1),
-	(24.8, 59.8, '2024-04-07 10:15:00', 2),
-	(26.3, 61.5, '2024-04-07 10:30:00', 3),
-	(27.1, 62.8, '2024-04-07 10:45:00', 4),
-	(26.9, 63.2, '2024-04-07 11:00:00', 5);
 
-SELECT * FROM usuario;
+SELECT empresa.nome, username FROM Empresa JOIN usuario ON idEmpresa = fkEmpresa;
 
 SELECT * FROM Armazem;
 
