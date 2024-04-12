@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador Financeiro | GuardTech+</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="screen">
+        <div class="header">
+            <ul class="nav-bar">
+                <li>Home</li>
+                <li>Sobre nós</li>
+                <li>Solução</li>
+                <li style="color: #2a4c09;">Simulação</li>
+                <li>Contato</li>
+            </ul>
+        </div>
+        <div class="conteiner">
+            <div class="box_L">
+                <img class="logo" src="imagens/logo.png">
+            </div>
+            <div class="box_R">
+                <h2>Preencha o formulario</h2>
+                <div class="box-input">
+                    <p>Nome da sua empresa</p>
+                    <input id="input_empresa">
+                    <p>Selecione seu estado</p>
+                    <select id="select_estado">
+                        <option value="sp">São Paulo</option>
+                        <option value="ms">Mato Grosso do Sul</option>
+                        <option value="pr">Paraná</option>
+                        <option value="mt">Mato grosso</option>
+                        <option value="go">Goiás</option>
+                        <option value="rs">Rio Grande do Sul</option>
+                        <option value="mg">Minas Gerais</option>
+                        <option value="ba">Bahia</option>
+                    </select>
+                    <p>Quantidade de milho produzido na ultima safra</p>
+                    <input id="input_qtd_produzido" placeholder="Toneladas">
+                    <p>Preço médio de venda por saca de milho</p>
+                    <input id="input_preco" placeholder="Reais">
+                </div>
+                <button class="botao-simular">Simular</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
