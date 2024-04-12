@@ -158,8 +158,8 @@ main button {
 }
 
 .boxes{
-    margin-left: 32px;
-    margin-right: 32px;
+    margin-left: 290px;
+    margin-right: 290px;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -175,6 +175,7 @@ main button {
     height: 240px;
 }
 .card p {
+    padding: 5px;
     justify-content: center;
     margin-top: 2rem;
     color: #2A4C09;
