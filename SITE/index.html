@@ -6,6 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+        (function () {
+            emailjs.init({
+                publicKey: "utjNP4FwYfSEdvHyE",
+            });
+        })();
+    </script>
+    <script src="script.js"></script>
 </head>
 
 <body>
@@ -132,9 +142,11 @@
                 <h1>Mande sua dúvida<br>para nós!</h1>
             </div>
             <div class="contato-input">
-                <input id="input_nome" placeholder="Nome"><input id="input_email" placeholder="E-mail"><br>
-                <input id="input_mensagem" placeholder="Escreva uma mensagem"><br>
-                <button><a href="">Enviar</a></button><br>
+                <input id="input_nome" placeholder="Nome" required><input id="input_email" placeholder="E-mail" required><br>
+                <input id="input_mensagem" placeholder="Escreva uma mensagem" required><br>
+                <button onclick="sendMail()"><a href="#">Enviar</a></button><br>
+            </div>
+            <div class="contato-img">
                 <img src="img/fundo.png" alt="">
             </div>
         </div>
@@ -142,23 +154,23 @@
         <div class="redes-sociais">
             <div class="logo">
                 <img src="img/guardsemescrita.png" alt="">
-                
+
             </div>
             <div class="redes-texto">
                 <p>Siga-nos nas redes<br> sociais abaixo,<br> acompanhe a nossa<br> trajetória mais de perto!</p>
                 <div class="mini-logos">
-                   <a href="">
-                       <img src="img/twitter.png" alt="">
-                   </a> 
-                   <a href="">
-                    <img src="img/facebook.png" alt="">
-                </a> 
-                <a href="">
-                    <img src="img/pinterest.png" alt="">
-                </a> 
-                <a href="">
-                    <img src="img/instagram.png" alt="">
-                </a> 
+                    <a href="">
+                        <img src="img/twitter.png" alt="">
+                    </a>
+                    <a href="">
+                        <img src="img/facebook.png" alt="">
+                    </a>
+                    <a href="">
+                        <img src="img/pinterest.png" alt="">
+                    </a>
+                    <a href="">
+                        <img src="img/instagram.png" alt="">
+                    </a>
                 </div>
             </div>
         </div>
