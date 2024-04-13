@@ -138,3 +138,10 @@ input::placeholder{
 .area-button button:hover {
     background-color: #486618;
 }
+
+
+.alert{
+    display: none;
+    font-family: 'Poppins';
+    color: #2A4C09;
+}
