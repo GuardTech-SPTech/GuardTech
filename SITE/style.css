@@ -4,7 +4,9 @@
     margin: 0;
     padding: 0;
 }
-
+body {
+    background-color: #f8f7f0;
+}
 nav a {
     letter-spacing: 1px;
     color: #868686;
@@ -116,7 +118,7 @@ main img {
     align-items: center;
     justify-content: start;
 }
-main a{
+.inicio-texto a{
     font-family: 'Inter';
     letter-spacing: 1px;
     color: #F8F7F0;
@@ -130,7 +132,7 @@ main a:hover {
     opacity: 0.7;
 }
 
-main button {
+.inicio-texto button {
     font-family: 'Inter';
     background-color: #e2b808;
     margin-top: 2rem;
@@ -294,3 +296,250 @@ main button {
     font-size: 24px;
     font-weight: 600;
  }
+
+ .icon-sub {
+    display: flex;
+   flex-direction: column;
+ }
+ .icon-sub img{
+    max-width: 20px;
+    max-height: 20px;
+ }
+
+ .sub {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+ }
+
+ .sub p {
+    margin-top: 5.1rem;
+    margin-left: 10px;
+ }
+ 
+ .sub2 {
+    margin-top: -4rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+ }
+
+ .sub2 p {
+    margin-top: 5.1rem;
+    margin-left: 10px;
+ }
+ 
+ .solucao {
+    display: flex;
+    flex-direction: column;
+ }
+.solucao-img {
+    margin: 30rem;
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+ .solucao-card img{
+    border-radius: 10px;
+    max-width: 300px;
+    max-height: 400px;
+ }
+ 
+ .solucao-card p {
+    line-height: 1.5rem;
+    margin-left: 15px;
+    color: #F8F7F0;
+    font-family: 'Inter';
+    font-weight: 600;
+    font-size: 24px;
+    margin-top: -5rem;
+    text-align: left;
+ }
+.simulacao {
+    margin-top: -15rem;
+    
+}
+
+.simulacao-texto {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+ .simulacao-texto h3 {
+    text-align: center;
+    font-family: 'Montserrat';
+    color: #e2b808;
+    font-size: 24px;
+    font-weight: 600;
+ }
+
+ .simulacao-texto h1 {
+    text-align: center;
+    font-family: 'Inter';
+    color: #2a4c09;
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 57px;
+ }
+ .simulacao-texto p{
+    font-size: 24px;
+    font-family: 'Inter';
+    color: #868686;
+    text-align: center;
+ }
+
+ .simulacao-texto button {
+    font-family: 'Inter';
+    background-color: #e2b808;
+    margin-top: 2rem;
+    border: none;
+    border-radius: 10px;
+    width: 20rem;
+    height: 3rem;
+ }
+
+ .simulacao-texto a {
+    font-family: 'Inter';
+    letter-spacing: 1px;
+    color: #F8F7F0;
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 20px;
+    font-weight: 800;
+
+ }
+
+ .contato{
+
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    margin-left: 25rem;
+ }
+
+ .contato-texto h3{
+    color: #e2b808;
+    font-family: 'Montserrat';
+    font-size: 24px;
+    text-align: left;
+ }
+
+ .contato-texto h1{
+    color: black;
+    font-size: 48px;
+    font-weight: 800;
+    font-family: 'Inter';
+ }
+
+ .contato-input input{
+    color: #2A4C09;
+    font-family: 'Inter';
+    margin: 4px;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    
+ }
+
+ .contato-input input:hover {
+    background-color: #eeeeee75;
+ }
+
+ .contato-input input:focus-visible{
+    outline: 1px solid #e2b808;
+ }
+
+.contato-input #input_nome {
+    width: 280px; 
+    height: 40px;
+}
+
+.contato-input #input_email{
+    width: 720px; 
+    height: 40px;
+}
+
+.contato-input #input_mensagem {
+    width: 1031px; 
+    height: 150px;
+}
+
+.contato-input button {
+    background-color: #2A4C09;
+    margin-top: 1rem;
+    border: none;
+    border-radius: 10px;
+    width: 15rem;
+    height: 4rem;
+}
+
+.contato-input a {
+    font-family: 'Inter';
+    letter-spacing: 1px;
+    color: #F8F7F0;
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 20px;
+    font-weight: 800;
+}
+.contato img {
+    margin-top: -3rem;
+    width: 1031px;
+    height: 200px;
+}
+
+.redes-sociais {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: #e0f19c;
+    max-width: 100%;
+    max-height: fit-content;
+}
+
+.redes-sociais img {
+    max-width: 350px;
+    max-height: 350px;
+}
+
+.redes-texto {
+    font-family: 'Montserrat';
+    font-size: 20px;
+    line-height: 30px;
+}
+
+.mini-logos{
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.mini-logos img{
+    width: 50px;
+    height: 50px;
+}
+
+.rodape {
+    background-color: #2A4C09;
+    max-width: 100%;
+    max-height: 10rem;
+    font-family: 'Montserrat';
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.rodape p {
+
+    color: #A5A49A;
+    margin: 20px;
+}
