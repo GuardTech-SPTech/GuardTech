@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/style.css">
+    <title>Bem-Vindo!</title>
+</head>
+<body>
+    <div class="container-form">
+        <div class="area-logo">
+            <div class="box-logo">
+                <h2 class="titulo-logo">Bem-Vindo á GuardTech+</h2>
+                <div class="logo">
+                    <img src="assets/logo sem (claro) sem escrita 1.png" alt="">
+                </div>
+                <p class="flush">voltar</p>
+            </div>
+        </div>
+        <div class="area-form">
+            <div class="desc-form">
+                <p class="titulo-form">Cadastre-se</p>
+            </div>
+            <div class="form">
+                <input type="text" id="input_empresa" placeholder="EMPRESA">
+                <small class="alert" id="alert_email">o email deve estar no formato empresa@dominio.com</small>
+                <input type="text" onkeyup="showEmail()" id="input_email" placeholder="EMAIL"> 
+                <small class="alert" id="alert_senha"></small>
+                <input type="password" id="input_senha" placeholder="SENHA">
+                <small class="alert" id="alert_confirm">As senhas não são iguais</small>
+                <input type="password" onkeyup="showConfirm()" id="input_confirm" placeholder="CONFIRME SUA SENHA">
+            </div>
+            <div class="area-button">
+                <button onclick="cad()">CADASTRAR</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function cad(){
+        //PEGANDO OS VALORES DOS INPUTS
+        const empresa = input_empresa.value;
+        const email = input_email.value;
+        const senha = input_senha.value;
+        const confirm = input_confirm.value;
+        
+        //CRIANDO VARIAVEIS BOOLEANAS PARA VALIDAÇÃO
+        let temMaiscula = false;
+        let temMinuscula = false;
+        let temNum = false;
+        let temEspecial = false;
+        let senhaValida = true;
+
+        //CRIANDO ARRAY PARA VALORES ESPECIAIS
+        let especiais = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', '-', '=', '[', ']', '{', '}', '|', ';', ':', ',', '.', '<', '>', '?'];
+
+        //LIMPANDO CAMPO DE ALERT DA SENHA
+        alert_senha.innerHTML = '';
+        
+        //FOR PARA VALIDAÇÃO
+        for(let posicaoChar = 0; posicaoChar < senha.length; posicaoChar++ ){
+            let letra = senha[posicaoChar];
+
+            if(letra >= 'A' && letra <= 'Z'){
+                temMaiscula = true;
+            }
+
+            if(letra >= 'a' && letra <= 'z'){
+                temMinuscula = true;
+            }
+
+            if(letra >= '0' && letra <= '9'){
+                temNum = true;
+            }
+
+            if(especiais.indexOf(letra) != -1){
+                temEspecial = true;
+            }
+        }
+
+        if(!temMaiscula){
+            alert_senha.style.display = 'block';
+            alert_senha.innerHTML = 'A senha deve conter pelo menos uma letra maiscula';
+        }
+
+        if(!temMinuscula){
+            alert_senha.style.display = 'block';
+            alert_senha.innerHTML = 'A senha deve conter pelo menos uma letra minuscula';
+        }
+
+        if(!temNum){
+            alert_senha.style.display = 'block';
+            alert_senha.innerHTML = 'A senha deve conter pelo menos um numero';
+        }
+
+        if(!temEspecial){
+            alert_senha.style.display = 'block';
+            alert_senha.innerHTML = 'A senha deve conter pelo menos 1 caractere especial';
+        }
+
+        if(temMaiscula && temMinuscula && temNum && temEspecial){
+            alert_senha.innerHTML = '';
+        }
+    }
+
+
+        function showEmail(){
+            const email = input_email.value;
+            
+            alert_email.style.display = 'block'
+
+            if(email.indexOf('@') != - 1){
+                alert_email.style.display = 'none'
+            }
+        }
+
+        function showConfirm(){
+            const senha = input_senha.value;
+            const confirm = input_confirm.value;
+
+            if(senha != confirm){
+                alert_confirm.style.display = 'block'
+            }else{
+                alert_confirm.style.display = 'none'
+            }
+        }
+    </script>
+</body>
+</html>
