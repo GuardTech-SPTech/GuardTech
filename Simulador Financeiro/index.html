@@ -8,6 +8,7 @@
     <title>Simulador Financeiro | GuardTech+</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
     <div class="screen">
@@ -46,55 +47,79 @@
         <div id="tela_2" class="conteiner_resultado">
             <div class="box_L_resultado">
                 <div class="resultado_L">
-
-                    <!-- <button onclick="VoltarPrimeiraTela()">Voltar</button> -->
                     <p id="p_empresa"></p>
-                    <p>Seu lucro, baseado na quantidade de milho armazenado informado e seu preço médio de venda deveria ser de</p>
-                    <span id="span_lucro_estimado">R$ 12.000,00</span>
-                    <p>A estimativa de perda no armazenamento de milho por ausência de monitoramento 
-                    de temperatura e umidade no Brasil de acordo a <b>EMBRAPA</b> é de <b>10%</b></p>
-                    <p>Oque reduz seu lucro para</p>
-                    <span id="p_lucro_prejuizo">R$ 10.000,00</span>
-                    <p>Com o nosso serviço de monitoramento nestas circunstancias, você deixa de perder</p>
-                    <span id="p_economia">R$ 2.000,00</span>
+                    <p>Seu lucro, baseado na quantidade de milho armazenado informado e seu preço médio de venda deveria
+                        ser de</p>
+                    <span id="span_lucro_estimado"></span>
+                    <p>A estimativa de perda no armazenamento de milho por ausência de monitoramento
+                        de temperatura e umidade no Brasil de acordo a <b>EMBRAPA</b> é de <b>10%</b></p>
+                    <p>O que reduz seu lucro para</p>
+                    <span id="span_lucro_prejuizo"></span>
+                    <p>Com o nosso serviço de monitoramento nestas circunstâncias, você deixa de perder</p>
+                    <span id="span_deixa_de_perder"></span>
                 </div>
             </div>
             <div class="box_R_resultado">
                 <div class="resultado_R">
                     <h2 id="h2_empresa"></h2>
                     <p>Em um ano</p>
-                    <span id="span_ano">R$ 6.000,00</span>
+                    <span id="span_ano"></span>
                     <p>Em cinco anos</p>
-                    <span id="span_5_anos">R$ 30.000,00</span>
+                    <span id="span_5_anos"></span>
                 </div>
                 <button class="ajuda">Ver como a GuardTech pode te ajudar</button>
             </div>
-            
+
         </div>
 
     </div>
 
 </body>
+
 </html>
 
 <script>
     function Simular() {
-
+        // Valores dos inputs
         const empresa = input_empresa.value
-        const qtd_armazenado = Number(input_qtd_armazenado.value)
-        const preco_medio = Number(input_preco_medio.value)
+        const qtd_armazenado = Number(input_qtd_armazenado.value) // Tonelada
+        const preco_medio = Number(input_preco_medio.value) // Saca
 
+        // Conversão
+        const quilos = qtd_armazenado * 1000
+        const sacas = quilos / 60
+
+        // Lucro estimado
+        const lucro_estimado = sacas * preco_medio
+
+        // Lucro com prejuizo
+        const lucro_com_prejuizo = lucro_estimado - (lucro_estimado * 0.10)
+
+        // Deixa de perder
+        const deixa_de_perder = lucro_estimado * 0.10
+
+        // Perspectiva anual
+        const ano = deixa_de_perder * 3
+        const cinco_anos = ano * 5
+
+        // Verificação dos campos
         if (empresa == '' || qtd_armazenado == '' || preco_medio == '') {
             alert('Preencha todos os campos para uma simulação valida')
-        } else {
 
+        } else {
+            // Troca de telas
             tela_1.style.display = 'none'
             tela_2.style.display = 'flex'
-            
+
+            // Exibição
             p_empresa.innerHTML = 'Olá,'
             p_empresa.innerHTML += `<b> ${empresa}</b>`
-            
+            span_lucro_estimado.innerHTML = lucro_estimado.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+            span_lucro_prejuizo.innerHTML = lucro_com_prejuizo.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+            span_deixa_de_perder.innerHTML = deixa_de_perder.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
             h2_empresa.innerHTML = `A ${empresa} deixa de perder`
+            span_ano.innerHTML = ano.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+            span_5_anos.innerHTML = cinco_anos.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
         }
     }
     function VoltarPrimeiraTela() {
