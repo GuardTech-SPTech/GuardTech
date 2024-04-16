@@ -47,7 +47,7 @@ nav img{
 main {
     background: url("img/milharal.png");
     background-size: cover;
-    height: 120vh;
+    height: 100vh;
     background-color: #f8f7f0;
 }
 
@@ -123,6 +123,7 @@ main img {
     display: flex;
     align-items: center;
     justify-content: start;
+    
 }
 .inicio-texto a{
     font-family: 'Inter';
@@ -167,11 +168,11 @@ main a:hover {
 }
 
 .boxes{
-    /* margin-left: 10x;
-    margin-right: 10px; */
+    margin-top: 5rem;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
+    flex-direction: row;
 
 } 
 
@@ -182,8 +183,8 @@ main a:hover {
     margin: 7rem;
     border-radius: 10px;
     background-color: #FFF9C7;
-    width: 232.81px;
-    height: 240px;
+    width: 250px;
+    height: 270px;
 }
 .card p {
     text-align: center;
