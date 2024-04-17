@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,45 +8,122 @@
     <title>Simulador Financeiro | GuardTech+</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+
     <div class="screen">
+
+        <!-- Nav Bar -->
         <div class="header">
             <ul class="nav-bar">
                 <li>Home</li>
                 <li>Sobre nós</li>
                 <li>Solução</li>
-                <li style="color: #2a4c09;">Simulação</li>
+                <li style="color: #2a4c09;" onclick="VoltarPrimeiraTela()">Simulação</li>
                 <li>Contato</li>
             </ul>
         </div>
-        <div class="conteiner">
+
+        <!-- Primeira tela (Preencher informações) -->
+        <div id="tela_1" class="conteiner">
             <div class="box_L">
                 <img class="logo" src="imagens/logo.png">
             </div>
             <div class="box_R">
-                <h2>Preencha o formulario</h2>
+                <h2>Preencha as informações</h2>
                 <div class="box-input">
                     <p>Nome da sua empresa</p>
                     <input id="input_empresa">
-                    <p>Selecione seu estado</p>
-                    <select id="select_estado">
-                        <option value="sp">São Paulo</option>
-                        <option value="ms">Mato Grosso do Sul</option>
-                        <option value="pr">Paraná</option>
-                        <option value="mt">Mato grosso</option>
-                        <option value="go">Goiás</option>
-                        <option value="rs">Rio Grande do Sul</option>
-                        <option value="mg">Minas Gerais</option>
-                        <option value="ba">Bahia</option>
-                    </select>
-                    <p>Quantidade de milho produzido na ultima safra</p>
-                    <input id="input_qtd_produzido" placeholder="Toneladas">
+                    <p>Quantidade de milho armazenado na ultima safra</p>
+                    <input id="input_qtd_armazenado" placeholder="Toneladas">
                     <p>Preço médio de venda por saca de milho</p>
-                    <input id="input_preco" placeholder="Reais">
+                    <input id="input_preco_medio" placeholder="Reais">
                 </div>
-                <button class="botao-simular">Simular</button>
+                <button class="botao-simular" onclick="Simular()">Simular</button>
             </div>
         </div>
+
+        <!-- Segunda tela (Mostrar resultados)-->
+        <div id="tela_2" class="conteiner_resultado">
+            <div class="box_L_resultado">
+                <div class="resultado_L">
+                    <p id="p_empresa"></p>
+                    <p>Seu lucro, baseado na quantidade de milho armazenado informado e seu preço médio de venda deveria
+                        ser de</p>
+                    <span id="span_lucro_estimado"></span>
+                    <p>A estimativa de perda no armazenamento de milho por ausência de monitoramento
+                        de temperatura e umidade no Brasil de acordo a <b>EMBRAPA</b> é de <b>10%</b></p>
+                    <p>O que reduz seu lucro para</p>
+                    <span id="span_lucro_prejuizo"></span>
+                    <p>Com o nosso serviço de monitoramento nestas circunstâncias, você deixa de perder</p>
+                    <span id="span_deixa_de_perder"></span>
+                </div>
+            </div>
+            <div class="box_R_resultado">
+                <div class="resultado_R">
+                    <h2 id="h2_empresa"></h2>
+                    <p>Em um ano</p>
+                    <span id="span_ano"></span>
+                    <p>Em cinco anos</p>
+                    <span id="span_5_anos"></span>
+                </div>
+                <button class="ajuda">Ver como a GuardTech pode te ajudar</button>
+            </div>
+
+        </div>
+
     </div>
+
 </body>
+
 </html>
+
+<script>
+    function Simular() {
+        // Valores dos inputs
+        const empresa = input_empresa.value
+        const qtd_armazenado = Number(input_qtd_armazenado.value) // Tonelada
+        const preco_medio = Number(input_preco_medio.value) // Saca
+
+        // Conversão
+        const quilos = qtd_armazenado * 1000
+        const sacas = quilos / 60
+
+        // Lucro estimado
+        const lucro_estimado = sacas * preco_medio
+
+        // Lucro com prejuizo
+        const lucro_com_prejuizo = lucro_estimado - (lucro_estimado * 0.10)
+
+        // Deixa de perder
+        const deixa_de_perder = lucro_estimado * 0.10
+
+        // Perspectiva anual
+        const ano = deixa_de_perder * 3
+        const cinco_anos = ano * 5
+
+        // Verificação dos campos
+        if (empresa == '' || qtd_armazenado == '' || preco_medio == '' || isNaN(qtd_armazenado) || isNaN(preco_medio)) {
+            alert('Preencha todos os campos para uma simulação valida')
+
+        } else {
+            // Troca de telas
+            tela_1.style.display = 'none'
+            tela_2.style.display = 'flex'
+
+            // Exibição
+            p_empresa.innerHTML = 'Olá,'
+            p_empresa.innerHTML += `<b> ${empresa}</b>`
+            span_lucro_estimado.innerHTML = lucro_estimado.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+            span_lucro_prejuizo.innerHTML = lucro_com_prejuizo.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+            span_deixa_de_perder.innerHTML = deixa_de_perder.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+            h2_empresa.innerHTML = `A ${empresa} deixa de perder`
+            span_ano.innerHTML = ano.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+            span_5_anos.innerHTML = cinco_anos.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+        }
+    }
+    function VoltarPrimeiraTela() {
+        tela_1.style.display = 'flex'
+        tela_2.style.display = 'none'
+    }
+</script>

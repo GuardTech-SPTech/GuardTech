@@ -24,6 +24,9 @@ body {
     align-items: center;
     border-top: 3px solid #2a4c09;
 }
+.logo {
+    wid
+}
 .nav-bar {
     list-style: none;
     display: flex;
@@ -71,14 +74,13 @@ body {
 .box_R h2{
     position: relative;
     display: flex;
-    right: 126px;
-    bottom: 25px;
+    right: 54px;
+    top: 5px;
 }
 .box-input {
     width: 400px;
     height: 300px;
     position: relative;
-    right: 50px;
     bottom: 30px;
     display: flex;
     flex-direction: column;
@@ -122,15 +124,109 @@ body {
     border: 0;
     border-radius: 15px;
     position: relative;
-    right: 62px;
-    bottom: 10px;
+    right: 12px;
+    bottom: 35px;
     color: #f8f7f0;
     font-size: 15px;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
     transition: 0.2s;
 }
 .botao-simular:hover {
-    background-color: #4f5c42;
+    background-color: #414e34;
     cursor: pointer;
-   
+}
+.conteiner_resultado {
+    display: none;
+    position: relative;
+    top: 3%;
+    width: 80%;
+    height: 80%;
+    box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.3);
+}
+.box_L_resultado {
+    background-color: #f8f7f0;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.box_R_resultado {
+    background-color: rgb(224, 241, 156);
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.resultado_L {
+    width: 80%;
+    height: 80%;
+    text-align: center;
+}
+.resultado_L p {
+    font-size: 16px;
+    position: relative;
+    left: 8%;
+    width: 400px;
+    color: #777777;
+    margin-top: 25px;
+}
+.resultado_L span {
+    position: relative;
+    right: 2%;
+    color: #2a4c09;
+    font-size: 30px;
+}
+.resultado_L b {
+    color: #2a4c09;
+}
+.resultado_R {
+    width: 80%;
+    height: 60%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    position: relative;
+    bottom: 5%;
+}
+.resultado_R h2 {
+    position: relative;
+    top: 6%;
+    font-size: 30px;
+    color: #2a4c09;
+}
+.resultado_R p {
+    font-size: 25px;
+    position: relative;
+    left: 10%;
+    width: 400px;
+    color: #2a4c09;
+}
+.resultado_R span {
+    position: relative;
+    color: black;
+    font-size: 30px;
+}
+.ajuda {
+    font-size: 15px;
+    font-family: "Inter", sans-serif;
+    border: 0;
+    border-radius: 15px;
+    background-color: #2a4c09;
+    color: #f8f7f0;
+    width: 340px;
+    height: 80px;
+    position: relative;
+    bottom: 2%;
+    box-shadow: 3px 3px 3px 1px rgba(0, 0, 0, 0.2);
+    transition: 0.2s;
+}
+.ajuda:hover {
+    background-color: #414e34;
+    cursor: pointer;
 }
