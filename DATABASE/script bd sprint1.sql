@@ -13,7 +13,7 @@ INSERT INTO Telefone VALUES
 
 CREATE TABLE Endereco(
 	idEndereco INT PRIMARY KEY AUTO_INCREMENT, 
-    cep CHAR(8),
+    cep CHAR(9),
     numero VARCHAR(5),
     logradouro VARCHAR(45),
     bairro VARCHAR(45),

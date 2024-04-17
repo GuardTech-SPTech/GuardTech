@@ -184,3 +184,8 @@ main button {
     font-size: 22px;
     letter-spacing: 0px;
 } 
+
+.card img {
+    max-width: 10px;
+    max-height: 10px;
+}
