@@ -69,6 +69,10 @@ body {
     text-decoration: none;
     color: #868686;
 }
+.box-nav-bar a:hover {
+    transition: 0.5s;
+    color: #2a4c09;
+}
 .nav-bar-R {
     display: flex;
     background-color: #F5F5F5;
