@@ -24,6 +24,9 @@ body {
     align-items: center;
     border-top: 3px solid #2a4c09;
 }
+.logo {
+    wid
+}
 .nav-bar {
     list-style: none;
     display: flex;
