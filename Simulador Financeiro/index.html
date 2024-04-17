@@ -103,7 +103,7 @@
         const cinco_anos = ano * 5
 
         // Verificação dos campos
-        if (empresa == '' || qtd_armazenado == '' || preco_medio == '') {
+        if (empresa == '' || qtd_armazenado == '' || preco_medio == '' || isNaN(qtd_armazenado) || isNaN(preco_medio)) {
             alert('Preencha todos os campos para uma simulação valida')
 
         } else {
