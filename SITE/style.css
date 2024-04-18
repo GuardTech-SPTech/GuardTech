@@ -206,11 +206,6 @@ main a:hover {
 } 
 
 .card img {
-<<<<<<< HEAD
-    max-width: 10px;
-    max-height: 10px;
-}
-=======
     text-align: center;
     border-radius: 5px;
     max-width: 60%;
@@ -562,4 +557,3 @@ main a:hover {
     color: #A5A49A;
     margin: 20px;
 }
->>>>>>> f283bdaa2b340d3f889f8f00b3ea525a1c098e36

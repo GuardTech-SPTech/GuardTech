@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plataforma | GuardTech+</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+  <script src="http://www.chartjs.org/dist/2.7.1/Chart.js"></script>
+  <script src="http://www.chartjs.org/samples/latest/utils.js"></script>
+</head>
+
+<body>
+  <header>
+    <div class="header">
+      <p>Voltar</p>
+      <h2>GUARDTECH+</h2>
+      <img class="logo" src="imagens/guardsemescrita.png">
+    </div>
+    <div class="box-nav-bar">
+      <div class="nav-bar-L">
+        <ul>
+          <li><a href="">Perfil</a></li>
+          <li><a href="">Contato</a></li>
+        </ul>
+      </div>
+      <div class="nav-bar-R">
+        <ul>
+          <li><a href="" id="monitoramento">Monitoramento</a></li>
+          <li><a href="">Historico</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+  <!-- Insere a tela -->
+
+
+    <!-- Grafico Tmeperatura -->
+    <div class="monitor_temperatura">
+
+      <div class="graf_temp">
+        <div class="char1">
+          <section>
+            <canvas id="dht11Temperatura"></canvas>
+          </section>
+        </div>
+      </div>
+
+      <div class="funcionamento_temperatura">
+        <h1>Situação</h1>
+      </div>
+    </div>
+
+    <!-- Grafico Umidade -->
+    <div class="monitor_umidade">
+
+      <div class="graf_umi">
+        <div class="char2">
+          <section>
+            <canvas id="dht11Umidade"></canvas>
+          </section>
+        </div>
+      </div>
+
+      <div class="funcionamento_umidade">
+        <h1>Situação</h1>
+        <p> </p>
+      </div>
+    </div>
+
+</body>
+
+</html>
+
+<script>
+
+  /* -- dht11Umidade -- */
+  var contextoDht11Umidade = document.getElementById('dht11Umidade').getContext('2d');
+    contextoDht11Umidade.canvas.width = 1000;
+    contextoDht11Umidade.canvas.height = 350;
+    var dht11Umidade = new Chart(
+        contextoDht11Umidade,
+        {
+            type: 'line',
+            data: {
+                datasets: [{
+                    label: 'Umidade',
+                    type: 'line',
+                    borderColor: ['#2a4c09'],
+                    backgroundColor: ['#2a4c09']
+                }]
+            },
+            options: {
+                scales: {
+                    xAxes: [{
+                        distribution: 'series',
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }],
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true
+                        },
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                },
+                animation: {
+                    duration: 0
+                }
+            }
+        }
+    );
+  /* -- dht11Temperatura -- */
+  var contextoDht11Temperatura = document.getElementById('dht11Temperatura').getContext('2d');
+  contextoDht11Temperatura.canvas.width = 1000;
+  contextoDht11Temperatura.canvas.height = 350;
+  var dht11Temperatura = new Chart(
+    contextoDht11Temperatura,
+    {
+      type: 'line',
+      data: {
+        datasets: [{
+          label: "Temperatura",
+          type: 'line',
+          borderColor: ['#2a4c09'],
+          backgroundColor: ['#2a4c09']
+        }]
+      },
+      options: {
+        scales: {
+          xAxes: [{
+            distribution: 'series',
+            ticks: {
+              beginAtZero: true
+            }
+          }],
+          yAxes: [{
+            scaleLabel: {
+              display: true
+            },
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        },
+        animation: {
+          duration: 0
+        }
+      }
+    }
+  );
+
+  var paginacao = {};
+  var tempo = {};
+  function obterDados(grafico, endpoint) {
+    var http = new XMLHttpRequest();
+    http.open('GET', 'http://localhost:3300/sensores/' + endpoint, false);
+    http.send(null);
+    var valores = JSON.parse(http.responseText);
+    if (paginacao[endpoint] == null) {
+      paginacao[endpoint] = 0;
+    }
+    if (te + mpo[endpoint] == null) {
+      tempo[endpoint] = 0;
+    }
+    // Exibir à partir do último elemento exibido anteriormente
+    var ultimaPaginacao = paginacao[endpoint];
+    paginacao[endpoint] = valores.length;
+    var valores = valores.slice(ultimaPaginacao);
+    valores.forEach((valor) => {
+      //Máximo de 60 itens exibidos no gráfico
+      if (grafico.data.labels.length == 10 && grafico.data.datasets[0].data.length == 10) {
+        grafico.data.labels.shift();
+        grafico.data.datasets[0].data.shift();
+      }
+
+      grafico.data.labels.push(tempo[endpoint]++);
+      grafico.data.datasets[0].data.push(parseFloat(valor));
+      grafico.update();
+    })
+  }
+
+  setInterval(() => {
+    obterDados(dht11Umidade, 'dht11/umidade');
+    obterDados(dht11Temperatura, 'dht11/temperatura');
+  }, 1000);
+
+
+
+</script>
