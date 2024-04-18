@@ -16,7 +16,7 @@
                 <div class="logo">
                     <img src="assets/logo sem (claro) sem escrita 1.png" alt="">
                 </div>
-                <p class="flush">voltar</p>
+                <p class="flush">Voltar</p>
             </div>
         </div>
         <div class="area-form">
@@ -24,11 +24,11 @@
                 <p class="titulo-form">Login</p>
             </div>
             <div class="form">
-                <input type="text" id="input_empresa" placeholder="Usuario">
-                <small class="alert" id="alert_email">o email deve estar no formato empresa@dominio.com</small>
-                <input type="text" onkeyup="showEmail()" id="input_email" placeholder="Email corporativo">
+                <input type="text" id="input_empresa" placeholder="USUÁRIO">
+                <small class="alert" id="alert_email">O email deve estar no formato empresa@dominio.com</small>
+                <input type="text" onkeyup="showEmail()" id="input_email" placeholder="E-MAIL COORPORATIVO">
                 <small class="alert" id="alert_senha"></small>
-                <input type="password" id="input_senha" placeholder="senha">
+                <input type="password" id="input_senha" placeholder="SENHA">
              
 
             </div>
@@ -36,7 +36,7 @@
                 <button onclick="cad()">Entrar</button>
             </div>
             <div class="desc-form">
-                <p>Ainda não tem uma conta?</p>
+                <p>Ainda não tem uma conta? </p>
                 <a href="../CADASTRO/index.html">Cadastre-se</a>
             </div>
         </div>
@@ -86,17 +86,17 @@
 
             if (!temMaiscula) {
                 alert_senha.style.display = 'block';
-                alert_senha.innerHTML = 'A senha deve conter pelo menos uma letra maiscula';
+                alert_senha.innerHTML = 'A senha deve conter pelo menos uma letra maiúscula';
             }
 
             if (!temMinuscula) {
                 alert_senha.style.display = 'block';
-                alert_senha.innerHTML = 'A senha deve conter pelo menos uma letra minuscula';
+                alert_senha.innerHTML = 'A senha deve conter pelo menos uma letra minúscula';
             }
 
             if (!temNum) {
                 alert_senha.style.display = 'block';
-                alert_senha.innerHTML = 'A senha deve conter pelo menos um numero';
+                alert_senha.innerHTML = 'A senha deve conter pelo menos um número';
             }
 
             if (!temEspecial) {
