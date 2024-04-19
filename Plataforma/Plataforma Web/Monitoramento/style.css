@@ -138,7 +138,10 @@ header{
 }
 
 .relogioBox {
-
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
     border-radius: 10px;
     background-color: #f5f5f5;
     width: 30vw;
@@ -222,5 +225,28 @@ header{
 
 .elementos_relogio {
     display: flex;
-    justify-content: space-around;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 80%;
+}
+
+.horas h1,
+.minutos h1,
+.segundos h1{
+    font-size: 70px;
+}
+
+.horas,
+.minutos,
+.segundos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}   
+
+.horas div,
+.minutos div,
+.segundos div {
+    margin-top: -50px;
 }

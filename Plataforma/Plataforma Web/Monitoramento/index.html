@@ -93,17 +93,23 @@
     <div class="relogioBox">
       <h1>Relogio</h1>
       <div class="elementos_relogio">
-        <div>
-          <span>Horas</span><br>
-          <span>00</span>
+        <div class="horas">
+          <h4>Horas</h4>
+          <div>
+            <h1 id="horas">00</h1>
+          </div>
         </div>
-        <div>
-          <span>Minutos</span>
-          <span>00</span>
+        <div class="minutos">
+          <h4>Minutos</h4>
+          <div>
+            <h1 id="minutos">00</h1>
+          </div>
         </div>
-        <div>
-          <span>Segundos</span>
-          <span>00</span>
+        <div class="segundos">
+          <h4>Segundos</h4>
+          <div>
+            <h1 id="segundos">00</h1>
+          </div>
         </div>
       </div>
     </div>
@@ -114,14 +120,41 @@
 </html>
 
 <script>
+  
+  //Relogio 
+  const horas = document.getElementById('horas');
+  const minutos = document.getElementById('minutos');
+  const segundos = document.getElementById('segundos');
+  let horaCompleta = ""
+  
+  const relogio = setInterval(function time() {
+    let DataDeHoje = new Date();
+    let hr = DataDeHoje.getHours();
+    let min = DataDeHoje.getMinutes();
+    let sec = DataDeHoje.getSeconds();
+
+    if (min <= 9) {
+      min = `: 0${min} :`
+    }
+    if (sec <= 9) {
+      sec = `0${sec}`
+    }
+
+    horas.innerHTML = hr;
+    minutos.innerHTML = `: ${min} :`;
+    segundos.innerHTML = sec;
+
+    horaCompleta = `${hr}:${min}:${sec}`
+  })
+
   // GRAFICO TEMPERATURA
 
   // Inicializa um array vazio para os dados de temperatura
   var DadoTemperatura = [];
 
   var chart_temp = document.getElementById('chart_temperatra').getContext('2d');
-  chart_temp.canvas.width = 500;
-  chart_temp.canvas.height = 120;
+  chart_temp.canvas.width = 480;
+  chart_temp.canvas.height = 170;
   var grafico_temperatura = new Chart(chart_temp, {
     type: 'line',
     data: {
@@ -152,7 +185,7 @@
     DadoTemperatura.push(novaTemperatura);
 
     // Adiciona a contagem atual ao array de labels
-    grafico_temperatura.data.labels.push('Leitura ' + DadoTemperatura.length);
+    grafico_temperatura.data.labels.push(horaCompleta);
     // Adiciona o novo dado ao conjunto de dados do gráfico
     grafico_temperatura.data.datasets[0].data.push(novaTemperatura);
     // Atualiza o gráfico
@@ -160,19 +193,15 @@
 
 
     let alerta_temperatura = document.getElementById('indicador_temp')
-    let texto_temperatura = document.getElementById('legenda_temp')
     let temperatura_atual = document.getElementById('temp_atual')
 
     temperatura_atual.innerHTML = `${novaTemperatura}ºC`
     if (novaTemperatura <= 15) {
       alerta_temperatura.style.backgroundColor = '#c4ee8e'
-      texto_temperatura.innerHTML = ' -  controlada!'
     } else if (novaTemperatura <= 20) {
       alerta_temperatura.style.backgroundColor = '#eccf4d'
-      texto_temperatura.innerHTML = ' -  proxima do limite!'
     } else {
       alerta_temperatura.style.backgroundColor = '#e66666'
-      texto_temperatura.innerHTML = ' - ACIMA DO LIMITE!'
     }
 
     console.log(novaTemperatura)
@@ -190,8 +219,8 @@
   var DadoUmidade = [];
 
   var chart_umi = document.getElementById('chart_umidade').getContext('2d');
-  chart_umi.canvas.width = 500;
-  chart_umi.canvas.height = 120;
+  chart_umi.canvas.width = 480;
+  chart_umi.canvas.height = 170;
   var grafico_umidade = new Chart(chart_umi, {
     type: 'line',
     data: {
@@ -220,7 +249,7 @@
     // Adiciona o novo dado ao array de dados de temperatura
     DadoUmidade.push(novaUmidade);
     // Adiciona a contagem atual ao array de labels
-    grafico_umidade.data.labels.push('Leitura ' + DadoUmidade.length);
+    grafico_umidade.data.labels.push(horaCompleta);
 
     // Adiciona o novo dado ao conjunto de dados do gráfico
     grafico_umidade.data.datasets[0].data.push(novaUmidade);
@@ -230,19 +259,15 @@
 
 
     let alerta_umidade = document.getElementById('indicador_umi')
-    let texto_umidade = document.getElementById('texto_umi')
     let umi_atual = document.getElementById('umidade_atual')
 
     umi_atual.innerHTML = `${novaUmidade}%`
     if (novaUmidade <= 55) {
       alerta_umidade.style.backgroundColor = '#c4ee8e'
-      texto_umidade.innerHTML = 'Umidade controlada!'
     } else if (novaUmidade <= 65) {
       alerta_umidade.style.backgroundColor = '#eccf4d'
-      texto_umidade.innerHTML = 'Umidade proxima do limite!'
     } else {
       alerta_umidade.style.backgroundColor = '#e66666'
-      texto_umidade.innerHTML = 'UMIDADE ACIMA DO LIMITE!'
     }
 
   }
@@ -250,4 +275,7 @@
   // Chama a função para adicionar dados de temperatura a cada 2 segundos
   setInterval(AdicionarDadoDeUmidade, 10000); // Adiciona um dado a cada 10 segundos
 
+
+
+  
 </script>
