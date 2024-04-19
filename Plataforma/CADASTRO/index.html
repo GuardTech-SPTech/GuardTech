@@ -10,11 +10,11 @@
     <div class="container-form">
         <div class="area-logo">
             <div class="box-logo">
-                <h2 class="titulo-logo">Bem-Vindo á GuardTech+</h2>
+                <h2 class="titulo-logo">Bem-Vindo a GuardTech+</h2>
                 <div class="logo">
                     <img src="assets/logo sem (claro) sem escrita 1.png" alt="">
                 </div>
-                <p class="flush">voltar</p>
+                <p class="flush"><a href="../../SITE/index.html">voltar</a></p>
             </div>
         </div>
         <div class="area-form">
@@ -49,7 +49,6 @@
         let temMinuscula = false;
         let temNum = false;
         let temEspecial = false;
-        let senhaValida = true;
 
         //CRIANDO ARRAY PARA VALORES ESPECIAIS
         let especiais = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', '-', '=', '[', ']', '{', '}', '|', ';', ':', ',', '.', '<', '>', '?'];
@@ -75,6 +74,10 @@
 
             if(especiais.indexOf(letra) != -1){
                 temEspecial = true;
+            }
+
+            if(temEspecial && temNum && temMinuscula && temMaiscula){
+                window.location.href = '../Plataforma Web/Monitoramento/index.html';
             }
         }
 

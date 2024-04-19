@@ -29,7 +29,7 @@
                 <input type="text" onkeyup="showEmail()" id="input_email" placeholder="E-MAIL COORPORATIVO">
                 <small class="alert" id="alert_senha"></small>
                 <input type="password" id="input_senha" placeholder="SENHA">
-             
+
 
             </div>
             <div class="area-button">
@@ -48,7 +48,6 @@
             const empresa = input_empresa.value;
             const email = input_email.value;
             const senha = input_senha.value;
-            const confirm = input_confirm.value;
 
             //CRIANDO VARIAVEIS BOOLEANAS PARA VALIDAÇÃO
             let temMaiscula = false;
@@ -81,6 +80,10 @@
 
                 if (especiais.indexOf(letra) != -1) {
                     temEspecial = true;
+                }
+
+                if (temEspecial && temNum && temMinuscula && temMaiscula) {
+                    window.location.href = '../Plataforma Web/Monitoramento/index.html';
                 }
             }
 
