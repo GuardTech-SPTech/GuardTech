@@ -1,55 +1,27 @@
-<!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <link rel="shortcut icon" type="imagex/png" href="c:\Users\sophy\Downloads\guardtech(logo).ico">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>One Piece</title>
+    <title>GUARDTECH+: Home
+    </title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+        (function () {
+            emailjs.init({
+                publicKey: "utjNP4FwYfSEdvHyE",
+            });
+        })();
+    </script>
+    <script src="script.js"></script>
 </head>
 
 <body>
-    Episódio que deseja começar assistindo:
-    <input type="number" id="input_comecarassistir">
-    <br><br>
-    Quantidade de tempo disponível:
-    <input type="number" id="input_tempodisponivel">
-    <br><br>
-    Unidade de tempo em:
-    <select name="unidade" id="select_unidadedemedida">
-        <option value="selecione">Selecione uma opção</option>
-        <option value="horas">Horas</option>
-        <option value="minutos">Minutos</option>
-    </select>
-    <br><br>
-    Pular abertura?
-    <select name="unidade" id="select_pularabertura">
-        <option value="selecione2">Selecione uma opção</option>
-        <option value="sim">Sim</option>
-        <option value="nao">Não</option>
-    </select>
-    <br><br>
-    Pular encerramento?
-    <select name="pularencerramento" id="select_pularencerramento">
-        <option value="selecione3">Selecione uma opção</option>
-        <option value="sim">Sim</option>
-        <option value="nao">Não</option>
-    </select>
-    <button onclick="assistir()">Assitir episódios</button>
-    <br><br>
-    <div id="resposta"></div>
+    <header>
+        <div class="linha">
 
-<<<<<<< HEAD
-    <script>
-        function assistir() {
-            resposta.innerHTML = "";
-            const episodioInicial = Number(input_comecarassistir.value);
-            let tempoDisponivel = Number(input_tempodisponivel.value);
-            const unidade = select_unidadedemedida.value;
-            const pularAbertura = select_pularabertura.value;
-            const pularEncerramento = select_pularencerramento.value;
-            let episodioAtual = episodioInicial;
-            let episodiosAssistidos = 0;
-=======
         </div>
         <nav>
             <a href="">
@@ -62,7 +34,7 @@
                 <li><a href="#scroll_3">Solução</a></li>
                 <li><a href="/">Simulação Financeira</a></li>
                 <li><a href="#scroll_5">Contato</a></li>
-                <button class="nav-button"><a href="">Entrar</a></button>
+                <button class="nav-button" onclick="get()">Entrar</a></button>
             </ul>
         </nav>
     </header>
@@ -109,7 +81,8 @@
                     estudantes. Reconhecendo os desafios enfrentados<br> pelos produtores e armazenadores de milho,
                     tanto
                     nacional quanto<br> internacionalmente, o grupo se mobilizou para oferecer soluções IoT de<br>
-                    qualidade e eficiência.
+                    qualidade e
+                    eficiência.
                 </p>
                 <div class="icons">
                     <div class="icons-milho">
@@ -139,52 +112,77 @@
                 <h3>Solução</h3>
                 <h1>Conservação Inteligente</h1>
             </div>
->>>>>>> 332822b7a50ca4d5b1b61b1053ec60a368418bf6
-
-            if (episodioInicial < 1 || episodioInicial > 1100 || tempoDisponivel <= 0) {
-                alert("Número do episódio ou tempo disponível é inválido");
-            } else {
-                for (let episodio = episodioInicial; tempoDisponivel > 0;) {
-                    let duracaoEpisodio = 24; // duração padrão do episódio (completo)
-
-                    if (pularAbertura === "sim") {
-                        duracaoEpisodio -= 2; // subtrai a duração da abertura
-                    }
-
-                    if (pularEncerramento === "sim") {
-                        duracaoEpisodio -= 2; // subtrai a duração do encerramento
-                    }
-
-                    let minutosAssistidos = duracaoEpisodio;
-                    if (tempoDisponivel < duracaoEpisodio) {
-                        minutosAssistidos = tempoDisponivel;
-                    }
-
-                    tempoDisponivel -= minutosAssistidos;
-
-                    resposta.innerHTML += `<p>Episódio ${episodio}</p>`;
-
-                    for (let minuto = 1; minuto <= minutosAssistidos; minuto++) {
-                        let status = "";
-                        if (minuto <= 2 && pularAbertura === "nao") {
-                            status = "Abertura do Episódio";
-                        } else if (minuto > 2 && minuto <= 22) {
-                            status = "Assistindo o Episódio";
-                        } else if (minuto > 22 && minuto <= 24 && pularEncerramento === "nao") {
-                            status = "Encerramento do Episódio";
-                        }
-
-                        resposta.innerHTML += `<p>Minuto ${minuto} - ${status}</p>`;
-                    }
-
-                    episodiosAssistidos++;
-                    episodio++;
-                }
-
-                resposta.innerHTML += `<p>Você assistiu ${episodiosAssistidos} episódios</p>`;
-            }
-        }
-    </script>
+            <div class="solucao-img">
+                <div class="solucao-card">
+                    <img src="img\umidade.jpg" alt="">
+                    <p>Captura de dados<br>Temperatura/Umidade</p>
+                </div>  
+                <div class="solucao-card">
+                    <img src="img\armazenamento.jpg" alt="">
+                    <p>Armazenamento em<br> Cloud</p>
+                </div>
+                <div class="solucao-card">
+                    <img src="img\gestao.png" alt="">
+                    <p>Acesso Remoto e<br>Gestão Eficiente</p>
+                </div>
+            </div>
+        </div>
+        <div class="simulacao" id="scroll_4">
+            <div class="simulacao-texto">
+                <h3>Simulação de perdas</h3>
+                <h1>Já pensou em quanto você está deixando de faturar?</h1><br>
+                <p>Utilize a nossa ferramenta de cálculo financeiro para descobrir o quanto que sua empresa está
+                    deixando de<br> lucrar com a nossa solução, utilizamos dados de estudos e pesquisas atualizadas e de
+                    alta confiabilidade</p>
+                <button><a href="/">Simule já</a></button>
+            </div>
+        </div>
+        <div class="contato" id="scroll_5">
+            <div class="contato-texto">
+                <h3>Consulte um especialista</h3>
+                <h1>Mande sua dúvida<br>para nós!</h1>
+            </div>
+            <div class="contato-input">
+                <input id="input_nome" placeholder="Nome" required><input id="input_email" placeholder="E-mail" required><br>
+                <input id="input_mensagem" placeholder="Escreva uma mensagem" required><br>
+                <button onclick="sendMail()"><a href="#">Enviar</a></button><br>
+            </div>
+            <div class="contato-img">
+                <img src="img/fundo.png" alt="">
+            </div>
+        </div>
+        <div class="redes-sociais">
+            <div class="logo">
+                <img src="img/guardsemescrita.png" alt="">
+            </div>
+            <div class="redes-texto">
+                <p>Nos siga nas redes<br> sociais abaixo,<br> acompanhe a nossa<br> trajetória mais de perto!</p>
+                <div class="mini-logos">
+                    <a href="">
+                        <img src="img/twitter.png" alt="">
+                    </a>
+                    <a href="">
+                        <img src="img/facebook.png" alt="">
+                    </a>
+                    <a href="">
+                        <img src="img/pinterest.png" alt="">
+                    </a>
+                    <a href="">
+                        <img src="img/instagram.png" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="rodape">
+            <p>© All Copyright 2024 by GuardTech+</p>
+            <p>Termos de uso | Políticas de privacidade</p>
+        </div>
+    </main>
 </body>
-
 </html>
+
+<script>
+    function get(){
+        window.location.href = '../Plataforma/CADASTRO/index.html';
+    }
+</script>

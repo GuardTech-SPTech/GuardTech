@@ -54,10 +54,11 @@ body {
     width: 100%;
 }
 
-.flush{
+.flush a{
     font-family: 'Montserrat';
     color: #A5A49A;
     font-weight: 600;
+    text-decoration: none;
 }
 
 .area-form{
