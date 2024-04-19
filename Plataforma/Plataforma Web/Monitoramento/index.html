@@ -37,159 +37,204 @@
   <!-- Insere a tela -->
 
 
-    <!-- Grafico Tmeperatura -->
-    <div class="monitor_temperatura">
+  <!-- Grafico Tmeperatura -->
+  <div class="monitor_temperatura">
 
-      <div class="graf_temp">
-        <div class="char1">
-          <section>
-            <canvas id="dht11Temperatura"></canvas>
-          </section>
-        </div>
-      </div>
-
-      <div class="funcionamento_temperatura">
-        <h1>Situação</h1>
+    <div class="graf_temp">
+      <div class="char1">
+        <section>
+          <canvas id="chart_temperatra"></canvas>
+        </section>
       </div>
     </div>
 
-    <!-- Grafico Umidade -->
-    <div class="monitor_umidade">
+    <div class="situacao_box">
+      <h1>Atual</h1>
+      <div class="stats_boxes">
+        <div class="box-temp">
+          <div class="att_temp">
+            <h3>Temperatura</h3>
+            <h1 id="temp_atual">
+              0ºC
+            </h1><br>
+            <div class="indicador" id="indicador_temp">
 
-      <div class="graf_umi">
-        <div class="char2">
-          <section>
-            <canvas id="dht11Umidade"></canvas>
-          </section>
+            </div>
+          </div>
+
+        </div>
+        <div class="box-umi">
+          <div class="att_umi">
+            <h3>Umidade</h3>
+            <h1 id="umidade_atual">
+              0%
+            </h1><br>
+            <div class="indicador" id="indicador_umi">
+
+            </div>
+          </div>
+
         </div>
       </div>
+    </div>
+  </div>
 
-      <div class="funcionamento_umidade">
-        <h1>Situação</h1>
-        <p> </p>
+  <!-- Grafico Umidade -->
+  <div class="monitor_umidade">
+
+    <div class="graf_umi">
+      <div class="char2">
+        <section>
+          <canvas id="chart_umidade"></canvas>
+        </section>
       </div>
     </div>
+
+    <div class="funcionamento_umidade">
+      <h1></h1>
+      <p> </p>
+    </div>
+  </div>
 
 </body>
 
 </html>
 
 <script>
+  // GRAFICO TEMPERATURA
 
-  /* -- dht11Umidade -- */
-  var contextoDht11Umidade = document.getElementById('dht11Umidade').getContext('2d');
-    contextoDht11Umidade.canvas.width = 1000;
-    contextoDht11Umidade.canvas.height = 350;
-    var dht11Umidade = new Chart(
-        contextoDht11Umidade,
-        {
-            type: 'line',
-            data: {
-                datasets: [{
-                    label: 'Umidade',
-                    type: 'line',
-                    borderColor: ['#2a4c09'],
-                    backgroundColor: ['#2a4c09']
-                }]
-            },
-            options: {
-                scales: {
-                    xAxes: [{
-                        distribution: 'series',
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }],
-                    yAxes: [{
-                        scaleLabel: {
-                            display: true
-                        },
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                },
-                animation: {
-                    duration: 0
-                }
-            }
-        }
-    );
-  /* -- dht11Temperatura -- */
-  var contextoDht11Temperatura = document.getElementById('dht11Temperatura').getContext('2d');
-  contextoDht11Temperatura.canvas.width = 1000;
-  contextoDht11Temperatura.canvas.height = 350;
-  var dht11Temperatura = new Chart(
-    contextoDht11Temperatura,
-    {
-      type: 'line',
-      data: {
-        datasets: [{
-          label: "Temperatura",
-          type: 'line',
-          borderColor: ['#2a4c09'],
-          backgroundColor: ['#2a4c09']
-        }]
-      },
-      options: {
-        scales: {
-          xAxes: [{
-            distribution: 'series',
-            ticks: {
-              beginAtZero: true
-            }
-          }],
-          yAxes: [{
-            scaleLabel: {
-              display: true
-            },
-            ticks: {
-              beginAtZero: true
-            }
-          }]
-        },
-        animation: {
-          duration: 0
+  // Inicializa um array vazio para os dados de temperatura
+  var DadoTemperatura = [];
+
+  var chart_temp = document.getElementById('chart_temperatra').getContext('2d');
+  chart_temp.canvas.width = 500;
+  chart_temp.canvas.height = 120;
+  var grafico_temperatura = new Chart(chart_temp, {
+    type: 'line',
+    data: {
+      labels: [],
+      datasets: [{
+        label: 'Temperatura (°C)',
+        data: [],
+        backgroundColor: 'rgba(134, 134, 134, 0.2)',
+        borderColor: 'rgba(134, 134, 134, 1)',
+        borderWidth: 5
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
         }
       }
     }
-  );
+  });
 
-  var paginacao = {};
-  var tempo = {};
-  function obterDados(grafico, endpoint) {
-    var http = new XMLHttpRequest();
-    http.open('GET', 'http://localhost:3300/sensores/' + endpoint, false);
-    http.send(null);
-    var valores = JSON.parse(http.responseText);
-    if (paginacao[endpoint] == null) {
-      paginacao[endpoint] = 0;
-    }
-    if (te + mpo[endpoint] == null) {
-      tempo[endpoint] = 0;
-    }
-    // Exibir à partir do último elemento exibido anteriormente
-    var ultimaPaginacao = paginacao[endpoint];
-    paginacao[endpoint] = valores.length;
-    var valores = valores.slice(ultimaPaginacao);
-    valores.forEach((valor) => {
-      //Máximo de 60 itens exibidos no gráfico
-      if (grafico.data.labels.length == 10 && grafico.data.datasets[0].data.length == 10) {
-        grafico.data.labels.shift();
-        grafico.data.datasets[0].data.shift();
-      }
+  // Função para adicionar um novo dado de temperatura
+  function AdicionarDadoDeTemperatura() {
+    // Gera um novo dado de temperatura aleatório entre 0 e 30 graus Celsius
+    var novaTemperatura = (Math.random() * 30).toFixed(2);
 
-      grafico.data.labels.push(tempo[endpoint]++);
-      grafico.data.datasets[0].data.push(parseFloat(valor));
-      grafico.update();
-    })
+    // Adiciona o novo dado ao array de dados de temperatura
+    DadoTemperatura.push(novaTemperatura);
+
+    // Adiciona a contagem atual ao array de labels
+    grafico_temperatura.data.labels.push('Leitura ' + DadoTemperatura.length);
+    // Adiciona o novo dado ao conjunto de dados do gráfico
+    grafico_temperatura.data.datasets[0].data.push(novaTemperatura);
+    // Atualiza o gráfico
+    grafico_temperatura.update();
+
+
+    let alerta_temperatura = document.getElementById('indicador_temp')
+    let texto_temperatura = document.getElementById('legenda_temp')
+    let temperatura_atual = document.getElementById('temp_atual')
+
+    temperatura_atual.innerHTML = `${novaTemperatura}ºC`
+    if (novaTemperatura <= 15) {
+      alerta_temperatura.style.backgroundColor = '#c4ee8e'
+      texto_temperatura.innerHTML = ' -  controlada!'
+    } else if (novaTemperatura <= 20) {
+      alerta_temperatura.style.backgroundColor = '#eccf4d'
+      texto_temperatura.innerHTML = ' -  proxima do limite!'
+    } else {
+      alerta_temperatura.style.backgroundColor = '#e66666'
+      texto_temperatura.innerHTML = ' - ACIMA DO LIMITE!'
+    }
+
+    console.log(novaTemperatura)
   }
 
-  setInterval(() => {
-    obterDados(dht11Umidade, 'dht11/umidade');
-    obterDados(dht11Temperatura, 'dht11/temperatura');
-  }, 1000);
+  // Chama a função para adicionar dados de temperatura a cada 2 segundos
+  setInterval(AdicionarDadoDeTemperatura, 10000); // Adiciona um dado a cada 10 segundos
 
 
+
+
+  // GRAFICO UMIDADE
+
+  // Inicializa um array vazio para os dados de temperatura
+  var DadoUmidade = [];
+
+  var chart_umi = document.getElementById('chart_umidade').getContext('2d');
+  chart_umi.canvas.width = 500;
+  chart_umi.canvas.height = 120;
+  var grafico_umidade = new Chart(chart_umi, {
+    type: 'line',
+    data: {
+      labels: [],
+      datasets: [{
+        label: 'Umidade (%)',
+        data: [],
+        backgroundColor: 'rgba(134, 134, 134, 0.2)',
+        borderColor: 'rgba(134, 134, 134, 1)',
+        borderWidth: 5
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+  // Função para adicionar um novo dado de temperatura
+  function AdicionarDadoDeUmidade() {
+    // Gera um novo dado de umidade aleatorio entre 0 e 100
+    var novaUmidade = (Math.random() * 100).toFixed(2);
+    // Adiciona o novo dado ao array de dados de temperatura
+    DadoUmidade.push(novaUmidade);
+    // Adiciona a contagem atual ao array de labels
+    grafico_umidade.data.labels.push('Leitura ' + DadoUmidade.length);
+
+    // Adiciona o novo dado ao conjunto de dados do gráfico
+    grafico_umidade.data.datasets[0].data.push(novaUmidade);
+
+    // Atualiza o gráfico
+    grafico_umidade.update();
+
+
+    let alerta_umidade = document.getElementById('indicador_umi')
+    let texto_umidade = document.getElementById('texto_umi')
+    let umi_atual = document.getElementById('umidade_atual')
+
+    umi_atual.innerHTML = `${novaUmidade}%`
+    if (novaUmidade <= 55) {
+      alerta_umidade.style.backgroundColor = '#c4ee8e'
+      texto_umidade.innerHTML = 'Umidade controlada!'
+    } else if (novaUmidade <= 65) {
+      alerta_umidade.style.backgroundColor = '#eccf4d'
+      texto_umidade.innerHTML = 'Umidade proxima do limite!'
+    } else {
+      alerta_umidade.style.backgroundColor = '#e66666'
+      texto_umidade.innerHTML = 'UMIDADE ACIMA DO LIMITE!'
+    }
+
+  }
+
+  // Chama a função para adicionar dados de temperatura a cada 2 segundos
+  setInterval(AdicionarDadoDeUmidade, 10000); // Adiciona um dado a cada 10 segundos
 
 </script>

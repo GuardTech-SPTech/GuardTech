@@ -1,8 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
+*{
+    font-family: "Inter", sans-serif;
+}
 body {
     margin: 0;
-    font-family: "Inter", sans-serif;
+    
 }
 header{
     width: 100%;
@@ -73,7 +76,7 @@ header{
 }
 .box-nav-bar a {
     text-decoration: none;
-    color: #868686;
+    color: rgb(134, 134, 134);
 }
 
 .box-nav-bar a#monitoramento {
@@ -107,10 +110,7 @@ header{
     height: 300px;
 }
 
-.funcionamento_temperatura {
-    display: flex;
-    flex: column;
-    justify-content: center;
+.situacao_box {
     border-radius: 10px;
     background-color: #F5F5F5;
     width: 30vw;
@@ -118,18 +118,9 @@ header{
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.3);
 }
 
-.char1{
-    padding: 10px;
-    /* display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center; */
-    width: 100%;
-    height: 200px;
-}
-
-.char1 section {
-    width: 100%;
+.situacao_box h1{
+    display: flex;
+    justify-content: center;
 }
 
 .monitor_umidade {
@@ -157,16 +148,71 @@ header{
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.3);
 }
 
-.char1{
-    padding: 10px;
-    /* display: flex;
-    flex-direction: column;
+
+.alerta_temperatura {
+    font-family: 'Inter',sans-serif;
+    display: flex;
     align-items: center;
-    justify-content: center; */
-    width: 100%;
-    height: 200px;
+    justify-content: center;
+    background-color: #c4ee8e;
+    width: 400px;
+    height: 60px;
+    border-radius: 10px;
+   
 }
 
-.char1 section {
-    width: 100%;
+.alerta_umidade {
+    font-family: 'Inter',sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e66666;
+    width: 400px;
+    height: 60px;
+    border-radius: 10px;
+}
+
+.indicador {
+    width: 100px;
+    height: 20px;
+    border-radius: 40px;
+    background: black;
+}
+
+.att_temp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.box-temp {
+    background-color: #f7f4dd;
+    border-radius: 15px;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stats_boxes {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.att_umi {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.box-umi {
+    background-color: #f7f4dd;
+    border-radius: 15px;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
 }
