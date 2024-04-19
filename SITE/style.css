@@ -86,15 +86,13 @@ main img {
     justify-content: center;
     width: 10rem;
     height: 3rem;
-}
-
-.nav-button a { 
     color: #2a4c09;
     font-size: 20px;
     font-family: 'Inter';
     letter-spacing: 1px;
     font-weight: 700;
 }
+
 
 .container {
     display: flex;

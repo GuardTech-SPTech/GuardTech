@@ -137,10 +137,8 @@ header{
     height: 300px;
 }
 
-.funcionamento_umidade {
-    display: flex;
-    flex: column;
-    justify-content: center;
+.relogioBox {
+
     border-radius: 10px;
     background-color: #f5f5f5;
     width: 30vw;
@@ -148,6 +146,11 @@ header{
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.3);
 }
 
+.relogioBox h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .alerta_temperatura {
     font-family: 'Inter',sans-serif;
@@ -215,4 +218,9 @@ header{
     display: flex;
     flex-direction: column;
     justify-content: start;
+}
+
+.elementos_relogio {
+    display: flex;
+    justify-content: space-around;
 }
