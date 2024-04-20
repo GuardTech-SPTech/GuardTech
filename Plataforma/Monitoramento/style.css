@@ -7,6 +7,12 @@ body {
     margin: 0;
     
 }
+.flush2 a{
+    font-family: 'Montserrat';
+    color: #A5A49A;
+    font-weight: 600;
+    text-decoration: none;
+}
 header{
     width: 100%;
     height: fit-content;
@@ -14,6 +20,7 @@ header{
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+
 }
 
 .boxes {
@@ -28,6 +35,7 @@ header{
     display: flex;
     justify-content: space-around;
     align-items: center;
+    
 }
 .logo {
     height: 135px;
@@ -66,6 +74,7 @@ header{
     height: 90%;
     box-shadow: -1px 2px 2px 1px rgba(0, 0, 0, 0.3);
 }
+
 .box-nav-bar ul {
     display: flex;
     width: 90%;
@@ -95,6 +104,11 @@ header{
     width: 49%;
     height: 90%;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.3);
+}
+
+.nav-bar-R .monitoramento a{
+    color: #2a4c09;
+    font-weight: 800;
 }
 
 .monitor_temperatura {

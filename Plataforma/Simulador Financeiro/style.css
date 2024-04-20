@@ -24,9 +24,7 @@ body {
     align-items: center;
     border-top: 3px solid #2a4c09;
 }
-.logo {
-    wid
-}
+
 .nav-bar {
     list-style: none;
     display: flex;
@@ -34,6 +32,7 @@ body {
     align-items: center;
     justify-content: space-between;
 }
+
 .nav-bar li {
     color: #868686;
     transition: 0.5s;

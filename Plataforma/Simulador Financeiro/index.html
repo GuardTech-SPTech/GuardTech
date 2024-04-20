@@ -16,11 +16,11 @@
         <!-- Nav Bar -->
         <div class="header">
             <ul class="nav-bar">
-                <li>Home</li>
-                <li>Sobre nós</li>
-                <li>Solução</li>
+                <li onclick="VoltarHome()"> Home</li>
+                <li onclick="VoltarSobre()">Sobre nós</li>
+                <li onclick="VoltarSolucao()">Solução</li>
                 <li style="color: #2a4c09;" onclick="VoltarPrimeiraTela()">Simulação</li>
-                <li>Contato</li>
+                <li onclick="VoltarContato()">Contato</li>
             </ul>
         </div>
 
@@ -67,7 +67,7 @@
                     <p>Em cinco anos</p>
                     <span id="span_5_anos"></span>
                 </div>
-                <button class="ajuda">Ver como a GuardTech pode te ajudar</button>
+                <button onclick="voltarPagSolucao()" class="ajuda">Ver como a GuardTech pode te ajudar</button>
             </div>
 
         </div>
@@ -125,5 +125,20 @@
     function VoltarPrimeiraTela() {
         tela_1.style.display = 'flex'
         tela_2.style.display = 'none'
+    }
+    function VoltarHome(){
+        window.location.href = '../SITE/index.html';
+    }
+    function VoltarSobre(){
+        window.location.href = '../SITE/index.html#scroll_2';
+    }
+    function VoltarSolucao(){
+        window.location.href = '../SITE/index.html#scroll_3';
+    }
+    function VoltarContato(){
+        window.location.href = '../SITE/index.html#scroll_5';
+    }
+    function voltarPagSolucao(){
+        window.location.href = '../SITE/index.html#scroll_3';   
     }
 </script>
