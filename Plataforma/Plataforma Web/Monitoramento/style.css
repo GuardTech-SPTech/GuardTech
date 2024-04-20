@@ -121,6 +121,7 @@ header{
 .situacao_box h1{
     display: flex;
     justify-content: center;
+    color: #2a4c09;
 }
 
 .monitor_umidade {
@@ -234,6 +235,7 @@ header{
 .minutos h1,
 .segundos h1{
     font-size: 70px;
+    font-family: 'Inter',sans-serif;
 }
 
 .horas,
