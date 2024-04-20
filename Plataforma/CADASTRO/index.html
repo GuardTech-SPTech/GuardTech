@@ -14,7 +14,7 @@
                 <div class="logo">
                     <img src="assets/logo sem (claro) sem escrita 1.png" alt="">
                 </div>
-                <p class="flush"><a href="../SITE/index.html">voltar</a></p>
+                <p class="flush"><a href="../SITE/index.html">Voltar</a></p>
             </div>
         </div>
         <div class="area-form">
@@ -23,7 +23,7 @@
             </div>
             <div class="form">
                 <input type="text" id="input_empresa" placeholder="EMPRESA">
-                <small class="alert" id="alert_email">o email deve estar no formato empresa@dominio.com</small>
+                <small class="alert" id="alert_email">O email deve estar no formato empresa@dominio.com</small>
                 <input type="text" onkeyup="showEmail()" id="input_email" placeholder="EMAIL"> 
                 <small class="alert" id="alert_senha"></small>
                 <input type="password" id="input_senha" placeholder="SENHA">
@@ -31,7 +31,7 @@
                 <input type="password" onkeyup="showConfirm()" id="input_confirm" placeholder="CONFIRME SUA SENHA">
             </div>
             <div class="area-button">
-                <button onclick="cad()">CADASTRAR</button>
+                <button onclick="cad()">Cadastrar</button>
             </div>
         </div>
     </div>
@@ -83,17 +83,17 @@
 
         if(!temMaiscula){
             alert_senha.style.display = 'block';
-            alert_senha.innerHTML = 'A senha deve conter pelo menos uma letra maiscula';
+            alert_senha.innerHTML = 'A senha deve conter pelo menos uma letra maiúscula';
         }
 
         if(!temMinuscula){
             alert_senha.style.display = 'block';
-            alert_senha.innerHTML = 'A senha deve conter pelo menos uma letra minuscula';
+            alert_senha.innerHTML = 'A senha deve conter pelo menos uma letra minúscula';
         }
 
         if(!temNum){
             alert_senha.style.display = 'block';
-            alert_senha.innerHTML = 'A senha deve conter pelo menos um numero';
+            alert_senha.innerHTML = 'A senha deve conter pelo menos um número';
         }
 
         if(!temEspecial){
