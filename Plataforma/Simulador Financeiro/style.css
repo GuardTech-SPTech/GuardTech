@@ -28,7 +28,7 @@ body {
 .nav-bar {
     list-style: none;
     display: flex;
-    width: 30%;
+    width: 50%;
     align-items: center;
     justify-content: space-between;
 }
