@@ -179,3 +179,30 @@ SPRINT 2*/
 ('Silo'); 
 decidir se vai na tabela armazenamento como fk*/
 
+
+SHOW TABLES;
+SELECT * FROM armazen;
+SELECT * FROM empresa;
+SELECT * FROM endereco;
+SELECT * FROM funcionario;
+SELECT * FROM parametro;
+SELECT * FROM sensor;
+SELECT * FROM tipofuncionario;
+SELECT * FROM telefone;
+
+
+-- select com empresas e seus funcionários/tipos
+SELECT empresa.idEmpresa AS 'ID da Empresa',
+empresa.nome AS Nome,
+empresa.cnpj AS CNPJ,
+empresa.email AS 'Email da empresa',
+funcionario.idFuncionario AS 'ID do Funcionário',
+funcionario 
+
+-- select com nome, email e senha das empresas
+
+-- select com nome dos funcionarios e tipo
+
+
+
+
