@@ -172,11 +172,10 @@ INSERT INTO funcionario (fkEmpresa, username, senha, email, nomeCompleto, cpf, f
 (4, 'letCordeiro', 'cordeiro123', 'cordeiro.leticia@gmail.com', 'Leticia Costa Cordeiro', '454.545.454-54', 2),
 (5, 'vihSilva', 'silva123', 'silva.vitoria@gmail.com', 'Vitória Serqueira Silva', '565.656.565-65', 1);
 
-/*INSERT INTO parametro (minTemp, maxTemp, minUmid, maxUmid) VALUES
-(, , , ); 
-perguntar pra Laís se ela encontrou os parâmetros do silo*/
+INSERT INTO parametro (minTemp, maxTemp, minUmid, maxUmid) VALUES
+(, , , 20); 
 
-/*INSERT INTO sensor (modelo, posicao, fkParametro) VALUES
+INSERT INTO sensor (modelo, posicao, fkParametro) VALUES
 ('DHT11', 'Entrada a esquerda', 1),
 ('DHT11', 'Saida a direita', 1),
 ('DHT11', 'Saida a esquerda', 1),
@@ -184,21 +183,16 @@ perguntar pra Laís se ela encontrou os parâmetros do silo*/
 ('DHT11', 'Parede lateral a esquerda da saida', 1),
 ('DHT11', 'Saida', 1),
 ('DHT11', 'Entrada a direira', 1); 
-verificar com o Edson e com a Laís*/
 
-/*INSERT INTO registro (fkSensor, dht11_temperatura, dht11_umidade, dataHora) VALUES 
-(, , , ); 
-dados inseridos em tempo real?¹*/
+INSERT INTO perguntaFrequente (pergunta, resposta) VALUES
+('Meu sensor parou de funcionar! E agora', 'Comunique a nossa equipe para que possammos fazer o reparo!'),
+('Como vizualizar os dados capturados?', 'Os dados capturados são armazenados e enviados para a Dashboard que está inserida em sua plataforma web!'),
+('Como posso entrar em contato com a GuardTech', 'Basta você enviar um email para o endereço guardtech@gmail.com que a nossa equipe de especialistas irá retornar o contato');
 
-/*INSERT INTO perguntaFrequente (pergunta, resposta) VALUES
-(); 
-SPRINT 2*/
-
-/*INSERT INTO tipoArmazem (nome) VALUES
+INSERT INTO tipoArmazem (nome) VALUES
 ('Silo'); 
-decidir se vai na tabela armazenamento como fk*/
 
-
+-- SELECT'S
 SHOW TABLES;
 SELECT * FROM armazen;
 SELECT * FROM empresa;
