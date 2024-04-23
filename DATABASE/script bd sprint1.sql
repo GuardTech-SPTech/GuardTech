@@ -172,8 +172,12 @@ INSERT INTO funcionario (fkEmpresa, username, senha, email, nomeCompleto, cpf, f
 (4, 'letCordeiro', 'cordeiro123', 'cordeiro.leticia@gmail.com', 'Leticia Costa Cordeiro', '454.545.454-54', 2),
 (5, 'vihSilva', 'silva123', 'silva.vitoria@gmail.com', 'Vitória Serqueira Silva', '565.656.565-65', 1);
 
-INSERT INTO parametro (minTemp, maxTemp, minUmid, maxUmid) VALUES
-(, , , 20); 
+INSERT INTO prazo (limite) VALUES
+(
+
+INSERT INTO parametro (minTemp, maxTemp, minUmid, maxUmid, fkPrazo) VALUES
+(, 35, , 20,); 
+ 
 
 INSERT INTO sensor (modelo, posicao, fkParametro) VALUES
 ('DHT11', 'Entrada a esquerda', 1),
