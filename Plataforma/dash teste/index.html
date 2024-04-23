@@ -39,9 +39,20 @@
         <div class="dash-boxes">
             <div class="info-box">
                 <h1>Info</h1>
+                
             </div>
             <div class="media-box">
                 <h1>Média</h1>
+                <div class="media-all">
+                    <p>Temperatura</p>
+                    <div class="media-temp" id="cor_temp">
+                        <h1 id="mediaTemp">00</h1>
+                    </div>
+                    <p>Umidade</p>
+                    <div class="media-umi" id="cor_umi">
+                        <h1 id="mediaUmi">00</h1>
+                    </div>
+                </div>
             </div>
             <div class="atual-box">
                 <h1>Atual</h1>
@@ -52,6 +63,7 @@
                         <div class="alerta-temperatura" id="indicador_temp">
 
                         </div>
+
                     </div>
                     <div class="umi-box">
                         <p>Umidade</p>
@@ -165,29 +177,34 @@
 
         let alerta_temperatura = document.getElementById('indicador_temp')
         let temperatura_atual = document.getElementById('temp_atual')
+        let alerta_media = document.getElementById('cor_temp')
 
         temperatura_atual.innerHTML = `${novaTemperatura}ºC`
 
-        if (novaTemperatura <= 15) {
+        if (novaTemperatura <= 14) {
             alerta_temperatura.style.backgroundColor = '#c4ee8e'
-        } else if (novaTemperatura <= 20) {
+        } else if (novaTemperatura <= 18) {
             alerta_temperatura.style.backgroundColor = '#eccf4d'
         } else {
             alerta_temperatura.style.backgroundColor = '#e66666'
         }
 
+
+        let media_temperatura = document.getElementById('mediaTemp')
+
         mediatemp += novaTemperatura
 
         if (grafico_temperatura.data.datasets[0].data.length >= 7) {
+            let media = (mediatemp / 6).toFixed(2)
+            mediatemp = 0 
+            media_temperatura.innerHTML = media
             grafico_temperatura.data.datasets[0].data = []
             grafico_temperatura.data.labels = []
-            mediatemp = mediatemp / 10
-            console.log(mediatemp)
         }
     }
 
     // Chama a função para adicionar dados de temperatura a cada 10 segundos
-    setInterval(AdicionarDadoDeTemperatura, 10000); // Adiciona um dado a cada 10 segundos
+    setInterval(AdicionarDadoDeTemperatura, 2000); // Adiciona um dado a cada 10 segundos
 
 
 
@@ -225,6 +242,8 @@
     });
 
     // Função para adicionar um novo dado de temperatura
+    let medumidade = 0
+
     function AdicionarDadoDeUmidade() {
         // Gera um novo dado de umidade aleatorio entre 0 e 100
         var novaUmidade = Number((Math.random() * 100).toFixed(2));
@@ -242,7 +261,6 @@
 
         let alerta_umidade = document.getElementById('indicador_umidade')
         let umi_atual = document.getElementById('umidade_atual')
-        let medumidade = 0
         umi_atual.innerHTML = `${novaUmidade}%`
 
         if (novaUmidade <= 55) {
@@ -253,16 +271,20 @@
             alerta_umidade.style.backgroundColor = '#e66666'
         }
 
+        let media_umidade = document.getElementById('mediaUmi')
         medumidade += novaUmidade
+
         if (grafico_umidade.data.datasets[0].data.length >= 7) {
+            let media = (medumidade / 6).toFixed(2)
+            media_umidade.innerHTML = media
+            medumidade = 0 
             grafico_umidade.data.datasets[0].data = []
             grafico_umidade.data.labels = []
-            console.log(medumidade)
         }
     }
 
     // Chama a função para adicionar dados de temperatura a cada 2 segundos
-    setInterval(AdicionarDadoDeUmidade, 10000); // Adiciona um dado a cada 10 segundos
+    setInterval(AdicionarDadoDeUmidade, 2000); // Adiciona um dado a cada 10 segundos
 
 
 
