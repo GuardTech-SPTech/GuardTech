@@ -3,7 +3,7 @@ CREATE DATABASE guardtech;
 USE guardtech;
 
 -- TABELAS CRIADAS 
-CREATE TABLE empresa (
+CREATE TABLE empresa(
 	idEmpresa INT PRIMARY KEY AUTO_INCREMENT, 
     nome VARCHAR(45),
     cnpj CHAR(14),
@@ -11,7 +11,7 @@ CREATE TABLE empresa (
     senha VARCHAR (45)
 ); 
 
-CREATE TABLE endereco (
+CREATE TABLE endereco(
 	idEndereco INT PRIMARY KEY AUTO_INCREMENT, 
     cep CHAR(9),
 	numero VARCHAR(45),
@@ -21,17 +21,19 @@ CREATE TABLE endereco (
     cidade VARCHAR(45),
     complemento VARCHAR(45),
     fkEmpresa INT, 
-    CONSTRAINT EnderecoEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa)
+    CONSTRAINT fkEnderecoEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa)
 );
 
-CREATE TABLE armazen(
+CREATE TABLE armazem(
 	idArmazen INT PRIMARY KEY AUTO_INCREMENT,
     capacidade DECIMAL (6,2),
     descricao VARCHAR(45),
     fkEmpresa INT, 
-    CONSTRAINT ArmazenEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa),
+    CONSTRAINT fkArmazenEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa),
     fkEndereco INT, 
-    CONSTRAINT ArmazenEndereco FOREIGN KEY (fkEndereco) REFERENCES endereco(idEndereco)
+    CONSTRAINT fkArmazenEndereco FOREIGN KEY (fkEndereco) REFERENCES endereco(idEndereco),
+    fkTipoArmazenamento INT,
+    CONSTRAINT fkArmazenTipoArmazenamento FOREIGN KEY (fkTipoArmazenamento) REFERENCES tipoArmazenamento(idTipoArmazem)
 );
 
 CREATE TABLE telefone(
@@ -40,9 +42,9 @@ CREATE TABLE telefone(
     prefixo CHAR(5),
     sufixo CHAR(4),
     fkEmpresa INT,
-    CONSTRAINT telefoneEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa),
+    CONSTRAINT fkTelefoneEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa),
     fkArmazen INT, 
-    CONSTRAINT telefoneArmazen FOREIGN KEY (fkArmazen) REFERENCES armazen(idArmazen)
+    CONSTRAINT fkTelefoneArmazen FOREIGN KEY (fkArmazen) REFERENCES armazen(idArmazen)
 );
 
 CREATE TABLE tipoFuncionario(
@@ -53,15 +55,15 @@ CREATE TABLE tipoFuncionario(
 CREATE TABLE funcionario(
 	idFuncionario INT AUTO_INCREMENT,
 	fkEmpresa INT,
-    CONSTRAINT pkComposta PRIMARY KEY (idFuncionario, fkEmpresa) ,
+    CONSTRAINT pkCompostaFuncionarioEmpresa PRIMARY KEY (idFuncionario, fkEmpresa) ,
     username VARCHAR(45),
     senha VARCHAR(20),
     email VARCHAR(45),
     nomeCompleto VARCHAR(45),
-    cpf CHAR(15), -- contei com o "." e "-"
+    cpf CHAR(15),
     fkTipoFuncionario INT, 
-    CONSTRAINT FuncionarioTipo FOREIGN KEY (fkTipoFuncionario) REFERENCES tipoFuncionario (idTipoFuncionario),
-    CONSTRAINT FuncionaroEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa)
+    CONSTRAINT fkFuncionarioTipo FOREIGN KEY (fkTipoFuncionario) REFERENCES tipoFuncionario (idTipoFuncionario),
+    CONSTRAINT fkFuncionaroEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa)
 ); 
 
 CREATE TABLE parametro(
@@ -69,25 +71,31 @@ CREATE TABLE parametro(
     minTemp DECIMAL (4,2),
     maxTemp DECIMAL (4,2),
     minUmid DECIMAL (4,2),
-    maxUmid DECIMAL (4,2)
+    maxUmid DECIMAL (4,2),
+    fkPrazo INT,
+	CONSTRAINT ParametroPrazo FOREIGN KEY (fkPrazo) REFERENCES prazo(idPrazo)
 );
 
 CREATE TABLE sensor(
-	idSensor INT PRIMARY KEY AUTO_INCREMENT, 
+	idSensor INT AUTO_INCREMENT, 
     modelo VARCHAR(45),
     posicao VARCHAR(45),
     fkParametro INT, 
-    CONSTRAINT sensorParametro FOREIGN KEY(fkParametro) REFERENCES parametro(idParametro)
+    CONSTRAINT fkSensorParametro FOREIGN KEY (fkParametro) REFERENCES parametro(idParametro),
+    CONSTRAINT pkCompostaSensorParametro PRIMARY KEY (idSensor, fkParametro),
+	fkArmazem INT,
+    CONSTRAINT fkSensorArmazem FOREIGN KEY (fkArmazen) REFERENCES armazem(idArmazem),
+    CONSTRAINT pkCompostaSensorArmazem PRIMARY KEY (idSensor, fkParametro)
 );
 
 CREATE TABLE registro(
 	idRegistro INT AUTO_INCREMENT, 
-    fkSensor INT, 
-    CONSTRAINT pkComposta PRIMARY KEY (idRegistro, fkSensor),
     dht11_temperatura DECIMAL (4,2),
     dht11_umidade DECIMAL (4,2),
     dataHora DATETIME,
-    CONSTRAINT registroSensor FOREIGN KEY (fkSensor) REFERENCES sensor(idSensor)
+	fkSensor INT, 
+    CONSTRAINT pkComposta PRIMARY KEY (idRegistro, fkSensor),
+    CONSTRAINT fkRegistroSensor FOREIGN KEY (fkSensor) REFERENCES sensor(idSensor)
 );
 
 CREATE TABLE perguntaFrequente(
@@ -96,9 +104,20 @@ CREATE TABLE perguntaFrequente(
     resposta VARCHAR(200)
 );
 
-CREATE TABLE tipoArmazen(
+CREATE TABLE tipoArmazem(
 	idTipoArmazen INT PRIMARY KEY AUTO_INCREMENT, 
     nome VARCHAR(45)
+);
+
+CREATE TABLE email (
+	idEmail INT PRIMARY KEY AUTO_INCREMENT,
+    endeco VARCHAR(256),
+    mensagem VARCHAR(900)
+);
+
+CREATE TABLE prazo (
+	idPrazo INT,
+    limite VARCHAR(45)
 );
 
 -- INSERTS DAS TABELAS 
@@ -175,7 +194,7 @@ dados inseridos em tempo real?¹*/
 (); 
 SPRINT 2*/
 
-/*INSERT INTO tipoArmazen (nome) VALUES
+/*INSERT INTO tipoArmazem (nome) VALUES
 ('Silo'); 
 decidir se vai na tabela armazenamento como fk*/
 
