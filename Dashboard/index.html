@@ -79,6 +79,7 @@
             }
         }
     );
+
     /* -- dht11Temperatura -- */
     var contextoDht11Temperatura = document.getElementById('dht11Temperatura').getContext('2d');
     contextoDht11Temperatura.canvas.width = 1000;
@@ -120,6 +121,7 @@
         }
     );
 
+
     var paginacao = {};
         var tempo = {};
         function obterDados(grafico, endpoint) {
@@ -154,5 +156,7 @@
             obterDados(dht11Umidade, 'dht11/umidade');
             obterDados(dht11Temperatura, 'dht11/temperatura');
         }, 1000);
+       
+        
 
 </script>
