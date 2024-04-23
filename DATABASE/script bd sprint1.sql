@@ -25,15 +25,15 @@ CREATE TABLE endereco(
 );
 
 CREATE TABLE armazem(
-	idArmazen INT PRIMARY KEY AUTO_INCREMENT,
+	idArmazem INT PRIMARY KEY AUTO_INCREMENT,
     capacidade DECIMAL (6,2),
     descricao VARCHAR(45),
     fkEmpresa INT, 
-    CONSTRAINT fkArmazenEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa),
+    CONSTRAINT fkArmazemempresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa),
     fkEndereco INT, 
-    CONSTRAINT fkArmazenEndereco FOREIGN KEY (fkEndereco) REFERENCES endereco(idEndereco),
+    CONSTRAINT fkArmazemEndereco FOREIGN KEY (fkEndereco) REFERENCES endereco(idEndereco),
     fkTipoArmazenamento INT,
-    CONSTRAINT fkArmazenTipoArmazenamento FOREIGN KEY (fkTipoArmazenamento) REFERENCES tipoArmazenamento(idTipoArmazem)
+    CONSTRAINT fkArmazemTipoArmazenamento FOREIGN KEY (fkTipoArmazenamento) REFERENCES tipoArmazenamento(idTipoArmazem)
 );
 
 CREATE TABLE telefone(
@@ -43,8 +43,8 @@ CREATE TABLE telefone(
     sufixo CHAR(4),
     fkEmpresa INT,
     CONSTRAINT fkTelefoneEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa),
-    fkArmazen INT, 
-    CONSTRAINT fkTelefoneArmazen FOREIGN KEY (fkArmazen) REFERENCES armazen(idArmazen)
+    fkArmazem INT, 
+    CONSTRAINT fkTelefoneArmazem FOREIGN KEY (fkArmazem) REFERENCES armazen(idArmazem)
 );
 
 CREATE TABLE tipoFuncionario(
@@ -55,7 +55,7 @@ CREATE TABLE tipoFuncionario(
 CREATE TABLE funcionario(
 	idFuncionario INT AUTO_INCREMENT,
 	fkEmpresa INT,
-    CONSTRAINT pkCompostaFuncionarioEmpresa PRIMARY KEY (idFuncionario, fkEmpresa) ,
+    CONSTRAINT pkCompostaFuncionarioEmpresa PRIMARY KEY (idFuncionario, fkEmpresa),
     username VARCHAR(45),
     senha VARCHAR(20),
     email VARCHAR(45),
