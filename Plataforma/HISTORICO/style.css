@@ -94,14 +94,46 @@ body {
     background-color:#E0F19C;
     width: 240px;
     height: 70px;  
-    color: #2A4C09;
+   
     border-radius: 20px;
-    margin-left: 1000px;
+    float: right;
+    margin-right: 2%;
     margin-top: 35px;
-    font-family: Inter;
-    font-size: 32px;
-    font-weight: 700;
-    line-height: 36px;
-    text-align: center;
     box-shadow: 0px 1px 2px 0px;
+    display: flex;
+    padding-right: 0.5%;
+    padding-left: 0.5%;
+}
+.seta{
+    width: 80%;
+    height: 50%;
+}
+.select1{
+    color: #2A4C09;
+    font-family: Inter;
+    font-size: 30px;
+    font-weight: 700;
+    list-style: none;
+    appearance: none;
+    background-color:#E0F19C;
+    border: none;
+    width: 100%;
+    height: 90%;
+    text-align: center;
+    border-radius: 5px;
+    border-color: none;
+    border-color: transparent;
+    outline: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23333" height="40" viewBox="0 0 24 24" width="40" margin-right="20px" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>'); /* Adiciona uma imagem SVG para a seta de dropdown */
+    background-repeat: no-repeat; /* Evita a repetição da imagem de fundo */
+    background-position: right 10px center; /* Posiciona a imagem de fundo à direita com um espaço de 10px */
+    cursor: pointer;
+}
+
+.dentroImob{
+    width: 95%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    height: 100%;
 }
