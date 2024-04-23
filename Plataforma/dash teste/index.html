@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma | GuardTech+</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="imagens/sergio.usa.na.aba.ico">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="http://www.chartjs.org/dist/2.7.1/Chart.js"></script>
+    <script src="http://www.chartjs.org/samples/latest/utils.js"></script>
+</head>
+
+<body>
+    <div class="screen">
+        <div class="header">
+            <p>Voltar</p>
+            <h2>GUARDTECH+</h2>
+            <img class="logo" src="imagens/guardsemescrita.png">
+        </div>
+        <div class="box-nav-bar">
+            <div class="nav-bar-L">
+                <ul>
+                    <li><a href="">Perfil</a></li>
+                    <li><a href="">Dúvidas frequentes</a></li>
+                </ul>
+            </div>
+            <div class="nav-bar-R">
+                <ul>
+                    <li><a href="">Monitoramento</a></li>
+                    <li><a href="">Historico</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- Insere a tela -->
+
+        <div class="dash-boxes">
+            <div class="info-box">
+                <h1>Info</h1>
+            </div>
+            <div class="media-box">
+                <h1>Média</h1>
+            </div>
+            <div class="atual-box">
+                <h1>Atual</h1>
+                <div class="alert-box">
+                    <div class="temp-box">
+                        <p>Temperatura</p>
+                        <h1 id="temp_atual">00ºC</h1>
+                        <div class="alerta-temperatura" id="indicador_temp">
+
+                        </div>
+                    </div>
+                    <div class="umi-box">
+                        <p>Umidade</p>
+                        <h1 id="umidade_atual">00%</h1>
+                        <div class="alerta-umidade" id="indicador_umidade">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="extra-boxes">
+                <div class="clima-box">
+                    <h1>Clima</h1>
+                </div>
+                <div class="horario-box">
+                    <h1>Relógio</h1>
+                    <div class="elementos_relogio">
+                        <div class="relogio">
+                            <h1 id="relogio"></h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-boxes">
+            <div class="chart-temp">
+                <canvas id="chart_temperatra"></canvas>
+            </div>
+            <div class="chart-umi">
+                <canvas id="chart_umidade"></canvas>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    //Relogio 
+    const horas = document.getElementById('relogio');
+    const minutos = document.getElementById('minutos');
+    const segundos = document.getElementById('segundos');
+    let horaCompleta = ""
+
+    const relogio = setInterval(function time() {
+        let DataDeHoje = new Date();
+        let hr = DataDeHoje.getHours();
+        let min = DataDeHoje.getMinutes();
+        let sec = DataDeHoje.getSeconds();
+
+
+        if (min <= 9) {
+            min = `0${min}`
+        }
+        if (sec <= 9) {
+            sec = `0${sec}`
+        }
+        horaCompleta = `${hr}:${min}:${sec}`
+        horas.innerHTML = horaCompleta;
+    })
+
+    // GRAFICO TEMPERATURA
+
+    // Inicializa um array vazio para os dados de temperatura
+    var DadoTemperatura = [];
+
+    var chart_temp = document.getElementById('chart_temperatra').getContext('2d');
+    chart_temp.canvas.width = 480;
+    chart_temp.canvas.height = 170;
+    var grafico_temperatura = new Chart(chart_temp, {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [{
+                label: 'Temperatura (°C)',
+                data: [],
+                backgroundColor: 'rgba(224, 241, 156, 0.5)',
+                borderColor: 'rgba(42, 76, 9, 1)',
+                borderWidth: 5
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+
+
+    var mediatemp = 0;
+
+    // Função para adicionar um novo dado de temperatura
+    function AdicionarDadoDeTemperatura() {
+        // Gera um novo dado de temperatura aleatório entre 0 e 30 graus Celsius
+        var novaTemperatura = Number((Math.random() * 30).toFixed(2));
+
+        // Adiciona o novo dado ao array de dados de temperatura
+        // DadoTemperatura.push(novaTemperatura);
+        // Adiciona a hora atual ao array de labels 
+        grafico_temperatura.data.labels.push(horaCompleta);
+
+        // Adiciona o novo dado ao conjunto de dados do gráfico
+        grafico_temperatura.data.datasets[0].data.push(novaTemperatura);
+        // Atualiza o gráfico
+        grafico_temperatura.update();
+
+
+        let alerta_temperatura = document.getElementById('indicador_temp')
+        let temperatura_atual = document.getElementById('temp_atual')
+
+        temperatura_atual.innerHTML = `${novaTemperatura}ºC`
+
+        if (novaTemperatura <= 15) {
+            alerta_temperatura.style.backgroundColor = '#c4ee8e'
+        } else if (novaTemperatura <= 20) {
+            alerta_temperatura.style.backgroundColor = '#eccf4d'
+        } else {
+            alerta_temperatura.style.backgroundColor = '#e66666'
+        }
+
+        mediatemp += novaTemperatura
+
+        if (grafico_temperatura.data.datasets[0].data.length >= 7) {
+            grafico_temperatura.data.datasets[0].data = []
+            grafico_temperatura.data.labels = []
+            mediatemp = mediatemp / 10
+            console.log(mediatemp)
+        }
+    }
+
+    // Chama a função para adicionar dados de temperatura a cada 10 segundos
+    setInterval(AdicionarDadoDeTemperatura, 10000); // Adiciona um dado a cada 10 segundos
+
+
+
+
+    // GRAFICO UMIDADE
+
+    // Inicializa um array vazio para os dados de temperatura
+
+
+    var DadoUmidade = [];
+
+
+    var chart_umi = document.getElementById('chart_umidade').getContext('2d');
+    chart_umi.canvas.width = 480;
+    chart_umi.canvas.height = 170;
+    var grafico_umidade = new Chart(chart_umi, {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [{
+                label: 'Umidade (%)',
+                data: [],
+                backgroundColor: 'rgba(134, 134, 134, 0.2)',
+                borderColor: 'rgba(134, 134, 134, 1)',
+                borderWidth: 5
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // Função para adicionar um novo dado de temperatura
+    function AdicionarDadoDeUmidade() {
+        // Gera um novo dado de umidade aleatorio entre 0 e 100
+        var novaUmidade = Number((Math.random() * 100).toFixed(2));
+        // Adiciona o novo dado ao array de dados de temperatura
+        DadoUmidade.push(novaUmidade);
+        // Adiciona a contagem atual ao array de labels
+        grafico_umidade.data.labels.push(horaCompleta);
+
+        // Adiciona o novo dado ao conjunto de dados do gráfico
+        grafico_umidade.data.datasets[0].data.push(novaUmidade);
+
+        // Atualiza o gráfico
+        grafico_umidade.update();
+
+
+        let alerta_umidade = document.getElementById('indicador_umidade')
+        let umi_atual = document.getElementById('umidade_atual')
+        let medumidade = 0
+        umi_atual.innerHTML = `${novaUmidade}%`
+
+        if (novaUmidade <= 55) {
+            alerta_umidade.style.backgroundColor = '#c4ee8e'
+        } else if (novaUmidade <= 65) {
+            alerta_umidade.style.backgroundColor = '#eccf4d'
+        } else {
+            alerta_umidade.style.backgroundColor = '#e66666'
+        }
+
+        medumidade += novaUmidade
+        if (grafico_umidade.data.datasets[0].data.length > 7) {
+            grafico_umidade.data.datasets[0].data = []
+            grafico_umidade.data.labels = []
+            console.log(medumidade)
+        }
+    }
+
+    // Chama a função para adicionar dados de temperatura a cada 2 segundos
+    setInterval(AdicionarDadoDeUmidade, 10000); // Adiciona um dado a cada 10 segundos
+
+
+
+</script>
