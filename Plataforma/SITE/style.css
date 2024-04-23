@@ -530,9 +530,9 @@ main a:hover {
 
 .mini-logos{
     margin-top: 2rem;
-    display: flex;
+    display:flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content:space-around;
 }
 
 .mini-logos img{
