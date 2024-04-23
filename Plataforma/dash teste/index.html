@@ -155,7 +155,7 @@
         // Adiciona o novo dado ao array de dados de temperatura
         // DadoTemperatura.push(novaTemperatura);
         // Adiciona a hora atual ao array de labels 
-        grafico_temperatura.data.labels.push(horaCompleta);
+        grafico_temperatura.data.labels.push(horaCompleta); 
 
         // Adiciona o novo dado ao conjunto de dados do gráfico
         grafico_temperatura.data.datasets[0].data.push(novaTemperatura);
@@ -254,7 +254,7 @@
         }
 
         medumidade += novaUmidade
-        if (grafico_umidade.data.datasets[0].data.length > 7) {
+        if (grafico_umidade.data.datasets[0].data.length >= 7) {
             grafico_umidade.data.datasets[0].data = []
             grafico_umidade.data.labels = []
             console.log(medumidade)

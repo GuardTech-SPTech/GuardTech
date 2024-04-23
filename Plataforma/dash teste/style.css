@@ -216,18 +216,32 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 100%;
+    justify-content: space-around;
 }
 
-.alerta-temperatura {
-    width:  150px;
-    height: 15px;
-    border: 15px;
-    background-color: red;
-}
-
+.alerta-temperatura,
 .alerta-umidade {
-    width:  150px;
+    width:  120px;
     height: 15px;
     border: 15px;
     background-color: red;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.3);  
+}
+
+.temp-box,
+.umi-box p{
+    color: #747472;
+    font-weight: 600;
+}
+
+.temp-box h1 {
+    color: black;
+    font-size: 35px;
+
+}
+
+.umi-box h1 {
+    color: black;
+    font-size: 35px;
 }
