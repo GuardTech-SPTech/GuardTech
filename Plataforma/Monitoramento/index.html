@@ -11,6 +11,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
   <script src="http://www.chartjs.org/dist/2.7.1/Chart.js"></script>
   <script src="http://www.chartjs.org/samples/latest/utils.js"></script>
+  <script src="main.js"></script>
   <link rel="icon" href="imagens/sergio.usa.na.aba.ico">
 </head>
 
@@ -123,6 +124,7 @@
 
 <script>
   
+
   //Relogio 
   const horas = document.getElementById('horas');
   const minutos = document.getElementById('minutos');
@@ -134,9 +136,10 @@
     let hr = DataDeHoje.getHours();
     let min = DataDeHoje.getMinutes();
     let sec = DataDeHoje.getSeconds();
+    
 
     if (min <= 9) {
-      min = `: 0${min} :`
+      min = `0${min}`
     }
     if (sec <= 9) {
       sec = `0${sec}`
@@ -161,7 +164,7 @@
     type: 'line',
     data: {
       labels: [],
-      datasets: [{
+      datasets: [{ 
         label: 'Temperatura (°C)',
         data: [],
         backgroundColor: '#c4ee8e' ,
@@ -178,16 +181,20 @@
     }
   });
 
+
+
+  var mediatemp = 0;
+
   // Função para adicionar um novo dado de temperatura
   function AdicionarDadoDeTemperatura() {
     // Gera um novo dado de temperatura aleatório entre 0 e 30 graus Celsius
-    var novaTemperatura = (Math.random() * 30).toFixed(2);
+    var novaTemperatura = Number((Math.random() * 30).toFixed(2));
 
     // Adiciona o novo dado ao array de dados de temperatura
-    DadoTemperatura.push(novaTemperatura);
-
-    // Adiciona a contagem atual ao array de labels
+    // DadoTemperatura.push(novaTemperatura);
+    // Adiciona a hora atual ao array de labels 
     grafico_temperatura.data.labels.push(horaCompleta);
+
     // Adiciona o novo dado ao conjunto de dados do gráfico
     grafico_temperatura.data.datasets[0].data.push(novaTemperatura);
     // Atualiza o gráfico
@@ -198,6 +205,7 @@
     let temperatura_atual = document.getElementById('temp_atual')
 
     temperatura_atual.innerHTML = `${novaTemperatura}ºC`
+
     if (novaTemperatura <= 15) {
       alerta_temperatura.style.backgroundColor = '#c4ee8e'
     } else if (novaTemperatura <= 20) {
@@ -206,10 +214,17 @@
       alerta_temperatura.style.backgroundColor = '#e66666'
     }
 
-    console.log(novaTemperatura)
+    mediatemp += novaTemperatura
+    
+    if (grafico_temperatura.data.datasets[0].data.length > 7) {
+      grafico_temperatura.data.datasets[0].data = []
+      grafico_temperatura.data.labels = []
+      mediatemp = mediatemp / 10
+      console.log(mediatemp)
+    }
   }
 
-  // Chama a função para adicionar dados de temperatura a cada 2 segundos
+  // Chama a função para adicionar dados de temperatura a cada 10 segundos
   setInterval(AdicionarDadoDeTemperatura, 10000); // Adiciona um dado a cada 10 segundos
 
 
@@ -218,7 +233,10 @@
   // GRAFICO UMIDADE
 
   // Inicializa um array vazio para os dados de temperatura
+
+
   var DadoUmidade = [];
+
 
   var chart_umi = document.getElementById('chart_umidade').getContext('2d');
   chart_umi.canvas.width = 480;
@@ -247,7 +265,7 @@
   // Função para adicionar um novo dado de temperatura
   function AdicionarDadoDeUmidade() {
     // Gera um novo dado de umidade aleatorio entre 0 e 100
-    var novaUmidade = (Math.random() * 100).toFixed(2);
+    var novaUmidade = Number((Math.random() * 100).toFixed(2));
     // Adiciona o novo dado ao array de dados de temperatura
     DadoUmidade.push(novaUmidade);
     // Adiciona a contagem atual ao array de labels
@@ -262,8 +280,9 @@
 
     let alerta_umidade = document.getElementById('indicador_umi')
     let umi_atual = document.getElementById('umidade_atual')
-
+    let medumidade = 0 
     umi_atual.innerHTML = `${novaUmidade}%`
+
     if (novaUmidade <= 55) {
       alerta_umidade.style.backgroundColor = '#c4ee8e'
     } else if (novaUmidade <= 65) {
@@ -272,6 +291,12 @@
       alerta_umidade.style.backgroundColor = '#e66666'
     }
 
+    medumidade += novaUmidade
+    if (grafico_umidade.data.datasets[0].data.length > 7) {
+      grafico_umidade.data.datasets[0].data = []
+      grafico_umidade.data.labels = []
+      console.log(medumidade)
+    }
   }
 
   // Chama a função para adicionar dados de temperatura a cada 2 segundos
