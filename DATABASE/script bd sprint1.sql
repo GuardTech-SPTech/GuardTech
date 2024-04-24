@@ -117,7 +117,7 @@ CREATE TABLE leads(
 );
 
 -- INSERTS DAS TABELAS 
- 
+ -- update das descrições 
 INSERT INTO empresa (nome, cnpj, email, senha) VALUES 
 ('AgroArmazéns', '12345678910001', 'gestao@agroarmazens.com', 'agro123'),
 ('GrãoSafra', '12345678920001', 'gestao@graosafra.com', 'grao321'),
@@ -201,17 +201,48 @@ INSERT INTO leads (endereco, mensagem) VALUES
 
 -- SELECT'S
 SHOW TABLES;
-SELECT * FROM armazen;
+SELECT * FROM armazem;
 SELECT * FROM empresa;
 SELECT * FROM endereco;
 SELECT * FROM funcionario;
+SELECT * FROM leads;
 SELECT * FROM parametro;
+SELECT * FROM perguntafrequente;
+SELECT * FROM prazo;
+SELECT * FROM registro;
 SELECT * FROM sensor;
 SELECT * FROM tipofuncionario;
 SELECT * FROM telefone;
+SELECT * FROM tipoarmazem;
+
+-- JOIN EMPRESA - ARMAZEM - REGISTRO - SENSOR
+SELECT 
+    empresa.idEmpresa AS 'ID Empresa',
+    empresa.nome AS 'Nome da empresa',
+    empresa.cnpj AS CNPJ,
+    empresa.email AS Email,
+    empresa.senha AS 'Senha de acesso',
+    armazem.idArmazem AS 'ID Armazem',
+    armazem.capacidade AS Capacidade,
+    armazem.descricao AS 'Descrição',
+    registro.idRegistro AS 'ID Registro',
+    registro.dht11_temperatura AS Temperatura,
+    registro.dht11_umidade AS Umidade,
+    registro.dataHora AS Momento,
+    sensor.idSensor AS 'ID Sensor',
+    sensor.modelo AS Modelo,
+    sensor.posicao AS 'Posição'
+FROM 
+    empresa 
+LEFT JOIN 
+    armazem ON armazem.fkEmpresa = empresa.idEmpresa
+LEFT JOIN 
+    sensor ON armazem.idArmazem = sensor.fkArmazem
+LEFT JOIN 
+    registro ON registro.fkSensor = sensor.idSensor;
 
 
--- select com empresas e seus funcionários/tipos
+-- JOIN COM TIPOARMAZEM - PRAZO - ENDERECO
 SELECT empresa.idEmpresa AS 'ID da Empresa',
 empresa.nome AS Nome,
 empresa.cnpj AS CNPJ,
