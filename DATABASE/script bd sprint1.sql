@@ -1,5 +1,5 @@
 CREATE DATABASE guardtech;
-
+drop database guardtech;
 USE guardtech;
 
 -- TABELAS CRIADAS 
@@ -33,7 +33,7 @@ CREATE TABLE armazem(
     fkEndereco INT, 
     CONSTRAINT fkArmazemEndereco FOREIGN KEY (fkEndereco) REFERENCES endereco(idEndereco),
     fkTipoArmazenamento INT,
-    CONSTRAINT fkArmazemTipoArmazenamento FOREIGN KEY (fkTipoArmazenamento) REFERENCES tipoArmazenamento(idTipoArmazem)
+    CONSTRAINT fkArmazemTipoArmazenamento FOREIGN KEY (fkTipoArmazenamento) REFERENCES tipoArmazem(idTipoArmazem)
 );
 
 CREATE TABLE telefone(
@@ -44,7 +44,7 @@ CREATE TABLE telefone(
     fkEmpresa INT,
     CONSTRAINT fkTelefoneEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa),
     fkArmazem INT, 
-    CONSTRAINT fkTelefoneArmazem FOREIGN KEY (fkArmazem) REFERENCES armazen(idArmazem)
+    CONSTRAINT fkTelefoneArmazem FOREIGN KEY (fkArmazem) REFERENCES armazem(idArmazem)
 );
 
 CREATE TABLE tipoFuncionario(
@@ -85,8 +85,8 @@ CREATE TABLE sensor(
     modelo VARCHAR(45),
     posicao VARCHAR(45),
 	fkArmazem INT,
-    CONSTRAINT fkSensorArmazem FOREIGN KEY (fkArmazen) REFERENCES armazem(idArmazem),
-    CONSTRAINT pkCompostaSensorArmazem PRIMARY KEY (idSensor, fkParametro)
+    CONSTRAINT fkSensorArmazem FOREIGN KEY (fkArmazem) REFERENCES armazem(idArmazem),
+    CONSTRAINT pkCompostaSensorArmazem PRIMARY KEY (idSensor, fkArmazem)
 );
 
 CREATE TABLE registro(
@@ -106,13 +106,13 @@ CREATE TABLE perguntaFrequente(
 );
 
 CREATE TABLE tipoArmazem(
-	idTipoArmazen INT PRIMARY KEY AUTO_INCREMENT, 
+	idTipoArmazem INT PRIMARY KEY AUTO_INCREMENT, 
     nome VARCHAR(45)
 );
 
 CREATE TABLE leads(
 	idEmail INT PRIMARY KEY AUTO_INCREMENT,
-    endeco VARCHAR(256),
+    endereco VARCHAR(256),
     mensagem VARCHAR(900)
 );
 
@@ -152,46 +152,46 @@ INSERT INTO armazem (capacidade, descricao, fkEmpresa, fkEndereco, fkTipoArmazen
 (8900, null, 2, 12, 1);
 
 INSERT INTO telefone (ddd, prefixo, sufixo, fkEmpresa, fkArmazem) VALUES 
-('11', '95656', '1111', 1, 8),
-('11', '94545', '2222', 2, 9),
-('31', '93434', '3333', 3, 10),
-('31', '92323', '4444', 4, 11),
-('11', '91212', '5555', 5, 12),
-('11', '98989', '8888', 1, 13),
-('11', '99898', '9999', 2, 14);
+('11', '95656', '1111', 1, 1),
+('11', '94545', '2222', 2, 2),
+('31', '93434', '3333', 3, 3),
+('31', '92323', '4444', 4, 4),
+('11', '91212', '5555', 5, 5),
+('11', '98989', '8888', 1, 6),
+('11', '99898', '9999', 2, 7);
 
 INSERT INTO tipoFuncionario (funcao) VALUES
 ('Operador'),
 ('Administrador');
 
-INSERT INTO funcionario (fkEmpresa, username, senha, email, nomeCompleto, cpf, fkTipoFuncionario) VALUES 
-(1, 'aghataDiniz', 'diniz123', 'diniz.aghata@gmail.com', 'Aghata Souza Diniz', '121.212.121-21', 1),
-(2, 'pereiraAlvaro', 'pereira123', 'pereira.alvaro@gmail.com', 'Alvaro Pereira Silva', '232.323.232-32', 1),
-(3, 'camilaCasi', 'casimiro123', 'casimiro.camila@gmail.com', 'Camila Casimiro Domingues', '343.434.343-43', 2),
-(4, 'letCordeiro', 'cordeiro123', 'cordeiro.leticia@gmail.com', 'Leticia Costa Cordeiro', '454.545.454-54', 2),
-(5, 'vihSilva', 'silva123', 'silva.vitoria@gmail.com', 'Vitória Serqueira Silva', '565.656.565-65', 1);
+INSERT INTO funcionario (idFuncionario, fkEmpresa, username, senha, email, nomeCompleto, cpf, fkTipoFuncionario) VALUES 
+(1, 1, 'aghataDiniz', 'diniz123', 'diniz.aghata@gmail.com', 'Aghata Souza Diniz', '121.212.121-21', 1),
+(2, 2, 'pereiraAlvaro', 'pereira123', 'pereira.alvaro@gmail.com', 'Alvaro Pereira Silva', '232.323.232-32', 1),
+(3, 3, 'camilaCasi', 'casimiro123', 'casimiro.camila@gmail.com', 'Camila Casimiro Domingues', '343.434.343-43', 2),
+(4, 4, 'letCordeiro', 'cordeiro123', 'cordeiro.leticia@gmail.com', 'Leticia Costa Cordeiro', '454.545.454-54', 2),
+(5, 5, 'vihSilva', 'silva123', 'silva.vitoria@gmail.com', 'Vitória Serqueira Silva', '565.656.565-65', 1);
 
 INSERT INTO prazo (tipoPrazo) VALUES
 ('curto'),
 ('longo');
 
-INSERT INTO parametro (minTemp, maxTemp, minUmid, maxUmid, fkPrazo) VALUES
-(, 35, , 20,); 
+INSERT INTO parametro (minTemp, maxTemp, minUmid, maxUmid) VALUES
+(5, 35, 15, 20); 
  
 
-INSERT INTO sensor (modelo, posicao, fkArmazem) VALUES
-('DHT11', 'Entrada a esquerda', 1, ),
-('DHT11', 'Saida a direita', 1, ),
-('DHT11', 'Saida a esquerda', 1, ),
-('DHT11', 'Entrada', 1, ),
-('DHT11', 'Parede lateral a esquerda da saida', 1, ),
-('DHT11', 'Saida', 1, ),
-('DHT11', 'Entrada a direira', 1, ); 
+INSERT INTO sensor (modelo, posicao, idSensor, fkArmazem) VALUES
+('DHT11', 'Entrada a esquerda', 1, 1),
+('DHT11', 'Saida a direita', 2, 2),
+('DHT11', 'Saida a esquerda', 10, 3),
+('DHT11', 'Entrada', 4, 4),
+('DHT11', 'Parede lateral a esquerda da saida', 5, 5),
+('DHT11', 'Saida', 6, 6),
+('DHT11', 'Entrada a direira', 7, 7); 
 
 INSERT INTO perguntaFrequente (pergunta, resposta) VALUES
 ('Meu sensor parou de funcionar! E agora', 'Comunique a nossa equipe para que possammos fazer o reparo!'),
 ('Como vizualizar os dados capturados?', 'Os dados capturados são armazenados e enviados para a Dashboard que está inserida em sua plataforma web!'),
-('Como posso entrar em contato com a GuardTech', 'Basta você enviar um email para o endereço guardtech@gmail.com que a nossa equipe de especialistas irá retornar o contato');
+('Como posso entrar em contato com a GuardTech', 'Basta você enviar um email para o endereço guardtech.sptech@gmail.com que a nossa equipe de especialistas irá retornar o contato');
 
 INSERT INTO leads (endereco, mensagem) VALUES 
 ('adm@pipotech.com', 'Olá, godtaria de receber um orçamento'),
