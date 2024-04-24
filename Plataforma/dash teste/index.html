@@ -23,14 +23,14 @@
         <div class="box-nav-bar">
             <div class="nav-bar-L">
                 <ul>
-                    <li><a href="">Perfil</a></li>
-                    <li><a href="">Dúvidas frequentes</a></li>
+                    <li><a href="../Perfil/index.html">Perfil</a></li>
+                    <li><a href="../CONTATO/contato.html">Dúvidas frequentes</a></li>
                 </ul>
             </div>
             <div class="nav-bar-R">
                 <ul>
                     <li><a href="">Monitoramento</a></li>
-                    <li><a href="">Historico</a></li>
+                    <li><a href="../HISTORICO/index.html">Historico</a></li>
                 </ul>
             </div>
         </div>
@@ -281,8 +281,10 @@
             grafico_umidade.data.datasets[0].data = []
             grafico_umidade.data.labels = []
         }
+        function voltarHome(){
+  window.location.href = '../SITE/index.html';
     }
-
+    }
     // Chama a função para adicionar dados de temperatura a cada 2 segundos
     setInterval(AdicionarDadoDeUmidade, 2000); // Adiciona um dado a cada 10 segundos
 
