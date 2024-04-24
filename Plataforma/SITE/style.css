@@ -96,6 +96,10 @@ main img {
     font-family: 'Inter';
     letter-spacing: 1px;
     font-weight: 700;
+    transition: 0.5s;
+}
+.nav-button:hover {
+    background-color: #cede90;
 }
 
 
