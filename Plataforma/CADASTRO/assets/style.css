@@ -17,8 +17,22 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 70%;
-    height: 500px;
+    width: 75vw;
+    height: 82vh;
+}
+
+.box-endereco{
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+}
+
+.box-endereco #input_cep{
+    width: 67%;
+}
+
+.box-endereco #input_num{
+    width: 30%;
 }
 
 
