@@ -38,26 +38,11 @@
 
         <div class="dash-boxes">
             <div class="info-box">
-                <h1>Legendas<br>(Indicadores)</h1>
-                <div class="box-indicadores">
-                    <div class="indicador_1">
-                        <div class="box_green">
-
-                        </div>
-                        <p>Adequada.</p>
-                    </div>
-                    <div class="indicador_2">
-                        <div class="box_yellow">
-
-                        </div>
-                        <p>Próxima do limite.</p>
-                    </div>
-                    <div class="indicador_3">
-                        <div class="box_red">
-
-                        </div>
-                        <p>Excedida.</p>
-                    </div>
+                <h1>Informações<br>Armazem</h1>
+                <img src="imagens/fazenda.png" id="imagemfazenda">
+                <div class="info_text">
+                    <p><b>Tipo:</b> Silo</p>
+                    <p><b>Endereço:</b> Rua haddock lobo Nº535</p>
                 </div>
             </div>
             <div class="media-box">
@@ -96,6 +81,20 @@
             <div class="extra-boxes">
                 <div class="clima-box">
                     <h1>Clima</h1>
+                    <div class="clima_elements">
+                        <img src="imagens/sol.png">
+                        <h1>26ºC<br>Ensolarado</h1>
+                        <div class="max_min">
+                            <div class="max">
+                                <img src="imagens/seta-esquerda.png" alt="">
+                                <p>30ºC</p>
+                            </div>
+                            <div class="min">
+                                <img src="imagens/seta-para-cima (1).png" alt="">
+                                <p>20ºC</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="horario-box">
                     <h1>Relógio</h1>
@@ -234,7 +233,7 @@
     }
 
     // Chama a função para adicionar dados de temperatura a cada 10 segundos
-    setInterval(AdicionarDadoDeTemperatura, 2000); // Adiciona um dado a cada 10 segundos
+    setInterval(AdicionarDadoDeTemperatura, 10000); // Adiciona um dado a cada 10 segundos
 
 
 
@@ -331,7 +330,7 @@
     function voltarHome(){
   window.location.href = '../SITE/index.html';}
     // Chama a função para adicionar dados de temperatura a cada 2 segundos
-    setInterval(AdicionarDadoDeUmidade, 2000); // Adiciona um dado a cada 10 segundos
+    setInterval(AdicionarDadoDeUmidade, 10000); // Adiciona um dado a cada 10 segundos
 
 
 

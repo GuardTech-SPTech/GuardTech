@@ -153,10 +153,13 @@ body {
     width: 420px;
     background-color: #F5F5F5; 
     box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.3);   
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+
 }
+.clima-box h1{
+    display: flex;
+    justify-content: center;
+}
+
 .horario-box {
     display: flex;
     flex-direction: column;
@@ -286,45 +289,60 @@ body {
     font-weight: 600;
 }
 
-.box-indicadores {
-    width: 90%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 15px;
+img#imagemfazenda {
+    border: solid 3px;
+    border-color: #2a4c09;
+    border-radius: 90px;
+    width: 90px;
+    height: 90px;
 }
 
-.indicador_1,
-.indicador_2,
-.indicador_3 {
+.clima_elements {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: start;
-    gap: 5px;
-    color: #747472;
-    font-weight: 600;
+    justify-content: space-around;
+    text-align: center;
+    margin-top: -20px;
+}
+.clima_elements img{
+    width: 70px;
+    height: 70px;
+}
+
+.clima_elements h1 {
+    color: black;
 
 }
 
-.box_green {
-    width: 20%;
-    height: 50px;
-    background-color: #c4ee8e;
-    box-shadow: 1px 2px 2px 1px rgba(0, 0, 0, 0.3);
+.max_min {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+.max {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 3px;
 }
 
-.box_yellow {
-    width: 20%;
-    height: 50px;
-    background-color: #eccf4d;
-    box-shadow: 1px 2px 2px 1px rgba(0, 0, 0, 0.3);
+.max img {
+    width: 20px;
+    height: 20px;
+    rotate: 90deg;
 }
 
-.box_red {
-    width: 20%;
-    height: 50px;
-    background-color: #e66666;
-    box-shadow: 1px 2px 2px 1px rgba(0, 0, 0, 0.3);
+.min {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 3px;
+}
+
+.min img{
+    width: 20px;
+    height: 20px;
+    rotate: 180deg;
 }
