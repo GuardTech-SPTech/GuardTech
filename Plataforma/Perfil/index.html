@@ -12,7 +12,7 @@
 <body>
     <div class="screen">
         <div class="header">
-        <p onclick="voltarHome()">Voltar</p>
+            <p onclick="voltarHome()">Voltar</p>
             <h2>GUARDTECH+</h2>
             <img class="logo" src="images/guardsemescrita.png">
         </div>
@@ -54,14 +54,17 @@
 
             <div class="area-funcionario">
                 <div class="titulo-funcionario">
-                    <h3>Funcionario</h3>
+                    <h3>Funcionarios</h3>
                 </div>
                 <div class="box-funcionario">
-                    <div class="foto-funcionario">
-                        <img src="images/fotoFuncionario.png" alt="">
+                    <div class="card-funcionario">
+                        <div class="foto-funcionario">
+                            <img src="images/fotoFuncionario.png" alt="">
+                        </div>
+                        <p class="nome-funcionario">Carlos Miguel</p>
                     </div>
-                    <p class="nome-funcionario">Carlos Miguel</p>
                 </div>
+
             </div>
         </div>
 
@@ -71,7 +74,7 @@
 </html>
 
 <script>
-    function voltarHome(){
+    function voltarHome() {
         window.location.href = '../SITE/index.html';
     }
 </script>

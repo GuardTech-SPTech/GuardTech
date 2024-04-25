@@ -1,7 +1,7 @@
 #include "DHT.h"
 #define dht_type DHT11
 
-int dht_pin = A0;
+int dht_pin = A1;
 DHT dht_1 = DHT(dht_pin, dht_type);
 
 void setup() {

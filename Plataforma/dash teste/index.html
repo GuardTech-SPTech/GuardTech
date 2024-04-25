@@ -16,21 +16,21 @@
 <body>
     <div class="screen">
         <div class="header">
-            <p>Voltar</p>
+            <p onclick="voltarHome()">Voltar</p>
             <h2>GUARDTECH+</h2>
             <img class="logo" src="imagens/guardsemescrita.png">
         </div>
         <div class="box-nav-bar">
             <div class="nav-bar-L">
                 <ul>
-                    <li><a href="">Perfil</a></li>
-                    <li><a href="">Dúvidas frequentes</a></li>
+                    <li><a href="../Perfil/index.html">Perfil</a></li>
+                    <li><a href="../CONTATO/contato.html">Dúvidas frequentes</a></li>
                 </ul>
             </div>
             <div class="nav-bar-R">
                 <ul>
                     <li><a href="">Monitoramento</a></li>
-                    <li><a href="">Historico</a></li>
+                    <li><a href="../HISTORICO/index.html">Historico</a></li>
                 </ul>
             </div>
         </div>
@@ -160,8 +160,8 @@
             datasets: [{
                 label: 'Temperatura (°C)',
                 data: [],
-                backgroundColor: 'rgba(224, 241, 156, 0.5)',
-                borderColor: 'rgba(42, 76, 9, 1)',
+                backgroundColor: 'rgba(3, 155, 207, 0.3)',
+                borderColor: 'rgba(3, 155, 207, 1)',
                 borderWidth: 5
             }]
         },
@@ -257,8 +257,8 @@
             datasets: [{
                 label: 'Umidade (%)',
                 data: [],
-                backgroundColor: 'rgba(224, 241, 156, 0.5)',
-                borderColor: 'rgba(42, 76, 9, 1)',
+                backgroundColor: 'rgba(3, 155, 207, 0.3)',
+                borderColor: 'rgba(3, 155, 207)',
                 borderWidth: 5
             }]
         },
@@ -325,8 +325,11 @@
             
 
         }
+        
     }
-
+   
+    function voltarHome(){
+  window.location.href = '../SITE/index.html';}
     // Chama a função para adicionar dados de temperatura a cada 2 segundos
     setInterval(AdicionarDadoDeUmidade, 2000); // Adiciona um dado a cada 10 segundos
 
