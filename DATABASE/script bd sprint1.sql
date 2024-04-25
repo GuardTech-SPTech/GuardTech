@@ -1,5 +1,5 @@
 CREATE DATABASE guardtech;
-drop database guardtech;
+
 USE guardtech;
 
 -- TABELAS CRIADAS 
@@ -24,6 +24,20 @@ CREATE TABLE endereco(
     CONSTRAINT fkEnderecoEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa)
 );
 
+CREATE TABLE prazo (
+	idPrazo INT PRIMARY KEY AUTO_INCREMENT,
+    tipoPrazo VARCHAR(45),
+    CONSTRAINT chkTipoPrazo CHECK (tipoPrazo IN('curto','longo')) 
+);
+
+CREATE TABLE tipoArmazem(
+	 idTipoArmazem INT PRIMARY KEY AUTO_INCREMENT, 
+    nome VARCHAR(45),
+    fkPrazo INT,
+    CONSTRAINT fktipoArmazemPrazo FOREIGN KEY (fkPrazo) REFERENCES prazo(idPrazo)
+);
+ALTER TABLE tipoArmazem ADD COLUMN fkParametro INT, ADD CONSTRAINT fkTipoArmazemParametro FOREIGN KEY (fkParametro) REFERENCES parametro(idParametro);
+
 CREATE TABLE armazem(
 	idArmazem INT PRIMARY KEY AUTO_INCREMENT,
     capacidade DECIMAL (6,2),
@@ -35,6 +49,7 @@ CREATE TABLE armazem(
     fkTipoArmazenamento INT,
     CONSTRAINT fkArmazemTipoArmazenamento FOREIGN KEY (fkTipoArmazenamento) REFERENCES tipoArmazem(idTipoArmazem)
 );
+
 
 CREATE TABLE telefone(
 	idTelefone INT PRIMARY KEY AUTO_INCREMENT, 
@@ -74,12 +89,6 @@ CREATE TABLE parametro(
     maxUmid DECIMAL (4,2)
 );
 
-CREATE TABLE prazo (
-	idPrazo INT,
-    tipoPrazo VARCHAR(45),
-    CONSTRAINT chkTipoPrazo CHECK (tipoPrazo IN('curto','longo')) 
-);
-
 CREATE TABLE sensor(
 	idSensor INT AUTO_INCREMENT, 
     modelo VARCHAR(45),
@@ -103,11 +112,6 @@ CREATE TABLE perguntaFrequente(
 	idPerguntaFrequente INT PRIMARY KEY AUTO_INCREMENT, 
     pergunta VARCHAR(400),
     resposta VARCHAR(200)
-);
-
-CREATE TABLE tipoArmazem(
-	idTipoArmazem INT PRIMARY KEY AUTO_INCREMENT, 
-    nome VARCHAR(45)
 );
 
 CREATE TABLE leads(
@@ -213,47 +217,158 @@ SELECT * FROM registro;
 SELECT * FROM sensor;
 SELECT * FROM tipofuncionario;
 SELECT * FROM telefone;
-SELECT * FROM tipoarmazem;
+SELECT * FROM tipoArmazem;
 
 -- JOIN EMPRESA - ARMAZEM - REGISTRO - SENSOR
-SELECT 
-    empresa.idEmpresa AS 'ID Empresa',
-    empresa.nome AS 'Nome da empresa',
-    empresa.cnpj AS CNPJ,
-    empresa.email AS Email,
-    empresa.senha AS 'Senha de acesso',
-    armazem.idArmazem AS 'ID Armazem',
-    armazem.capacidade AS Capacidade,
-    armazem.descricao AS 'Descrição',
-    registro.idRegistro AS 'ID Registro',
-    registro.dht11_temperatura AS Temperatura,
-    registro.dht11_umidade AS Umidade,
-    registro.dataHora AS Momento,
-    sensor.idSensor AS 'ID Sensor',
-    sensor.modelo AS Modelo,
-    sensor.posicao AS 'Posição'
-FROM 
-    empresa 
-LEFT JOIN 
-    armazem ON armazem.fkEmpresa = empresa.idEmpresa
-LEFT JOIN 
-    sensor ON armazem.idArmazem = sensor.fkArmazem
-LEFT JOIN 
-    registro ON registro.fkSensor = sensor.idSensor;
-
-
--- JOIN COM TIPOARMAZEM - PRAZO - ENDERECO
-SELECT empresa.idEmpresa AS 'ID da Empresa',
-empresa.nome AS Nome,
+SELECT empresa.idEmpresa AS 'ID Empresa',
+empresa.nome AS 'Nome da empresa',
 empresa.cnpj AS CNPJ,
-empresa.email AS 'Email da empresa',
-funcionario.idFuncionario AS 'ID do Funcionário',
-funcionario 
+empresa.email AS Email,
+empresa.senha AS 'Senha de acesso',
+armazem.idArmazem AS 'ID Armazem',
+armazem.capacidade AS Capacidade,
+armazem.descricao AS 'Descrição',
+registro.idRegistro AS 'ID Registro',
+registro.dht11_temperatura AS Temperatura,
+registro.dht11_umidade AS Umidade,
+registro.dataHora AS Momento,
+sensor.idSensor AS 'ID Sensor',
+sensor.modelo AS Modelo,
+sensor.posicao AS 'Posição'
+FROM empresa 
+LEFT JOIN armazem 
+ON armazem.fkEmpresa = empresa.idEmpresa
+LEFT JOIN sensor 
+ON armazem.idArmazem = sensor.fkArmazem
+LEFT JOIN registro 
+ON registro.fkSensor = sensor.idSensor;
 
--- select com nome, email e senha das empresas
+-- JOIN COM ARMAZEM - TIPOARMAZEM - PRAZO - ENDERECO
+SELECT armazem.idArmazem AS 'ID Armazem',
+armazem.capacidade AS Capacidade,
+armazem.descricao AS 'Descrição',
+tipo.idTipoArmazem AS 'ID Tipo Armazem',
+tipo.nome AS 'Nome do armazem',
+prazo.tipoPrazo AS Prazo,
+endereco.cep AS CEP,
+endereco.numero AS 'Número',
+endereco.logradouro AS Logradouro,
+endereco.bairro AS Bairro,
+endereco.estado AS Estado,
+endereco.cidade AS Cidade,
+endereco.complemento AS Complemento
+FROM armazem 
+LEFT JOIN tipoarmazem AS tipo
+ON armazem.fkTipoArmazenamento = tipo.idTipoArmazem
+LEFT JOIN prazo
+ON tipo.fkPrazo = prazo.idPrazo
+LEFT JOIN endereco 
+ON armazem.fkEndereco = endereco.idEndereco;
 
--- select com nome dos funcionarios e tipo
+
+-- JOIN EMPRESA - FUNCIONÁRIO -  TIPOFUNCIONÁRIO
+SELECT empresa.idEmpresa AS 'ID Empresa',
+empresa.nome AS 'Nome da empresa', 
+empresa.cnpj AS CNPJ,
+empresa.email AS 'Email empresa',
+func.idFuncionario AS 'ID Funcionário',
+func.nomeCompleto AS 'Nome funcionário',
+func.email AS 'Email funcionário',
+func.cpf AS CPF,
+tipo.funcao AS 'Função'
+FROM empresa JOIN funcionario AS func
+ON func.fkEmpresa = empresa.idEmpresa
+JOIN tipoFuncionario AS tipo
+ON func.fkTipoFuncionario = tipo.idTipoFuncionario;
 
 
+-- JOIN FUNCIONÁRIO - TIPOFUNCIONÁRIO - SENHA - EMAIL - USERNAME - CPF
+SELECT func.idFuncionario AS 'ID Funcionário',
+func.nomeCompleto AS 'Nome funcionário',
+tipo.funcao AS 'Função',
+func.email AS Email,
+func.cpf AS CPF,
+func.username AS UserName,
+func.senha AS 'Senha de acesso'
+FROM funcionario AS func
+JOIN tipoFuncionario AS tipo
+ON func.fkTipoFuncionario = tipo.idTipoFuncionario;
 
 
+-- SELECT COM NOME - EMAIL - SENHA FROM EMPRESAS
+SELECT empresa.nome AS 'Nome Empresa',
+empresa.email AS Email,
+empresa.senha AS 'Senha de acesso' 
+FROM empresa;
+
+
+-- JOIN - FUNCIONARIO - TIPO 
+SELECT func.idFuncionario AS 'ID Funcionário',
+func.nomeCompleto AS 'Nome',
+func.cpf AS CPF,
+func.email AS Email,
+func.username AS UserName,
+tipo.funcao AS 'Função'
+FROM funcionario AS func
+JOIN tipofuncionario AS tipo
+ON func.fkTipoFuncionario = tipo.idTipoFuncionario;
+
+
+-- JOIN - ARMAZEM - SENSOR - REGISTRO 
+SELECT armazem.idArmazem AS 'ID Armazem',
+armazem.capacidade AS Capacidade,
+armazem.descricao AS 'Descrição',
+sensor.idSensor AS 'ID Sensor',
+sensor.modelo AS Modelo,
+sensor.posicao AS 'Posição',
+registro.dataHora AS 'Momento',
+registro.dht11_temperatura AS Temperatura,
+registro.dht11_umidade AS Umidade
+FROM armazem LEFT JOIN sensor
+ON sensor.fkArmazem = armazem.idArmazem
+LEFT JOIN registro
+ON registro.fkSensor = sensor.idSensor;
+
+
+-- JOIN - ARMAZEM - TIPO - PARAMETRO
+SELECT armazem.idArmazem AS 'ID Armazem',
+armazem.capacidade AS Capacidade,
+armazem.descricao AS 'Descrição',
+tipo.idTipoArmazem AS 'ID Tipo Armazem',
+tipo.nome AS 'Nome do armazem',
+parametro.minTemp AS 'Temperatura minima',
+parametro.maxTemp AS 'Temperatura máxima',
+parametro.minUmid AS 'Umidade minima',
+parametro.maxUmid AS 'Umidade máxima'
+FROM armazem LEFT JOIN tipoArmazem AS tipo
+ON armazem.fkTipoArmazenamento = tipo.idTipoArmazem
+LEFT JOIN parametro 
+ON tipo.fkParametro = parametro.idParametro;
+
+SELECT * FROM endereco;
+SELECT * FROM empresa;
+SELECT * FROM armazem;
+SELECT * FROM tipoArmazem;
+-- JOIN - EMPRESA - ENDEREÇO - ARMAZEM - TIPOARMAZEM
+SELECT empresa.idEmpresa AS 'ID Empresa',
+empresa.nome AS 'Nome da empresa', 
+empresa.cnpj AS CNPJ,
+empresa.email AS 'Email empresa',
+endereco.cep AS CEP,
+endereco.numero AS 'Número',
+endereco.logradouro AS Logradouro,    
+endereco.bairro AS Bairro,
+endereco.estado AS Estado,
+endereco.cidade AS Cidade,
+endereco.complemento AS Complemento,
+armazem.idArmazem AS 'ID Armazem',
+armazem.capacidade AS Capacidade,
+armazem.descricao AS 'Descrição',
+tipo.nome AS 'Nome do armazem'
+FROM empresa 
+JOIN endereco 
+ON endereco.fkEmpresa = empresa.idEmpresa
+JOIN armazem 
+ON armazem.fkEndereco = endereco.idEndereco
+JOIN tipoArmazem AS tipo 
+ON armazem.fkTipoArmazenamento = tipo.idTipoArmazem;
