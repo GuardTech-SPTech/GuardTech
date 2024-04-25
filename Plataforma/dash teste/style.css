@@ -110,6 +110,7 @@ body {
     font-size: 20px;
 }
 .info-box {
+    text-align: center;
     height: 100%;
     width: 200px;
     background-color: #F5F5F5;
@@ -120,6 +121,7 @@ body {
 }
 
 .media-box {
+    text-align: center;
     height: 100%;
     width: 200px;
     background-color: #F5F5F5;
@@ -221,6 +223,7 @@ body {
 
 .alerta-temperatura,
 .alerta-umidade {
+    margin-top: 25px;
     width:  120px;
     height: 15px;
     border: 15px;
@@ -252,6 +255,7 @@ body {
     width: 80%;
     height: 30%;
     background-color: gray;
+    box-shadow: 1px 2px 2px 1px rgba(0, 0, 0, 0.3);
 }
 
 .media-temp {
@@ -261,6 +265,7 @@ body {
     width: 80%;
     height: 30%;
     background-color: gray;
+    box-shadow: 1px 2px 2px 1px rgba(0, 0, 0, 0.3);
 }
 
 .media-temp h1,
@@ -279,4 +284,47 @@ body {
 .media-all p {
     color: #747472;
     font-weight: 600;
+}
+
+.box-indicadores {
+    width: 90%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+}
+
+.indicador_1,
+.indicador_2,
+.indicador_3 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    gap: 5px;
+    color: #747472;
+    font-weight: 600;
+
+}
+
+.box_green {
+    width: 20%;
+    height: 50px;
+    background-color: #c4ee8e;
+    box-shadow: 1px 2px 2px 1px rgba(0, 0, 0, 0.3);
+}
+
+.box_yellow {
+    width: 20%;
+    height: 50px;
+    background-color: #eccf4d;
+    box-shadow: 1px 2px 2px 1px rgba(0, 0, 0, 0.3);
+}
+
+.box_red {
+    width: 20%;
+    height: 50px;
+    background-color: #e66666;
+    box-shadow: 1px 2px 2px 1px rgba(0, 0, 0, 0.3);
 }

@@ -38,11 +38,30 @@
 
         <div class="dash-boxes">
             <div class="info-box">
-                <h1>Info</h1>
-                
+                <h1>Legendas<br>(Indicadores)</h1>
+                <div class="box-indicadores">
+                    <div class="indicador_1">
+                        <div class="box_green">
+
+                        </div>
+                        <p>Adequada.</p>
+                    </div>
+                    <div class="indicador_2">
+                        <div class="box_yellow">
+
+                        </div>
+                        <p>Próxima do limite.</p>
+                    </div>
+                    <div class="indicador_3">
+                        <div class="box_red">
+
+                        </div>
+                        <p>Excedida.</p>
+                    </div>
+                </div>
             </div>
             <div class="media-box">
-                <h1>Média</h1>
+                <h1>Média<br>(Ultimo minuto)</h1>
                 <div class="media-all">
                     <p>Temperatura</p>
                     <div class="media-temp" id="cor_temp">
@@ -162,7 +181,7 @@
     // Função para adicionar um novo dado de temperatura
     function AdicionarDadoDeTemperatura() {
         // Gera um novo dado de temperatura aleatório entre 0 e 30 graus Celsius
-        var novaTemperatura = Number((Math.random() * 30).toFixed(2));
+        var novaTemperatura = Number((Math.random() * 25).toFixed(2));
 
         // Adiciona o novo dado ao array de dados de temperatura
         // DadoTemperatura.push(novaTemperatura);
@@ -195,11 +214,22 @@
         mediatemp += novaTemperatura
 
         if (grafico_temperatura.data.datasets[0].data.length >= 7) {
-            let media = (mediatemp / 6).toFixed(2)
+            let media = (mediatemp / 7).toFixed(2)
+            media_temperatura.innerHTML = `${media}ºC`
+
+            if (media <= 14) {
+                alerta_media.style.backgroundColor = '#c4ee8e'
+            } else if (media <= 18) {
+                alerta_media.style.backgroundColor = '#eccf4d'
+            } else {
+                alerta_media.style.backgroundColor = '#e66666'
+            }
+
+            //zerando dados
             mediatemp = 0 
-            media_temperatura.innerHTML = media
             grafico_temperatura.data.datasets[0].data = []
             grafico_temperatura.data.labels = []
+            grafico_temperatura.update();
         }
     }
 
@@ -227,8 +257,8 @@
             datasets: [{
                 label: 'Umidade (%)',
                 data: [],
-                backgroundColor: 'rgba(134, 134, 134, 0.2)',
-                borderColor: 'rgba(134, 134, 134, 1)',
+                backgroundColor: 'rgba(224, 241, 156, 0.5)',
+                borderColor: 'rgba(42, 76, 9, 1)',
                 borderWidth: 5
             }]
         },
@@ -246,7 +276,7 @@
 
     function AdicionarDadoDeUmidade() {
         // Gera um novo dado de umidade aleatorio entre 0 e 100
-        var novaUmidade = Number((Math.random() * 100).toFixed(2));
+        var novaUmidade = Number((Math.random() * 40).toFixed(2));
         // Adiciona o novo dado ao array de dados de temperatura
         DadoUmidade.push(novaUmidade);
         // Adiciona a contagem atual ao array de labels
@@ -263,23 +293,37 @@
         let umi_atual = document.getElementById('umidade_atual')
         umi_atual.innerHTML = `${novaUmidade}%`
 
-        if (novaUmidade <= 55) {
+        if (novaUmidade <= 18) {
             alerta_umidade.style.backgroundColor = '#c4ee8e'
-        } else if (novaUmidade <= 65) {
+        } else if (novaUmidade <= 25) {
             alerta_umidade.style.backgroundColor = '#eccf4d'
         } else {
             alerta_umidade.style.backgroundColor = '#e66666'
         }
 
         let media_umidade = document.getElementById('mediaUmi')
+        let cor_umidade = document.getElementById('cor_umi')
         medumidade += novaUmidade
 
         if (grafico_umidade.data.datasets[0].data.length >= 7) {
             let media = (medumidade / 6).toFixed(2)
-            media_umidade.innerHTML = media
+            media_umidade.innerHTML = `${media}%`
+
+            if(media <= 18) {
+                cor_umidade.style.backgroundColor = '#c4ee8e'
+            } else if (media <= 25) {
+                cor_umidade.style.backgroundColor = '#eccf4d'
+            } else {
+                cor_umidade.style.backgroundColor = '#e66666'
+            }
+
             medumidade = 0 
             grafico_umidade.data.datasets[0].data = []
             grafico_umidade.data.labels = []
+            grafico_umidade.update();
+
+            
+
         }
     }
 
