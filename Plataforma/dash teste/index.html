@@ -16,7 +16,7 @@
 <body>
     <div class="screen">
         <div class="header">
-            <p>Voltar</p>
+            <p onclick="voltarHome()">Voltar</p>
             <h2>GUARDTECH+</h2>
             <img class="logo" src="imagens/guardsemescrita.png">
         </div>
@@ -281,10 +281,11 @@
             grafico_umidade.data.datasets[0].data = []
             grafico_umidade.data.labels = []
         }
-        function voltarHome(){
-  window.location.href = '../SITE/index.html';
+        
     }
-    }
+   
+    function voltarHome(){
+  window.location.href = '../SITE/index.html';}
     // Chama a função para adicionar dados de temperatura a cada 2 segundos
     setInterval(AdicionarDadoDeUmidade, 2000); // Adiciona um dado a cada 10 segundos
 
