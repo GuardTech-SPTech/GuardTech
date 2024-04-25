@@ -34,9 +34,10 @@ CREATE TABLE tipoArmazem(
 	 idTipoArmazem INT PRIMARY KEY AUTO_INCREMENT, 
     nome VARCHAR(45),
     fkPrazo INT,
-    CONSTRAINT fktipoArmazemPrazo FOREIGN KEY (fkPrazo) REFERENCES prazo(idPrazo)
+    CONSTRAINT fktipoArmazemPrazo FOREIGN KEY (fkPrazo) REFERENCES prazo(idPrazo),
+    fkParametro INT,
+    CONSTRAINT fkTipoArmazemParametro FOREIGN KEY (fkParametro) REFERENCES parametro(idParametro)
 );
-ALTER TABLE tipoArmazem ADD COLUMN fkParametro INT, ADD CONSTRAINT fkTipoArmazemParametro FOREIGN KEY (fkParametro) REFERENCES parametro(idParametro);
 
 CREATE TABLE armazem(
 	idArmazem INT PRIMARY KEY AUTO_INCREMENT,
@@ -85,17 +86,15 @@ CREATE TABLE parametro(
 	idParametro INT PRIMARY KEY AUTO_INCREMENT, 
     minTemp DECIMAL (4,2),
     maxTemp DECIMAL (4,2),
-    minUmid DECIMAL (4,2),
     maxUmid DECIMAL (4,2)
 );
 
 CREATE TABLE sensor(
-	idSensor INT AUTO_INCREMENT, 
+	idSensor INT PRIMARY KEY AUTO_INCREMENT, 
     modelo VARCHAR(45),
     posicao VARCHAR(45),
 	fkArmazem INT,
-    CONSTRAINT fkSensorArmazem FOREIGN KEY (fkArmazem) REFERENCES armazem(idArmazem),
-    CONSTRAINT pkCompostaSensorArmazem PRIMARY KEY (idSensor, fkArmazem)
+    CONSTRAINT fkSensorArmazem FOREIGN KEY (fkArmazem) REFERENCES armazem(idArmazem)
 );
 
 CREATE TABLE registro(
@@ -119,15 +118,14 @@ CREATE TABLE leads(
     endereco VARCHAR(256),
     mensagem VARCHAR(900)
 );
-
+SHOW TABLES;
 -- INSERTS DAS TABELAS 
- -- update das descrições 
-INSERT INTO empresa (nome, cnpj, email, senha) VALUES 
-('AgroArmazéns', '12345678910001', 'gestao@agroarmazens.com', 'agro123'),
-('GrãoSafra', '12345678920001', 'gestao@graosafra.com', 'grao321'),
-('ProtegeMilho', '12345678930001', 'adm@protegemilho.com', 'protege456'),
-('MilhoGuarda', '12345678940001', 'gestao@milhoguarda.com', 'guarda654'),
-('LogísticaMilho', '12345678950001', 'adm1@logisticamilho.com', 'logis789');
+INSERT INTO empresa VALUES 
+(default,'AgroArmazéns', '12345678910001', 'gestao@agroarmazens.com', 'agro123'),
+(default,'GrãoSafra', '12345678920001', 'gestao@graosafra.com', 'grao321'),
+(default,'ProtegeMilho', '12345678930001', 'adm@protegemilho.com', 'protege456'),
+(default,'MilhoGuarda', '12345678940001', 'gestao@milhoguarda.com', 'guarda654'),
+(default,'LogísticaMilho', '12345678950001', 'adm1@logisticamilho.com', 'logis789');
 
 INSERT INTO endereco (cep, numero, logradouro, bairro, estado, cidade, complemento, fkEmpresa) VALUES
 ('01234-111', '1011', 'Avenida', 'Bela Vista', 'São Paulo', 'São Paulo', 'prédio', 1),
@@ -143,8 +141,8 @@ INSERT INTO endereco (cep, numero, logradouro, bairro, estado, cidade, complemen
 ('54321-444', '409', 'Rua', 'São Joaquim', 'Minas Gerais', 'Juiz de Fora', 'fazenda', 1),
 ('54321-333', '509', 'Rua', 'Clara Manhã', 'São Paulo', 'Rio Preto', 'fazenda', 2);
 
-INSERT INTO tipoArmazem (nome) VALUES
-('Silo'); 
+INSERT INTO tipoArmazem (nome, fkPrazo) VALUES
+('Silo', 1); 
 
 INSERT INTO armazem (capacidade, descricao, fkEmpresa, fkEndereco, fkTipoArmazenamento) VALUES
 (1000, null, 1, 6, 1),
@@ -174,13 +172,13 @@ INSERT INTO funcionario (idFuncionario, fkEmpresa, username, senha, email, nomeC
 (3, 3, 'camilaCasi', 'casimiro123', 'casimiro.camila@gmail.com', 'Camila Casimiro Domingues', '343.434.343-43', 2),
 (4, 4, 'letCordeiro', 'cordeiro123', 'cordeiro.leticia@gmail.com', 'Leticia Costa Cordeiro', '454.545.454-54', 2),
 (5, 5, 'vihSilva', 'silva123', 'silva.vitoria@gmail.com', 'Vitória Serqueira Silva', '565.656.565-65', 1);
-
+SELECT * FROM prazo;
 INSERT INTO prazo (tipoPrazo) VALUES
 ('curto'),
 ('longo');
 
-INSERT INTO parametro (minTemp, maxTemp, minUmid, maxUmid) VALUES
-(5, 35, 15, 20); 
+INSERT INTO parametro (minTemp, maxTemp, maxUmid) VALUES
+(5, 35, 20); 
  
 
 INSERT INTO sensor (modelo, posicao, idSensor, fkArmazem) VALUES
@@ -193,9 +191,9 @@ INSERT INTO sensor (modelo, posicao, idSensor, fkArmazem) VALUES
 ('DHT11', 'Entrada a direira', 7, 7); 
 
 INSERT INTO perguntaFrequente (pergunta, resposta) VALUES
-('Meu sensor parou de funcionar! E agora', 'Comunique a nossa equipe para que possammos fazer o reparo!'),
-('Como vizualizar os dados capturados?', 'Os dados capturados são armazenados e enviados para a Dashboard que está inserida em sua plataforma web!'),
-('Como posso entrar em contato com a GuardTech', 'Basta você enviar um email para o endereço guardtech.sptech@gmail.com que a nossa equipe de especialistas irá retornar o contato');
+('Meu sensor parou de funcionar! E agora?', 'Comunique a nossa equipe para que possamos fazer o reparo!'),
+('Como visualizar os dados capturados?', 'Os dados capturados são armazenados e enviados para a Dashboard que está inserida em sua plataforma web!'),
+('Como posso entrar em contato com a GuardTech?', 'Basta você enviar um email para o endereço guardtech.sptech@gmail.com que a nossa equipe de especialistas irá retornar o contato');
 
 INSERT INTO leads (endereco, mensagem) VALUES 
 ('adm@pipotech.com', 'Olá, godtaria de receber um orçamento'),
@@ -227,7 +225,6 @@ empresa.email AS Email,
 empresa.senha AS 'Senha de acesso',
 armazem.idArmazem AS 'ID Armazem',
 armazem.capacidade AS Capacidade,
-armazem.descricao AS 'Descrição',
 registro.idRegistro AS 'ID Registro',
 registro.dht11_temperatura AS Temperatura,
 registro.dht11_umidade AS Umidade,
@@ -246,7 +243,6 @@ ON registro.fkSensor = sensor.idSensor;
 -- JOIN COM ARMAZEM - TIPOARMAZEM - PRAZO - ENDERECO
 SELECT armazem.idArmazem AS 'ID Armazem',
 armazem.capacidade AS Capacidade,
-armazem.descricao AS 'Descrição',
 tipo.idTipoArmazem AS 'ID Tipo Armazem',
 tipo.nome AS 'Nome do armazem',
 prazo.tipoPrazo AS Prazo,
@@ -345,10 +341,7 @@ ON armazem.fkTipoArmazenamento = tipo.idTipoArmazem
 LEFT JOIN parametro 
 ON tipo.fkParametro = parametro.idParametro;
 
-SELECT * FROM endereco;
-SELECT * FROM empresa;
-SELECT * FROM armazem;
-SELECT * FROM tipoArmazem;
+
 -- JOIN - EMPRESA - ENDEREÇO - ARMAZEM - TIPOARMAZEM
 SELECT empresa.idEmpresa AS 'ID Empresa',
 empresa.nome AS 'Nome da empresa', 
