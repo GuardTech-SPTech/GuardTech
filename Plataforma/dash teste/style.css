@@ -112,7 +112,7 @@ body {
 .info-box {
     text-align: center;
     height: 100%;
-    width: 200px;
+    width: 250px;
     background-color: #F5F5F5;
     box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.3);
     display: flex;
@@ -123,7 +123,7 @@ body {
 .media-box {
     text-align: center;
     height: 100%;
-    width: 200px;
+    width: 240px;
     background-color: #F5F5F5;
     box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.3);
     display: flex;
@@ -181,14 +181,14 @@ body {
 
 .chart-temp {
     height: 95%;
-    width: 45%;
+    width: 48.5%;
     background-color: #F5F5F5;
     border-radius: 15px;
     box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.3);  
 }
 .chart-umi {
     height: 95%;
-    width: 45%;
+    width: 48.5%;
     background-color: #F5F5F5;
     border-radius: 15px;
     box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.3);  
@@ -257,7 +257,7 @@ body {
     align-items: center;
     width: 80%;
     height: 30%;
-    background-color: gray;
+    background-color: rgb(196, 196, 196);
     box-shadow: 1px 2px 2px 1px rgba(0, 0, 0, 0.3);
 }
 
@@ -267,7 +267,7 @@ body {
     align-items: center;
     width: 80%;
     height: 30%;
-    background-color: gray;
+    background-color: rgb(196, 196, 196);
     box-shadow: 1px 2px 2px 1px rgba(0, 0, 0, 0.3);
 }
 
@@ -303,7 +303,8 @@ img#imagemfazenda {
     align-items: center;
     justify-content: space-around;
     text-align: center;
-    margin-top: -20px;
+    position: relative;
+    bottom: 33px;
 }
 .clima_elements img{
     width: 70px;
@@ -311,8 +312,9 @@ img#imagemfazenda {
 }
 
 .clima_elements h1 {
+    position: relative;
+    top: 10px;
     color: black;
-
 }
 
 .max_min {

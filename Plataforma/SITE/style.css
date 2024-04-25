@@ -467,7 +467,6 @@ main a:hover {
     border: none;
     padding: 10px;
     border-radius: 10px;
-    
  }
 
  .contato-input input:hover {
@@ -484,7 +483,7 @@ main a:hover {
 }
 
 .contato-input #input_email{
-    width: 720px; 
+    width: 742px; 
     height: 40px;
 }
 
