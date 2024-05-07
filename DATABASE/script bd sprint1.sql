@@ -6,9 +6,7 @@ USE guardtech;
 CREATE TABLE empresa(
 	idEmpresa INT PRIMARY KEY AUTO_INCREMENT, 
     nome VARCHAR(45),
-    cnpj CHAR(14),
-    email VARCHAR(45),
-    senha VARCHAR (45)
+    cnpj CHAR(14)
 ); 
 
 CREATE TABLE endereco(
@@ -30,6 +28,13 @@ CREATE TABLE prazo (
     CONSTRAINT chkTipoPrazo CHECK (tipoPrazo IN('curto','longo')) 
 );
 
+CREATE TABLE parametro(
+	idParametro INT PRIMARY KEY AUTO_INCREMENT, 
+    minTemp DECIMAL (4,2),
+    maxTemp DECIMAL (4,2),
+    maxUmid DECIMAL (4,2)
+);
+
 CREATE TABLE tipoArmazem(
 	 idTipoArmazem INT PRIMARY KEY AUTO_INCREMENT, 
     nome VARCHAR(45),
@@ -38,6 +43,7 @@ CREATE TABLE tipoArmazem(
     fkParametro INT,
     CONSTRAINT fkTipoArmazemParametro FOREIGN KEY (fkParametro) REFERENCES parametro(idParametro)
 );
+
 
 CREATE TABLE armazem(
 	idArmazem INT PRIMARY KEY AUTO_INCREMENT,
@@ -50,7 +56,6 @@ CREATE TABLE armazem(
     fkTipoArmazenamento INT,
     CONSTRAINT fkArmazemTipoArmazenamento FOREIGN KEY (fkTipoArmazenamento) REFERENCES tipoArmazem(idTipoArmazem)
 );
-
 
 CREATE TABLE telefone(
 	idTelefone INT PRIMARY KEY AUTO_INCREMENT, 
@@ -82,13 +87,6 @@ CREATE TABLE funcionario(
     CONSTRAINT fkFuncionaroEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa)
 ); 
 
-CREATE TABLE parametro(
-	idParametro INT PRIMARY KEY AUTO_INCREMENT, 
-    minTemp DECIMAL (4,2),
-    maxTemp DECIMAL (4,2),
-    maxUmid DECIMAL (4,2)
-);
-
 CREATE TABLE sensor(
 	idSensor INT PRIMARY KEY AUTO_INCREMENT, 
     modelo VARCHAR(45),
@@ -107,6 +105,7 @@ CREATE TABLE registro(
     CONSTRAINT fkRegistroSensor FOREIGN KEY (fkSensor) REFERENCES sensor(idSensor)
 );
 
+
 CREATE TABLE perguntaFrequente(
 	idPerguntaFrequente INT PRIMARY KEY AUTO_INCREMENT, 
     pergunta VARCHAR(400),
@@ -121,11 +120,11 @@ CREATE TABLE leads(
 SHOW TABLES;
 -- INSERTS DAS TABELAS 
 INSERT INTO empresa VALUES 
-(default,'AgroArmazéns', '12345678910001', 'gestao@agroarmazens.com', 'agro123'),
-(default,'GrãoSafra', '12345678920001', 'gestao@graosafra.com', 'grao321'),
-(default,'ProtegeMilho', '12345678930001', 'adm@protegemilho.com', 'protege456'),
-(default,'MilhoGuarda', '12345678940001', 'gestao@milhoguarda.com', 'guarda654'),
-(default,'LogísticaMilho', '12345678950001', 'adm1@logisticamilho.com', 'logis789');
+(default,'AgroArmazéns', '12345678910001'),
+(default,'GrãoSafra', '12345678920001'),
+(default,'ProtegeMilho', '12345678930001'),
+(default,'MilhoGuarda', '12345678940001'),
+(default,'LogísticaMilho', '12345678950001');
 
 INSERT INTO endereco (cep, numero, logradouro, bairro, estado, cidade, complemento, fkEmpresa) VALUES
 ('01234-111', '1011', 'Avenida', 'Bela Vista', 'São Paulo', 'São Paulo', 'prédio', 1),
@@ -141,26 +140,33 @@ INSERT INTO endereco (cep, numero, logradouro, bairro, estado, cidade, complemen
 ('54321-444', '409', 'Rua', 'São Joaquim', 'Minas Gerais', 'Juiz de Fora', 'fazenda', 1),
 ('54321-333', '509', 'Rua', 'Clara Manhã', 'São Paulo', 'Rio Preto', 'fazenda', 2);
 
+INSERT INTO prazo (tipoPrazo) VALUES
+('curto'),
+('longo');
+
+INSERT INTO parametro (minTemp, maxTemp, maxUmid) VALUES
+(5, 35, 20); 
+
 INSERT INTO tipoArmazem (nome, fkPrazo) VALUES
 ('Silo', 1); 
 
 INSERT INTO armazem (capacidade, descricao, fkEmpresa, fkEndereco, fkTipoArmazenamento) VALUES
-(1000, null, 1, 6, 1),
-(2200, null, 2, 7, 1),
-(4000, null, 3, 8, 1),
-(5550, null, 4, 9, 1),
-(1000, null, 5, 10, 1),
-(3200, null, 1, 11, 1),
-(8900, null, 2, 12, 1);
+(1000, null, 1, 6, 2),
+(2200, null, 2, 7, 2),
+(4000, null, 3, 8, 2),
+(5550, null, 4, 9, 2),
+(1000, null, 5, 10, 2),
+(3200, null, 1, 11, 2),
+(8900, null, 2, 12, 2);
 
 INSERT INTO telefone (ddd, prefixo, sufixo, fkEmpresa, fkArmazem) VALUES 
-('11', '95656', '1111', 1, 1),
-('11', '94545', '2222', 2, 2),
-('31', '93434', '3333', 3, 3),
-('31', '92323', '4444', 4, 4),
-('11', '91212', '5555', 5, 5),
-('11', '98989', '8888', 1, 6),
-('11', '99898', '9999', 2, 7);
+('11', '95656', '1111', 1, 8),
+('11', '94545', '2222', 2, 9),
+('31', '93434', '3333', 3, 10),
+('31', '92323', '4444', 4, 11),
+('11', '91212', '5555', 5, 12),
+('11', '98989', '8888', 1, 13),
+('11', '99898', '9999', 2, 14);
 
 INSERT INTO tipoFuncionario (funcao) VALUES
 ('Operador'),
@@ -172,23 +178,16 @@ INSERT INTO funcionario (idFuncionario, fkEmpresa, username, senha, email, nomeC
 (3, 3, 'camilaCasi', 'casimiro123', 'casimiro.camila@gmail.com', 'Camila Casimiro Domingues', '343.434.343-43', 2),
 (4, 4, 'letCordeiro', 'cordeiro123', 'cordeiro.leticia@gmail.com', 'Leticia Costa Cordeiro', '454.545.454-54', 2),
 (5, 5, 'vihSilva', 'silva123', 'silva.vitoria@gmail.com', 'Vitória Serqueira Silva', '565.656.565-65', 1);
-SELECT * FROM prazo;
-INSERT INTO prazo (tipoPrazo) VALUES
-('curto'),
-('longo');
 
-INSERT INTO parametro (minTemp, maxTemp, maxUmid) VALUES
-(5, 35, 20); 
- 
 
 INSERT INTO sensor (modelo, posicao, idSensor, fkArmazem) VALUES
-('DHT11', 'Entrada a esquerda', 1, 1),
-('DHT11', 'Saida a direita', 2, 2),
-('DHT11', 'Saida a esquerda', 10, 3),
-('DHT11', 'Entrada', 4, 4),
-('DHT11', 'Parede lateral a esquerda da saida', 5, 5),
-('DHT11', 'Saida', 6, 6),
-('DHT11', 'Entrada a direira', 7, 7); 
+('DHT11', 'Entrada a esquerda', 1, 8),
+('DHT11', 'Saida a direita', 2, 9),
+('DHT11', 'Saida a esquerda', 10, 10),
+('DHT11', 'Entrada', 4, 11),
+('DHT11', 'Parede lateral a esquerda da saida', 5, 12),
+('DHT11', 'Saida', 6, 13),
+('DHT11', 'Entrada a direira', 7, 14); 
 
 INSERT INTO perguntaFrequente (pergunta, resposta) VALUES
 ('Meu sensor parou de funcionar! E agora?', 'Comunique a nossa equipe para que possamos fazer o reparo!'),
@@ -221,10 +220,8 @@ SELECT * FROM tipoArmazem;
 SELECT empresa.idEmpresa AS 'ID Empresa',
 empresa.nome AS 'Nome da empresa',
 empresa.cnpj AS CNPJ,
-empresa.email AS Email,
-empresa.senha AS 'Senha de acesso',
 armazem.idArmazem AS 'ID Armazem',
-armazem.capacidade AS Capacidade,
+armazem.capacidadeToneladas AS Capacidade,
 registro.idRegistro AS 'ID Registro',
 registro.dht11_temperatura AS Temperatura,
 registro.dht11_umidade AS Umidade,
@@ -242,7 +239,7 @@ ON registro.fkSensor = sensor.idSensor;
 
 -- JOIN COM ARMAZEM - TIPOARMAZEM - PRAZO - ENDERECO
 SELECT armazem.idArmazem AS 'ID Armazem',
-armazem.capacidade AS Capacidade,
+armazem.capacidadeToneladas AS Capacidade,
 tipo.idTipoArmazem AS 'ID Tipo Armazem',
 tipo.nome AS 'Nome do armazem',
 prazo.tipoPrazo AS Prazo,
@@ -266,7 +263,6 @@ ON armazem.fkEndereco = endereco.idEndereco;
 SELECT empresa.idEmpresa AS 'ID Empresa',
 empresa.nome AS 'Nome da empresa', 
 empresa.cnpj AS CNPJ,
-empresa.email AS 'Email empresa',
 func.idFuncionario AS 'ID Funcionário',
 func.nomeCompleto AS 'Nome funcionário',
 func.email AS 'Email funcionário',
@@ -293,8 +289,7 @@ ON func.fkTipoFuncionario = tipo.idTipoFuncionario;
 
 -- SELECT COM NOME - EMAIL - SENHA FROM EMPRESAS
 SELECT empresa.nome AS 'Nome Empresa',
-empresa.email AS Email,
-empresa.senha AS 'Senha de acesso' 
+cnpj as 'CNPJ Empresa'
 FROM empresa;
 
 
@@ -312,7 +307,7 @@ ON func.fkTipoFuncionario = tipo.idTipoFuncionario;
 
 -- JOIN - ARMAZEM - SENSOR - REGISTRO 
 SELECT armazem.idArmazem AS 'ID Armazem',
-armazem.capacidade AS Capacidade,
+armazem.capacidadeToneladas AS Capacidade,
 armazem.descricao AS 'Descrição',
 sensor.idSensor AS 'ID Sensor',
 sensor.modelo AS Modelo,
@@ -328,13 +323,12 @@ ON registro.fkSensor = sensor.idSensor;
 
 -- JOIN - ARMAZEM - TIPO - PARAMETRO
 SELECT armazem.idArmazem AS 'ID Armazem',
-armazem.capacidade AS Capacidade,
+armazem.capacidadeToneladas AS Capacidade,
 armazem.descricao AS 'Descrição',
 tipo.idTipoArmazem AS 'ID Tipo Armazem',
 tipo.nome AS 'Nome do armazem',
 parametro.minTemp AS 'Temperatura minima',
 parametro.maxTemp AS 'Temperatura máxima',
-parametro.minUmid AS 'Umidade minima',
 parametro.maxUmid AS 'Umidade máxima'
 FROM armazem LEFT JOIN tipoArmazem AS tipo
 ON armazem.fkTipoArmazenamento = tipo.idTipoArmazem
@@ -346,7 +340,6 @@ ON tipo.fkParametro = parametro.idParametro;
 SELECT empresa.idEmpresa AS 'ID Empresa',
 empresa.nome AS 'Nome da empresa', 
 empresa.cnpj AS CNPJ,
-empresa.email AS 'Email empresa',
 endereco.cep AS CEP,
 endereco.numero AS 'Número',
 endereco.logradouro AS Logradouro,    
@@ -355,7 +348,7 @@ endereco.estado AS Estado,
 endereco.cidade AS Cidade,
 endereco.complemento AS Complemento,
 armazem.idArmazem AS 'ID Armazem',
-armazem.capacidade AS Capacidade,
+armazem.capacidadeToneladas AS Capacidade,
 armazem.descricao AS 'Descrição',
 tipo.nome AS 'Nome do armazem'
 FROM empresa 
@@ -365,3 +358,4 @@ JOIN armazem
 ON armazem.fkEndereco = endereco.idEndereco
 JOIN tipoArmazem AS tipo 
 ON armazem.fkTipoArmazenamento = tipo.idTipoArmazem;
+
