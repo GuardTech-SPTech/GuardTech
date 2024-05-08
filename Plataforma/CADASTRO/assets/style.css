@@ -99,14 +99,16 @@ body {
     color:#2A4C09;
 }
 
-.form{
+.form {
     display: flex;
     flex-direction: column;
     height: 60%;
     width: 100%;
     justify-content: space-around;
     align-items: center;
+    margin-bottom: 80px; /* Adicionando margem inferior */
 }
+
 
 input[type="text"],
 input[type="password"]{

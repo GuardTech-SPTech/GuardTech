@@ -32,6 +32,9 @@
                     <input name="cep" onkeyup="showCep()" type="text" id="input_cep" size="10" maxlength="9" placeholder="CEP">
                     <input type="text" id="input_num" placeholder="NUMERO">
                 </div>
+                <input type="text" id="input_rua" placeholder="RUA">
+                <input type="text" id="input_logradouro" placeholder="LOGRADOURO">
+                <input type="text" id="input_cidade" placeholder="CIDADE">
                 <small class="alert" id="alert_cnpj">CNPJ invalido!</small>
                 <input type="text" onkeyup="showCNPJ()" id="input_cnpj" placeholder="CNPJ">
                 <small class="alert" id="alert_email">O email deve estar no formato empresa@dominio.com</small>
@@ -52,6 +55,9 @@
             //PEGANDO OS VALORES DOS INPUTS
             const empresa = input_empresa.value;
             const cep = input_cep.value;
+            const rua = input_rua.value;
+            const logradouro = input_logradouro.value;
+            const cidade = input_cidade.value;
             const email = input_email.value;
             const senha = input_senha.value;
             const confirm = input_confirm.value;
@@ -170,6 +176,4 @@
             }
         }
     </script>
-</body>
-
-</html>
+</
