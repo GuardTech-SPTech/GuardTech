@@ -7,10 +7,13 @@
     <title>GuardTech+ | Contato </title>
     <link rel="stylesheet" href="contato.css">
     <link rel="icon" href="imagens/sergio.usa.na.aba.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <script src="script.js"></script>
 </head>
 
 <body>
-    <div class="screen">
+    
         <div class="header">
             <p onclick="voltarHome()">Voltar</p>
             <h2>GUARDTECH+</h2>
@@ -20,7 +23,7 @@
             <div class="nav-bar-L">
                 <ul>
                     <li><a href="../Perfil/index.html">Perfil</a></li>
-                    <li class="contato"><a href="">Contato</a></li>
+                    <li class="contato"><a href=""><span>Dúvidas Frequentes</span></a></li>
                 </ul>
             </div>
             <div class="nav-bar-R">
@@ -31,35 +34,37 @@
             </div>
         </div>
         <!-- Insere a tela -->
-        <div class="pagina">
-            <div class="titulo">
-                <h1> Perguntas Frequentes </h1>
-            </div>
 
-            <div class="fundoPergunta">
-                    <select class="select" id="select_pergunta">
-                        <option value="op"> Como funciona a solução </option>
-                        <option value="op"> Como funciona a solução </option>
-                        <option value="op"> Como funciona a solução </option>
+        <div class="content">
+            <div class="chat">
+                <div class="box-pergunta">
+                    <select id="select_pergunta" onchange="TrocarClasse()">
+                        <option value="1">Como funciona a solução?</option>
+                        <option value="2">Asdasdasas</option>
+                        <option value="3">Asdatafas</option>
                     </select>
-                <div class="boxBotao">
-                    <button class= "iconeBotao" onclick="Perguntar()"></button>
+                    <button onclick="perguntar()">
+                        <i class="fas fa-play"></i>
+                    </button>
+                </div>
+                <div class="box-resposta">
+                    <div class="x" id="pergunta_usuario">
+                        <div class="pergunta">
+                            <p id="p_pergunta"></p>
+                        </div>
+                        <img src="imagens/cliente.png">
+                    </div>
+                    <div class="x" id="resposta_empresa">
+                        <img src="imagens/empresa.png">
+                        <div class="resposta">
+                            <p id="p_resposta"></p>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <div class="fundoChat">
-                <div class="boxPerguntaChat"> </div>
-                <img clas="">
-                <div class="boxRespostaChat"> </div>
-                <img class="funcionario">
-            </div>
         </div>
+    
 </body>
 
 </html>
 
-<script>
-    function voltarHome(){
-        window.location.href = '../SITE/index.html';
-    }
-</script>
