@@ -79,6 +79,11 @@ body {
     color: #868686;
 }
 
+.box-nav-bar span {
+    color: #2a4c09;
+    font-weight: bold;
+}
+
 .box-nav-bar a:hover {
     transition: 0.5s;
     color: #2a4c09;
@@ -94,7 +99,7 @@ body {
 
 .dash-boxes {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     width: 100%;
     height: 40vh;
     margin: 15px;
@@ -110,9 +115,9 @@ body {
     font-size: 20px;
 }
 .info-box {
-    text-align: center;
+    text-align: left;
     height: 100%;
-    width: 250px;
+    width: 200px;
     background-color: #F5F5F5;
     box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.3);
     display: flex;
@@ -120,10 +125,18 @@ body {
     align-items: center;
 }
 
+
+.info_text p{
+    font-size: 13px;
+    position: relative;
+    left: 20px;
+    max-width: 90%;
+}
+
 .media-box {
     text-align: center;
     height: 100%;
-    width: 240px;
+    width: 200px;
     background-color: #F5F5F5;
     box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.3);
     display: flex;
@@ -136,23 +149,89 @@ body {
     flex-direction: column;
     align-items: center;
     height: 100%;
-    width: 450px;
+    width: 460px;
     background-color: #F5F5F5;
     box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
 
-.extra-boxes {
-    height: 100%;
+.parametros-box {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;  
+    align-items: center;
+    justify-content: center;
+    height: 55%;
+    width: 100%;
+    background-color: #F5F5F5;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.parametro-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 55px;
+    background-color: #e0f19c;
+    margin-bottom: 15px;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.temp-umi-box {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    position: relative;
+    bottom: 20px;
+}
+
+.parametros-box p {
+    margin: 0;
+    position: relative;
+    bottom: 10px;
+    color: #747472;
+    font-weight: 600;
+}
+
+.parametro-temp {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+}
+
+.parametro-umi {
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100px;
+}
+
+.left-box {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    margin-right: 20px;
+}
+
+.extra-boxes {
+    height: 120px;
+    width: 600px;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+    position: relative;
+    right: 6px;
 }
 
 .clima-box {
-    height: 45%;
-    width: 420px;
+    height: 100%;
+    width: 240px;
     background-color: #F5F5F5; 
-    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.3);   
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.3);
+    margin-right: 20px;
+    margin-left: 10px;
 
 }
 .clima-box h1{
@@ -164,8 +243,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 45%;
-    width: 420px;
+    height: 100%;
+    width: 200px;
     background-color: #F5F5F5; 
     box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.3);   
 }
@@ -176,7 +255,6 @@ body {
     align-items: center;
     height: 40vh;
     width: 100%;
-    
 }
 
 .chart-temp {
@@ -202,8 +280,8 @@ body {
 }
 
 .elementos_relogio h1 {
-    margin-top: -5px;
-    font-size: 45px;
+    margin-top: 8px;
+    font-size: 24px;
     color: black;
     
 }
@@ -255,7 +333,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 80%;
+    width: 70%;
     height: 30%;
     background-color: rgb(196, 196, 196);
     box-shadow: 1px 2px 2px 1px rgba(0, 0, 0, 0.3);
@@ -265,7 +343,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 80%;
+    width: 70%;
     height: 30%;
     background-color: rgb(196, 196, 196);
     box-shadow: 1px 2px 2px 1px rgba(0, 0, 0, 0.3);
@@ -293,8 +371,8 @@ img#imagemfazenda {
     border: solid 3px;
     border-color: #2a4c09;
     border-radius: 90px;
-    width: 90px;
-    height: 90px;
+    width: 70px;
+    height: 70px;
 }
 
 .clima_elements {
@@ -304,17 +382,16 @@ img#imagemfazenda {
     justify-content: space-around;
     text-align: center;
     position: relative;
-    bottom: 33px;
+    bottom: 20px;
 }
 .clima_elements img{
-    width: 70px;
-    height: 70px;
+    width: 40px;
+    height: 40px;
 }
 
 .clima_elements h1 {
-    position: relative;
-    top: 10px;
     color: black;
+    font-size: 16px;
 }
 
 .max_min {
@@ -331,9 +408,13 @@ img#imagemfazenda {
 }
 
 .max img {
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     rotate: 90deg;
+}
+
+.max p {
+    font-size: 12px;
 }
 
 .min {
@@ -344,7 +425,11 @@ img#imagemfazenda {
 }
 
 .min img{
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     rotate: 180deg;
+}
+
+.min p {
+    font-size: 12px;
 }

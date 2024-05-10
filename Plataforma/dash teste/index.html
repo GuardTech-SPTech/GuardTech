@@ -29,7 +29,7 @@
             </div>
             <div class="nav-bar-R">
                 <ul>
-                    <li><a href="">Monitoramento</a></li>
+                    <li><a href=""><span>Monitoramento</span></a></li>
                     <li><a href="../HISTORICO/index.html">Histórico</a></li>
                 </ul>
             </div>
@@ -43,18 +43,55 @@
                 <div class="info_text">
                     <p><b>Nome:</b> Armazém XPTO</p>
                     <p><b>Endereço:</b> Rua Haddock Lobo, Nº 535</p>
+                    <p><b>Tipo:</b> Silo</p>
+                    <p><b>Prazo:</b> Curto</p>
                 </div>
             </div>
-            <div class="media-box">
-                <h1>Média<br>(Último minuto)</h1>
-                <div class="media-all">
-                    <p>Temperatura</p>
-                    <div class="media-temp" id="cor_temp">
-                        <h1 id="mediaTemp">00</h1>
+           <div class="left-box">
+                <div class="extra-boxes">
+                    <div class="clima-box">
+                        <h1>Clima</h1>
+                        <div class="clima_elements">
+                            <img src="imagens/sol.png">
+                            <h1>26°C<br>Ensolarado</h1>
+                            <div class="max_min">
+                                <div class="max">
+                                    <img src="imagens/seta-esquerda.png" alt="">
+                                    <p>30ºC</p>
+                                </div>
+                                <div class="min">
+                                    <img src="imagens/seta-para-cima (1).png" alt="">
+                                    <p>20ºC</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <p>Umidade</p>
-                    <div class="media-umi" id="cor_umi">
-                        <h1 id="mediaUmi">00</h1>
+                    <div class="horario-box">
+                        <h1>Relógio (GMT-3)</h1>
+                        <div class="elementos_relogio">
+                            <div class="relogio">
+                                <h1 id="relogio"></h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="parametros-box">
+                    <h1>Parâmetros</h1>
+                    <p>Ideais</p>
+                    <div class="temp-umi-box">
+                        <div class="parametro-temp">
+                            <div class="parametro-back">
+                                <h2>14°</h2>
+                            </div>
+                            <p>Temperatura</p>
+                        </div>
+                        <div class="parametro-umi">
+                            <div class="parametro-back">
+                                <h2>18%</h2>
+                            </div>
+                            <p>Umidade</p>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -78,34 +115,22 @@
                     </div>
                 </div>
             </div>
-            <div class="extra-boxes">
-                <div class="clima-box">
-                    <h1>Clima</h1>
-                    <div class="clima_elements">
-                        <img src="imagens/sol.png">
-                        <h1>26°C<br>Ensolarado</h1>
-                        <div class="max_min">
-                            <div class="max">
-                                <img src="imagens/seta-esquerda.png" alt="">
-                                <p>30ºC</p>
-                            </div>
-                            <div class="min">
-                                <img src="imagens/seta-para-cima (1).png" alt="">
-                                <p>20ºC</p>
-                            </div>
-                        </div>
+
+            <div class="media-box">
+                <h1>Média<br>(Última hora)</h1>
+                <div class="media-all">
+                    <p>Temperatura</p>
+                    <div class="media-temp" id="cor_temp">
+                        <h1 id="mediaTemp">00</h1>
                     </div>
-                </div>
-                <div class="horario-box">
-                    <h1>Relógio (GMT-3)</h1>
-                    <div class="elementos_relogio">
-                        <div class="relogio">
-                            <h1 id="relogio"></h1>
-                        </div>
+                    <p>Umidade</p>
+                    <div class="media-umi" id="cor_umi">
+                        <h1 id="mediaUmi">00</h1>
                     </div>
                 </div>
             </div>
         </div>
+        
 
         <div class="chart-boxes">
             <div class="chart-temp">
