@@ -1,0 +1,343 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+body {
+    margin: 0;
+    font-family: "Inter", sans-serif;
+}
+.screen {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+.header {
+    background-color: #e0f19c;
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.logo {
+    height: 135px;
+    width: 135px;
+    position: relative;
+    left: 80px;
+    bottom: 5px;
+}
+.header h2 {
+    color: #2a4c09;
+    font-size: 32px;
+    position: relative;
+    left: 56px;
+    bottom: 5px;
+}
+.header p {
+    color: #747472;
+    font-weight: 600;
+    position: relative;
+    right: 20px;
+    bottom: 5px;
+}
+.box-nav-bar {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 100%;
+    height: 10%;
+    position: relative;
+    bottom: 25px;
+}
+.nav-bar-L {
+    display: flex; 
+    background-color: #F5F5F5;
+    width: 49%;
+    height: 90%;
+    box-shadow: -1px 2px 2px 1px rgba(0, 0, 0, 0.3);
+}
+.box-nav-bar ul {
+    display: flex;
+    width: 90%;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+    
+}
+.box-nav-bar a {
+    text-decoration: none;
+    color: #868686;
+}
+.box-nav-bar a:hover {
+    transition: 0.5s;
+    color: #2a4c09;
+}
+.nav-bar-R {
+    display: flex;
+    background-color: #F5F5F5;
+    width: 49%;
+    height: 90%;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilização resultados */
+/*box1*/
+
+.resultadoMonitoramento1 {
+    display: flex;
+    justify-content: center;
+    background-color: transparent;
+    justify-content: space-around;
+    flex-direction: column;
+    width: 100%;
+}
+
+.parte1 {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.box1 {
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+    border-radius: 15px;
+    width: 50%;
+    height: 200px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-left: 50px;
+}
+
+.box1 h3 {
+    color: #2a4c09;
+    margin-bottom: -55px;
+    width: 470px;
+    width: 32px;
+    width: 100%;
+    text-align: center;
+}
+
+.boxResultados {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    margin: 0;
+}
+
+.boxTemperatura {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 50%;
+    align-items: center;
+    margin-left: 15%;
+}
+
+.boxTemperatura p {
+    color: #868686;
+    width: 161px;
+    height: 40px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.boxTemperatura h1 {
+    margin-top: 0;
+    background-color: #e0f19c;
+    width: 118px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 25px;
+}
+
+.boxUmidade {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 50%;
+    align-items: center;
+    margin-right: 15%;
+}
+
+.boxUmidade p {
+    color: #868686;
+    width: 161px;
+    height: 40px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.boxUmidade h1 {
+    margin-top: 0;
+    background-color: #e0f19c;
+    width: 118px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 25px;
+}
+
+/*box2*/
+.box2 {
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+    border-radius: 15px;
+    width: 50%;
+    height: 200px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-left: 50px;
+}
+
+.box2 h3 {
+    color: #2a4c09;
+    margin-bottom: -55px;
+    width: 470px;
+    width: 32px;
+    width: 100%;
+    text-align: center;
+}
+
+.boxResultados {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    margin: 0;
+}
+
+.boxArmazem {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 50%;
+    align-items: center;
+    margin-left: 15%;
+}
+
+.boxArmazem p {
+    color: #868686;
+    width: 161px;
+    height: 40px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.boxArmazem h1 {
+    margin-top: 0;
+    width: 118px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 25px;
+}
+
+.boxRecorrencia{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 50%;
+    align-items: center;
+    margin-right: 15%;
+}
+
+.boxRecorrencia p {
+    color: #868686;
+    width: 161px;
+    height: 40px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.boxRecorrencia h1 {
+    margin-top: 0;
+    width: 118px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 25px;
+    text-align: center;
+}
+/*box 3*/
+
+.parte2 {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    right: 100%;
+    align-items: center;
+    flex-direction: column;
+}
+
+.box3 {
+    background-color: #e0f19c;
+    display: flex;
+    width: 100%;
+    right: 100%;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.box3 h3 {
+    color: #2a4c09;
+    margin-bottom: -55px;
+    width: 470px;
+    width: 32px;
+    width: 100%;
+    text-align: center;
+    bottom: 100%;
+}
+
+.idArmazem {
+    display: flex;
+    justify-content: column;
+    background-color: #F5F5F5    ;
+    width: 227px;
+    height: 191px;
+    border-radius: 30px;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;   
+}
+
+.idArmazem p {
+    color: #868686;
+    width: 161px;
+    height: 40px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.resultadoTemperatura {
+    display: flex;
+    flex-direction: row;
+}
+
+.barrinhaTemperatura {
+    background-color: #F1A69C;    
+    color: #F1A69C; 
+    width: 100px;  
+    right: 1px; 
+    border-radius: 55px;
+}
+
+.resultadoUmidade {
+    display: flex;
+    flex-direction: row;
+}
+
+.barrinhaUmidade {
+    background-color: #F1E39C;    
+    color: #F1E39C;
+    width: 90px;  
+    right: 100px; 
+    border-radius: 55px;
+}
