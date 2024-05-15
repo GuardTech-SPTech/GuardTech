@@ -11,7 +11,7 @@ function cadastrar(req, res) {
     var cnpj = req.body.cnpjServer;
 
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        empresaModel.cadastrar(nome, cep, numero, logradouro, bairro, cidade, cnpj)
+        empresaModel.cadastrar(nome, cnpj)
             .then(
                 function (resultado) {
                     res.json(resultado);
