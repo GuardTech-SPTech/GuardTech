@@ -1,8 +1,10 @@
 
-
+const idEmpresa = sessionStorage.getItem('idEmpresaSession');
 const nomeEmpresa = sessionStorage.getItem('empresaSession');
 const inputEmpresa = document.querySelector('#input_empresa');
 inputEmpresa.value = nomeEmpresa 
+
+
 
 function cadastrarUsuario() {
     // const nomeVar = input_empresa.value
@@ -21,7 +23,7 @@ function cadastrarUsuario() {
     const nomeCompletoVar = input_nome_completo.value
     const senhaVar = input_senha.value
     const cpfVar = input_cpf.value
-    // const idEmpresaVar = idEmpresa
+    const idEmpresaVar = idEmpresa
         fetch("../../admin/cadastrar", {
             method: "POST",
             headers: {

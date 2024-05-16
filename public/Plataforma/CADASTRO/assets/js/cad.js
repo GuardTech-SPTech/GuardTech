@@ -37,7 +37,7 @@ function cad() {
         if (resposta.ok) {
           alert("Cadastro realizado com sucesso!")
           sessionStorage.setItem('empresaSession', nomeVar)
-          // window.location.href = "../CADASTRO/cadastroAdministrador.html"
+          window.location.href = "../CADASTRO/cadastroAdministrador.html"
         } else {
           throw "Houve um erro ao tentar realizar o cadastro!";
         }
