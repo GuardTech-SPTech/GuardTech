@@ -9,7 +9,10 @@ function cadastrar(req, res) {
     empresaModel.cadastrar(nome, cnpj)
         .then(
             function (resultado) {
-                res.json(resultado);
+                res.json({
+                    idEmpresa:resultado.insertId
+                    
+                });
                 console.log('ID do último registro inserido:', resultado.insertId);
                 ultimoIdInseridoNoBanco = resultado.insertId
             }

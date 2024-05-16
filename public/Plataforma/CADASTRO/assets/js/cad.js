@@ -24,11 +24,20 @@ function cad() {
 
     }).then(function (resposta) {
         console.log("resposta: ", resposta);
+
+        resposta.json()
+        .then(function(json){
+            console.log(json.idEmpresa)
+            sessionStorage.setItem('idEmpresaSession', json.idEmpresa)
+        })
+        .catch(function(err){
+          console.log(err)
+        })
         
         if (resposta.ok) {
           alert("Cadastro realizado com sucesso!")
           sessionStorage.setItem('empresaSession', nomeVar)
-          window.location.href = "../CADASTRO/cadastroAdministrador.html"
+          // window.location.href = "../CADASTRO/cadastroAdministrador.html"
         } else {
           throw "Houve um erro ao tentar realizar o cadastro!";
         }
