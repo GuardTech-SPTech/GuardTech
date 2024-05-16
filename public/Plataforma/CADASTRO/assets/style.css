@@ -109,6 +109,28 @@ body {
     margin-bottom: 80px; /* Adicionando margem inferior */
 }
 
+select {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+    height: 45px;
+    border-radius: 14px;
+    background-color: #F5F5F5;
+    transition: outline-color 0.3s ease;
+    font-family: 'Inter';
+}
+select{
+    outline-color: #2A4C09;
+}
+
+select::placeholder{
+    font-family: 'Poppins';
+    font-weight: 500;
+    color: #9F9F9F;
+}
 
 input[type="text"],
 input[type="password"]{

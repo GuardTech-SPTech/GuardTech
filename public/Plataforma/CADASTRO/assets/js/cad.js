@@ -24,11 +24,11 @@ function cad() {
 
     }).then(function (resposta) {
         console.log("resposta: ", resposta);
-      
+        
         if (resposta.ok) {
           alert("Cadastro realizado com sucesso!")
-
-          window.location.href = "../SITE/index.html"
+          sessionStorage.setItem('empresaSession', nomeVar)
+          window.location.href = "../CADASTRO/cadastroAdministrador.html"
         } else {
           throw "Houve um erro ao tentar realizar o cadastro!";
         }

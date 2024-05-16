@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./assets/style.css">
+    <script defer src="./assets/js/cadastrarUsuario.js"></script>
+    <link rel="icon" href="assets/sergio.usa.na.aba.ico">
+</head>
+<body>
+    <div class="container-form">
+        <div class="area-logo">
+            <div class="box-logo">
+                <h2 class="titulo-logo">Bem-Vindo a GuardTech+</h2>
+                <div class="logo">
+                    <img src="assets/logo sem (claro) sem escrita 1.png" alt="">
+                </div>
+                <p class="flush"><a href="../SITE/index.html">Voltar</a></p>
+            </div>
+        </div>
+        <div class="area-form">
+            <div class="desc-form">
+                <p class="titulo-form">Cadastro Usuário</p>
+            </div>
+            <div class="form">
+                <input type="text" id="input_empresa" placeholder="EMPRESA" readonly>
+                <input type="text" id="input_usuario" placeholder="NOME DE USUARIO">
+                <input type="text" id="input_email" placeholder="EMAIL">
+                <input type="text" id="input_nome_completo" placeholder="NOME COMPLETO">
+                <input type="text" id="input_cpf" placeholder="CPF">
+                <input type="text" id="input_senha" placeholder="SENHA">
+                <input type="text" id="input_confirmar_senha" placeholder="CONFIRMAR SENHA">
+            </div>
+            <div class="area-button">
+                <button onclick="cadastrarUsuario()">Cadastrar</button>
+            </div>
+        </div>
+</body>
+</html>
