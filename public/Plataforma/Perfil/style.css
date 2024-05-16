@@ -105,6 +105,8 @@ body {
     width: 93%;
     justify-content: space-between;
     height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 .area-perfil .empresa-perfil {
@@ -114,8 +116,8 @@ body {
     align-items: center;
     background-color: #E0F19C;
     font-family: 'Inter', sans-serif;
-    width: 71vh;
-    height: 38.65vh;
+    width: 600px;
+    height: 200px;
     border-radius: 12px;
     box-shadow: 0px 3px 2px 1px rgba(0, 0, 0, 0.3);
 }
@@ -124,7 +126,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 90%;
+    width: 530px;
+    height: 40px;
     background-color: #F5F5F5;
     border-radius: 10px;
     box-shadow: 0px 3px 3px 1px rgba(0, 0, 0, 0.3);
@@ -177,23 +180,110 @@ body {
 
 .area-funcionario{
     display: flex;
+    justify-content: center;
     flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    width: 71vh;
-    height: 30.65vh;
+    width: 600px;
+    max-height: 280px;
     font-family: 'Inter', sans-serif;
     background-color: #e0f19c;
     border-radius: 12px;
-    box-shadow: 0px 3px 2px 1px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 3px 4px 1px rgba(0, 0, 0, 0.3);
+    
+}
+
+.container-funcionario {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.area-funcionario .box-funcionario {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 40px;
+    width: 100%;
+    height: 100px;
+    margin: 10px;
+}
+
+.area-funcionario .foto-funcionario img {
+    width: 80px;
+    height: 80px;
 }
 
 .area-funcionario .titulo-funcionario{
     display: flex;
     width: 100%;
     justify-content: center;
+
+}
+
+.area-funcionario p{
+    font-family: 'Inter', sans-serif;
+    color: #868686;
+    font-weight: 800;
+    font-size: 20px;
+    margin: 15px;
+
+}
+
+.area-funcionario span {
+    font-family: 'Inter', sans-serif;
+    color: #868686;
+    font-size: 15px;
+}
+
+.area-funcionario .email-funcionario {
+
+    font-family: 'Inter', sans-serif;
 }
 
 .area-funcionario .titulo-funcionario h3{
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
     color: #2a4c09;
+    margin: 0px;
+    text-align: center;
+    height: 30px;
+}
+
+.area-funcionario .card-funcionario {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    box-shadow: 0px 3px 4px 1px rgba(0, 0, 0, 0.3);
+    background-color: #F5F5F5;
+    width: 250px;
+    height: 100px;
+    border-radius: 30px;
+    
+}
+
+.separar {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+} 
+
+.adicionar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 3px 4px 1px rgba(0, 0, 0, 0.3);
+    background-color: #F5F5F5;
+    width: 250px;
+    height: 100px;
+    border-radius: 30px;
+}
+
+.adicionar img {
+    width: 50px;
+    height: 50px;
+}
+
+::-webkit-scrollbar {
+  background-color: transparent;
 }
