@@ -91,11 +91,12 @@ body {
     justify-content: space-around;
     flex-direction: column;
     width: 100%;
+    flex-direction: column;
 }
 
 .parte1 {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     width: 100%;
 }
 
@@ -104,21 +105,22 @@ body {
     flex-direction: column;
     background-color: transparent;
     border-radius: 15px;
-    width: 50%;
-    height: 200px;
+    width: 469px;
+    height: 131px;
+    top: 261px;
+    left: 131px;
     display: flex;
-    justify-content: space-around;
     align-items: center;
-    margin-left: 50px;
 }
 
-.box1 h3 {
+.box1 h1 {
     color: #2a4c09;
-    margin-bottom: -55px;
-    width: 470px;
-    width: 32px;
-    width: 100%;
+    width: 469px;
+    height: 31px;
+    top: 261px;
+    left: 161px;
     text-align: center;
+    font-size: 24px;
 }
 
 .boxResultados {
@@ -141,15 +143,18 @@ body {
 .boxTemperatura p {
     color: #868686;
     width: 161px;
-    height: 40px;
+    height: 38px;
     font-weight: 600;
     text-align: center;
+    font-size: 20px;
 }
 
 .boxTemperatura h1 {
     margin-top: 0;
-    background-color: #e0f19c;
-    width: 118px;
+    background-color: #F1E39C;
+    color: #000;
+    width: 129px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -168,15 +173,18 @@ body {
 .boxUmidade p {
     color: #868686;
     width: 161px;
-    height: 40px;
+    height: 38px;
     font-weight: 600;
     text-align: center;
+    font-size: 20px;
 }
 
 .boxUmidade h1 {
     margin-top: 0;
-    background-color: #e0f19c;
-    width: 118px;
+    background-color: #F1E39C;
+    color: #000;
+    width: 129px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -189,21 +197,22 @@ body {
     flex-direction: column;
     background-color: transparent;
     border-radius: 15px;
-    width: 50%;
-    height: 200px;
+    width: 469px;
+    height: 131px;
+    top: 261px;
+    left: 131px;
     display: flex;
-    justify-content: space-around;
     align-items: center;
-    margin-left: 50px;
 }
 
-.box2 h3 {
+.box2 h1 {
     color: #2a4c09;
-    margin-bottom: -55px;
-    width: 470px;
-    width: 32px;
-    width: 100%;
+    width: 469px;
+    height: 31px;
+    top: 261px;
+    left: 161px;
     text-align: center;
+    font-size: 24px;
 }
 
 .boxResultados {
@@ -220,7 +229,6 @@ body {
     flex-direction: column;
     width: 50%;
     align-items: center;
-    margin-left: 15%;
 }
 
 .boxArmazem p {
@@ -229,6 +237,7 @@ body {
     height: 40px;
     font-weight: 600;
     text-align: center;
+    font-size: 20px;
 }
 
 .boxArmazem h1 {
@@ -238,26 +247,28 @@ body {
     align-items: center;
     justify-content: center;
     border-radius: 25px;
+    font-size: 48px;
+    color: #000;
 }
 
-.boxRecorrencia{
+.boxAlerta{
     display: flex;
     justify-content: center;
     flex-direction: column;
     width: 50%;
     align-items: center;
-    margin-right: 15%;
 }
 
-.boxRecorrencia p {
+.boxAlerta p {
     color: #868686;
     width: 161px;
     height: 40px;
     font-weight: 600;
     text-align: center;
+    font-size: 20px;
 }
 
-.boxRecorrencia h1 {
+.boxAlerta h1 {
     margin-top: 0;
     width: 118px;
     display: flex;
@@ -265,7 +276,10 @@ body {
     justify-content: center;
     border-radius: 25px;
     text-align: center;
+    font-size: 48px;
+    color: #000;
 }
+
 /*box 3*/
 
 .parte2 {
@@ -275,10 +289,20 @@ body {
     right: 100%;
     align-items: center;
     flex-direction: column;
+    margin-top: 100px;
+}
+
+.parte2 h1 {
+    color: #2a4c09;
+    width: 469px;
+    height: 31px;
+    top: 261px;
+    left: 161px;
+    text-align: center;
+    font-size: 24px;
 }
 
 .box3 {
-    background-color: #e0f19c;
     display: flex;
     width: 100%;
     right: 100%;
@@ -286,7 +310,7 @@ body {
     justify-content: space-evenly;
 }
 
-.box3 h3 {
+.box3 h1 {
     color: #2a4c09;
     margin-bottom: -55px;
     width: 470px;
@@ -296,23 +320,24 @@ body {
     bottom: 100%;
 }
 
-.idArmazem {
+.box3 .idArmazem {
     display: flex;
     justify-content: column;
     background-color: #F5F5F5    ;
     width: 227px;
     height: 191px;
-    border-radius: 30px;
+    border-radius: 20px;
     justify-content: space-around;
     flex-direction: column;
-    align-items: center;   
+    align-items: center;  
 }
 
-.idArmazem p {
+.box3 .idArmazem h1 {
     color: #868686;
     width: 161px;
     height: 40px;
-    font-weight: 600;
+    font-weight: 700px;
+    font-size: 20px;
     text-align: center;
 }
 
@@ -321,12 +346,22 @@ body {
     flex-direction: row;
 }
 
+.box3 .idArmazem .resultadoTemperatura h1 {
+    color: #000;
+    font-size: 32px;
+}
+
+.box3 .idArmazem .resultadoUmidade h1 {
+    color: #000;
+    font-size: 32px;
+}
+
 .barrinhaTemperatura {
     background-color: #F1A69C;    
     color: #F1A69C; 
-    width: 100px;  
-    right: 1px; 
-    border-radius: 55px;
+    width: 89px;  
+    height: 18px;
+    border-radius: 20px;
 }
 
 .resultadoUmidade {
@@ -337,7 +372,7 @@ body {
 .barrinhaUmidade {
     background-color: #F1E39C;    
     color: #F1E39C;
-    width: 90px;  
-    right: 100px; 
-    border-radius: 55px;
+    width: 89px;  
+    height: 18px;
+    border-radius: 20px;
 }
