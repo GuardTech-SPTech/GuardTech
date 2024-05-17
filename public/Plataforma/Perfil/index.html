@@ -26,48 +26,117 @@
             <div class="nav-bar-R">
                 <ul>
                     <li><a href="../dash teste/index.html">Monitoramento</a></li>
-                    <li><a href="../HISTORICO/index.html">Historico</a></li>
+                    <li><a href="../HISTORICO/index.html">Histórico</a></li>
                 </ul>
             </div>
         </div>
         <!-- Insere a tela -->
-
-        <div class="area-perfil">
-            <div class="empresa-perfil">
-                <div class="box-nome">
-                    <h2>Milho XPTO</h2>
-                </div>
-                <div class="desc-perfil">
-                    <div class="imagem-perfil">
-                        <img src="images/FotoEmpresa.png" alt="">
+        <div class="container-perfil">
+            <div class="area-perfil">
+                <div class="empresa-perfil">
+                    <div class="box-nome">
+                        <h2>Milho XPTO</h2>
                     </div>
-                    <div class="meta-dado">
-                        <div class="area-email">
-                            <p>milho.xpto@email.com</p>
+                    <div class="desc-perfil">
+                        <div class="imagem-perfil">
+                            <img src="images/FotoEmpresa.png" alt="">
                         </div>
-                        <div class="area-num">
-                            <p>11 3683-2671</p>
+                        <div class="meta-dado">
+                            <div class="area-email">
+                                <p>milho.xpto@email.com</p>
+                            </div>
+                            <div class="area-num">
+                                <p>11 3683-2671</p>
+                            </div>
                         </div>
+                    </div>
+                </div>
+
+                <div class="area-funcionario">
+
+                    <div class="titulo-funcionario">
+                        <h3>Funcionários</h3>
+                    </div>
+                    <div class="container-funcionario">
+                        <div class="separar">
+                            <div class="box-funcionario">
+                                <div class="adicionar">
+                                    <img onclick="abrirTelaCadastroFunc()" src="./images/adicionar 5.svg" alt="">
+                                </div>
+                            </div>
+
+                            <div class="box-funcionario">
+                                <div class="card-funcionario">
+                                    <p>Walter Santos <br>
+                                        <span>Operador</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="separar">
+                            <div class="box-funcionario">
+                                <div class="card-funcionario">
+                                    <p>Carlos Miguel <br>
+                                        <span>Operador</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="box-funcionario">
+                                <div class="card-funcionario">
+                                    <p>Raimunda Costa<br>
+                                        <span>Operador</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="separar">
+                            <div class="box-funcionario">
+                                <div class="card-funcionario">
+                                    <p>Lucas Gonçalves <br>
+                                        <span>Operador</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="box-funcionario">
+                                <div class="card-funcionario">
+                                    <p>Sônia Braga<br>
+                                        <span>Técnico</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+
+
                     </div>
                 </div>
             </div>
-
-            <div class="area-funcionario">
-                <div class="titulo-funcionario">
-                    <h3>Funcionarios</h3>
-                </div>
-                <div class="box-funcionario">
-                    <div class="card-funcionario">
-                        <div class="foto-funcionario">
-                            <img src="images/fotoFuncionario.png" alt="">
+            <div class="area-propriedades">
+                <h3>Minhas Propriedades</h3>
+                <div class="box-prop">
+                    <div class="info-prop">
+                        <img src="./images/imagem.svg" alt="">
+                        <div class="dados-propriedade">
+                            <span>Armazém XPTO</span>
+                            <span>Tipo: Silo</span>
+                            <span>Capacidade: 12000t</span>
+                            <span>Logradouro: Rua das Rosas</span>
                         </div>
-                        <p class="nome-funcionario">Carlos Miguel</p>
+                    </div>
+                    <div class="desc-prop">
+                        <span>Descrição:<br>
+                            «Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+                            laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et</span>
                     </div>
                 </div>
-
+                <div class="add-prop">
+                    <img onclick="abrirTelaCadastroFunc()" src="./images/adicionar 5.svg" alt="">
+                    <span>Solicitar novo Armazém</span>
+                </div>
             </div>
         </div>
-
+    </div>
     </div>
 </body>
 
