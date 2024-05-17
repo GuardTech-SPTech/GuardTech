@@ -122,20 +122,20 @@ body {
     font-size: 16px;
     transition: 0.7s;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 
 .box-pergunta button {
-    width: 10%;
-    height: 30%;
+    position: relative;
+    left: 550px;
     border-radius: 15px;
+    width: 80px;
+    height: 60px;
     border: none;
     background-color: #e0f19c;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.3);
     transition: 0.5s;
-    margin-left: 130px;
-    margin-top: 95px;
 }
 
 .box-pergunta button:hover {
@@ -148,15 +148,20 @@ body {
     text-shadow: 1px 0.7px 1px rgba(0, 0, 0, 0.3);
 }
 
-input[type="text"]{
+.box-pergunta input{
 
 font-size: 16px;
 border-radius: 5px;
-width: 400px;
+width: 95%;
 height: 30px;
 margin-left: 5px;
 margin-top: 20px;
+border: none;
+background-color: transparent;
 }
+.box-pergunta input:focus{
+    outline: none;
+    }
 /* input[type="text"]{
         visibility: hidden;
         padding: 15px;
