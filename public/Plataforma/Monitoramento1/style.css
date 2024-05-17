@@ -132,6 +132,7 @@ body {
 }
 
 .boxTemperatura {
+    margin-top: -25px;  
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -162,6 +163,7 @@ body {
 }
 
 .boxUmidade {
+    margin-top: -25px; 
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -229,6 +231,7 @@ body {
     flex-direction: column;
     width: 50%;
     align-items: center;
+    margin-top: -25px; 
 }
 
 .boxArmazem p {
@@ -257,6 +260,7 @@ body {
     flex-direction: column;
     width: 50%;
     align-items: center;
+    margin-top: -25px; 
 }
 
 .boxAlerta p {
@@ -303,76 +307,39 @@ body {
 }
 
 .box3 {
-    display: flex;
-    width: 100%;
-    right: 100%;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-}
-
-.box3 h1 {
-    color: #2a4c09;
-    margin-bottom: -55px;
-    width: 470px;
-    width: 32px;
-    width: 100%;
-    text-align: center;
-    bottom: 100%;
-}
-
-.box3 .idArmazem {
-    display: flex;
-    justify-content: column;
-    background-color: #F5F5F5    ;
-    width: 227px;
-    height: 191px;
+    padding: 10px;
+    width: 250px;
+    height: 180px;
+    background-color: #F5F5F5;
     border-radius: 20px;
-    justify-content: space-around;
+    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.1);
+    display: flex;
     flex-direction: column;
-    align-items: center;  
+    justify-content: space-between;
+    align-items: center;
+    
 }
 
-.box3 .idArmazem h1 {
-    color: #868686;
-    width: 161px;
-    height: 40px;
-    font-weight: 700px;
-    font-size: 20px;
-    text-align: center;
-}
-
-.resultadoTemperatura {
+.IndicadoresTemp,
+.IndicadoresUmi {
+    width: 100%;
+    height: 30%;
     display: flex;
-    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
 }
 
-.box3 .idArmazem .resultadoTemperatura h1 {
-    color: #000;
-    font-size: 32px;
-}
-
-.box3 .idArmazem .resultadoUmidade h1 {
-    color: #000;
-    font-size: 32px;
-}
-
-.barrinhaTemperatura {
-    background-color: #F1A69C;    
-    color: #F1A69C; 
-    width: 89px;  
-    height: 18px;
+.IndicadoresTemp div,
+.IndicadoresUmi div {
+    width: 130px;
+    height: 25px;
     border-radius: 20px;
+    background-color: red;
+    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.1);
 }
 
-.resultadoUmidade {
-    display: flex;
-    flex-direction: row;
-}
-
-.barrinhaUmidade {
-    background-color: #F1E39C;    
-    color: #F1E39C;
-    width: 89px;  
-    height: 18px;
-    border-radius: 20px;
+.IndicadoresTemp p,
+.IndicadoresUmi p {
+    font-size: 35px;
+    font-weight: 600;
 }
