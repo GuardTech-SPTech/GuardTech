@@ -26,11 +26,10 @@
         </div>
         <div class="big-box">
             <div class="box-resposta">
-                <div id="resposta"></div>
+                <div id="resposta" class="display-hidden"></div>
             </div>
             <div class="box-pergunta">
-                <input id="pergunta" type="text" placeholder="Digite sua pergunta..." >
-                <br><br>
+                <input id="pergunta" onclick="trocarClasse()" type="text" placeholder="Digite sua pergunta..." >
                 <button onclick="gerarResposta()">
                     <i class="fas fa-play"></i>
                 </button>
@@ -38,6 +37,14 @@
         </div>
 
         <script>
+                
+            function trocarClasse() {
+                let elemento = document.getElementById('resposta')
+
+
+                elemento.classList.remove('resposta')
+                elemento.classList.add('display-hidden')
+            }
 
             async function gerarResposta() {
                 const pergunta = document.getElementById('pergunta').value;
@@ -52,7 +59,11 @@
 
                 const data = await response.json();
 
-                resposta.style.display = 'block';
+                let elemento = document.getElementById('resposta')
+                
+                elemento.classList.remove('display-hidden')
+                elemento.classList.add('resposta')
+                
                 document.getElementById('resposta').innerText = data.resultado;
             }
 
