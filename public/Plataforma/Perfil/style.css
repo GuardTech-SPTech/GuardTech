@@ -224,6 +224,7 @@ body {
     display: flex;
     width: 100%;
     justify-content: center;
+    font-size: larger;
 
 }
 
@@ -357,7 +358,15 @@ body {
 
 .desc-prop span{
     font-family: 'Inter', sans-serif;
-    font-weight: 800;
+    color: #868686;
+    text-align: start;
+    
+
+}
+
+.titulo-desc {
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
     color: #868686;
     text-align: start;
 }
@@ -392,4 +401,5 @@ body {
     font-weight: 800;
     color: #868686;
     text-align: start;
+    margin: 10px;
 }
