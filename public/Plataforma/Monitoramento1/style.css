@@ -286,24 +286,23 @@ body {
 
 /*box 3*/
 
-.parte2 {
+.lastCaptures {
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
     right: 100%;
-    align-items: center;
-    flex-direction: column;
     margin-top: 100px;
 }
 
-.parte2 h1 {
-    color: #2a4c09;
+.storages h1 {
+    color: #747472;
     width: 469px;
     height: 31px;
     top: 261px;
     left: 161px;
     text-align: center;
-    font-size: 24px;
+    font-size: 20px;
 }
 
 .box3 {
@@ -320,6 +319,7 @@ body {
     
 }
 
+
 .IndicadoresTemp,
 .IndicadoresUmi {
     width: 100%;
@@ -334,12 +334,21 @@ body {
     width: 130px;
     height: 25px;
     border-radius: 20px;
-    background-color: red;
+    background-color: #F1A69C;
     box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.1);
 }
 
 .IndicadoresTemp p,
 .IndicadoresUmi p {
+
     font-size: 35px;
     font-weight: 600;
+}
+
+.storages {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+    width: 90%;
+    margin: 0 auto;
 }
