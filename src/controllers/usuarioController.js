@@ -1,5 +1,5 @@
 var usuarioModel = require("../models/usuarioModel");
-
+var armazemModel = require("../models/armazemModel");
 function autenticar(req, res) {
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
@@ -19,12 +19,22 @@ function autenticar(req, res) {
 
                     if (resultadoAutenticar.length == 1) {
                         console.log(resultadoAutenticar);
-                        res.json({
-                            id: resultadoAutenticar[0].id,
-                            email: resultadoAutenticar[0].email,
-                            nome: resultadoAutenticar[0].nome,
-                            empresaId: resultadoAutenticar[0].empresaId
-                        });
+
+                    armazemModel.buscarArmazemPorEmpresa(resultadoAutenticar[0].empresaId)
+                      .then((resultadoArmazem) => {
+                        if(resultadoArmazem.length > 0 ) {
+                            res.json({
+                                id: resultadoAutenticar[0].id,
+                                email: resultadoAutenticar[0].email,
+                                nome: resultadoAutenticar[0].nome,
+                                empresaId: resultadoAutenticar[0].empresaId,
+                                armazens: resultadoArmazem
+                            });
+                        } else {
+                            res.statsu(204).json({ aquarios: [] })
+                        }
+
+                      })
 
                     } else if (resultadoAutenticar.length == 0) {
                         res.status(403).send("Email e/ou senha inválido(s)");

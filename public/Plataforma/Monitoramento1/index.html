@@ -9,7 +9,7 @@
   <link rel="icon" href="imagens/sergio.usa.na.aba.ico">
 </head>
 
-<body>
+<body onload="exibirArmazens()">
   <div class="screen">
     <div class="header">
       <p>Voltar</p>
@@ -32,63 +32,71 @@
     </div>
     <!-- Insere a tela -->
     <div class="resultadoMonitoramento1">
-    <div class="parte1">
+      <div class="parte1">
 
-      <div class="box1">
+        <div class="box1">
 
-        <h1> Quantidade de armazéns em urgência </h1>
+          <h1> Quantidade de armazéns em urgência </h1>
 
-        <div class="boxResultados">
-          
-          <div class="boxTemperatura">
-            <p>Temperatura</p>
-            <h1> 30% </h1>
+          <div class="boxResultados">
+
+            <div class="boxTemperatura">
+              <p>Temperatura</p>
+              <h1> 30% </h1>
+            </div>
+
+            <div class="boxUmidade">
+              <p> Umidade </p>
+              <h1> 40% </h1>
+            </div>
+
           </div>
-
-          <div class="boxUmidade">
-            <p> Umidade </p>
-            <h1> 40% </h1>
-          </div>
-
         </div>
+
+        <div class="box2">
+          <h1> Maior Recorrência de Alertas (mês) </h1>
+          <div class="boxResultados">
+            <div class="boxArmazem">
+              <p> Armazém </p>
+              <h1> 05 </h1>
+            </div>
+            <div class="boxAlerta">
+              <p> Alertas </p>
+              <h1> 10 </h1>
+            </div>
+          </div>
+        </div>
+
       </div>
 
-      <div class="box2">
-        <h1> Maior Recorrência de Alertas (mês) </h1>
-        <div class="boxResultados">
-          <div class="boxArmazem">
-            <p> Armazém </p>
-            <h1> 05 </h1>
-          </div>
-          <div class="boxAlerta">
-            <p> Alertas </p>
-            <h1> 10 </h1>
-          </div>
-        </div>
+      <div class="parte2" id="parte2">
+        <h1> Útimas capturas (11:20) </h3>
       </div>
-
-    </div>
-
-    <div class="parte2">
-      <h1> Útimas capturas (11:20) </h3>
-
-      <div class="box3">
-        <h1>Armazém</h1>
-        <div class="IndicadoresTemp">
-          <p>
-            28ª
-          </p>
-          <div>
-
-          </div>
-        </div>
-        <div class="IndicadoresUmi">
-          <p>28ª</p> 
-          <div>
-
-          </div>
-        </div>
-    </div>
-  </div>
 </body>
+
 </html>
+
+<script>
+
+  function exibirArmazens() {
+    JSON.parse(sessionStorage.ARMAZENS).forEach(item => {
+      document.getElementById("parte2").innerHTML += `
+          <div class="box3">
+        <h1>${item.descricao}</h1>
+        <div class="IndicadoresTemp" id="indicador_temperatura_${item.idArmazem}">
+          <p id="temperatura_armazem_${item.idArmazem}">-º</p>
+          <div>
+
+          </div>
+        </div>
+        <div class="IndicadoresUmi" id="indicador_umidade_${item.idArmazem}">
+          <p id="umidade_armazem_${item.idArmazem}">-%</p> 
+          <div>
+
+          </div>
+        </div>
+    </div>`
+    });
+  }
+
+</script>

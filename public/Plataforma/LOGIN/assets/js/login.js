@@ -40,7 +40,8 @@ function login() {
                 sessionStorage.EMAIL_USUARIO = json.email;
                 sessionStorage.NOME_USUARIO = json.nome;
                 sessionStorage.ID_USUARIO = json.id;
-                window.location = "../dash teste/index.html";
+                sessionStorage.ARMAZENS = JSON.stringify(json.armazens)
+                window.location = "../monitoramento1/index.html";
 
 
             });
