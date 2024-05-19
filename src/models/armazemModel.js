@@ -2,7 +2,7 @@ var database = require("../database/config");
 
 function buscarArmazemPorEmpresa(empresaId) {
 
-  var instrucaoSql = `SELECT * FROM armazem a WHERE fkEmpresa = ${empresaId}`;
+  var instrucaoSql = `SELECT * FROM armazem JOIN sensor on armazem.idarmazem = sensor.fkarmazem WHERE fkEmpresa = ${empresaId}`;
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
