@@ -71,7 +71,7 @@
       </div>
 
       <div class="lastCaptures">
-        <h1> Útimas capturas (11:20) </h1>
+        <h1> Útimas capturas</h1>
           <div class="storages" id="storages">
             
           </div>
@@ -86,7 +86,7 @@
   function exibirArmazens() {
     JSON.parse(sessionStorage.ARMAZENS).forEach(item => {
       document.getElementById("storages").innerHTML += `
-          <div class="box3">
+          <div class="box3" onclick="RedirecionarParaDashboard()">
         <h1>${item.descricao}</h1>
         <div class="IndicadoresTemp" id="indicador_temperatura_${item.idSensor}">
           <p id="temperatura_armazem_${item.idSensor}">-º</p>
@@ -104,4 +104,8 @@
     });
   }
 
+  function RedirecionarParaDashboard() {
+    
+      window.location = "../dash teste/index.html"
+    }
 </script>

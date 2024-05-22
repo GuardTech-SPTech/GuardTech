@@ -28,8 +28,7 @@ function cad() {
         console.log(json.idEmpresa)
         sessionStorage.setItem('idEmpresaSession', json.idEmpresa);
 
-
-
+        
         fetch("../../enderecos/cadastrar", {
           method: "POST",
           headers: {
