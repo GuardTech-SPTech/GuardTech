@@ -39,9 +39,12 @@
             <div class="chat">
                 <div class="box-pergunta">
                     <select id="select_pergunta" onchange="TrocarClasse()">
-                        <option value="1">Como funciona a solução?</option>
-                        <option value="2">Pergunta 2</option>
-                        <option value="3">Pergunta 3</option>
+                        <option value="1">Com que frequência os sensores precisam ser calibrados?</option>
+                        <option value="2">Os sensores são à prova d'água?</option>
+                        <option value="3">Quais são os requisitos de manutenção para os sensores?</option>
+                        <option value="4">Como eu faço para cadastrar um novo funcionário?</option>
+                        <option value="5">Como cadastrar um novo armazém?</option>
+                        <option value="6">Como eu sei quais são os últimos do mês?</option>
                     </select>
                     <button onclick="perguntar()">
                         <i class="fas fa-play"></i>
@@ -52,6 +55,7 @@
                         <div class="pergunta">
                             <p id="p_pergunta"></p>
                         </div>
+                        
                         <img src="imagens/cliente.png">
                     </div>
                     <div class="x" id="resposta_empresa">
@@ -62,6 +66,7 @@
                     </div>
                 </div>
             </div>
+            <p class="suporte">Ainda com dúvidas? <a href="">Entre em contato</a></p>
         </div>
     
 </body>
