@@ -28,7 +28,26 @@ function buscarMedidasEmTempoReal(idSensor) {
     return database.executar(instrucaoSql);
 }
 
+
+function buscarMediaMedidas(idArmazem) {
+    var instrucaoSql = `SELECT a.idArmazem, s.idSensor, 
+    ROUND(AVG(r.dht11_temperatura), 2) AS media_temperatura,
+    ROUND(AVG(r.dht11_umidade), 2) AS media_umidade
+    FROM armazem a
+    JOIN sensor s ON a.idArmazem = s.fkArmazem
+    JOIN registro r ON s.idSensor = r.fkSensor
+    JOIN (SELECT fkSensor, MAX(dataHora) AS ultima_dataHora FROM registro GROUP BY fkSensor) 
+    ultimos_registros ON r.fkSensor = ultimos_registros.fkSensor AND r.dataHora = ultimos_registros.ultima_dataHora
+    WHERE a.idArmazem = ${idArmazem}
+    GROUP BY a.idArmazem, s.idSensor;`
+
+    console.log("Executando a instrução SQL:" + instrucaoSql)
+
+    return database.executar(instrucaoSql)
+}
+
 module.exports = {
     buscarUltimasMedidas,
-    buscarMedidasEmTempoReal
+    buscarMedidasEmTempoReal,
+    buscarMediaMedidas
 }

@@ -124,9 +124,71 @@ function transformarEmDiv({ idAquario, temp, grauDeAviso, grauDeAvisoCor }) {
     `;
 }
 
+
 function atualizacaoPeriodica() {
     JSON.parse(sessionStorage.ARMAZENS).forEach(item => {
         obterdados(item.idSensor)
     });
     setTimeout(atualizacaoPeriodica, 5000);
 }
+
+
+
+function obterMediaDados(idArmazem){
+    fetch(`/medidas/media/${idArmazem}`)
+    .then(resposta => {
+        if (resposta.status == 200) {
+            resposta.json().then(resposta => {
+
+                console.log(sessionStorage.ARMAZENS)
+
+                console.log(`media dos dados recebidos: ${JSON.stringify(resposta)}`);
+
+                alertarMedias(resposta, idArmazem);
+            });
+        } else {
+            console.error(`Nenhum dado encontrado para o id ${idArmazem} ou erro na API`);
+        }
+    })
+    .catch(function (error) {
+        console.error(`Erro na obtenção dos dados do aquario p/ gráfico: ${error.message}`);
+    });
+}
+
+function alertarMedias(resposta) {
+    console.log(resposta)
+
+    var temp = resposta[0].media_temperatura;
+    console.log(temp)
+    var umi = resposta[0].media_umidade;
+    console.log(umi);
+
+    if (document.getElementById(`temp_atual`) != null) {
+        document.getElementById(`temp_atual`).innerHTML = temp + "°C";
+    }
+    if (document.getElementById(`umidade_atual`) != null) {
+        document.getElementById(`umidade_atual`).innerHTML = umi + "°%";
+    }
+
+    AdicionarDadoDeUmidade(umi);
+    AdicionarDadoDeTemperatura(temp)
+}
+
+
+function atualizacaoPeriodicaMedia() {
+    JSON.parse(sessionStorage.ARMAZENS).forEach(item => {
+       
+        obterMediaDados(item.idArmazem)
+    });
+    setTimeout(atualizacaoPeriodica, 5000);
+}
+
+
+
+
+
+
+
+let medumidade = 0
+
+

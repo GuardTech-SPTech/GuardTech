@@ -11,9 +11,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="http://www.chartjs.org/dist/2.7.1/Chart.js"></script>
     <script src="http://www.chartjs.org/samples/latest/utils.js"></script>
+    <script src="../Monitoramento1/alerta.js"></script>
 </head>
 
-<body>
+<body onload="atualizacaoPeriodicaMedia()">
     <div class="screen">
         <div class="header">
             <p onclick="voltarHome()">Voltar</p>
@@ -203,7 +204,7 @@
     var mediatemp = 0;
 
     // Função para adicionar um novo dado de temperatura
-    function AdicionarDadoDeTemperatura() {
+    function AdicionarDadoDeTemperatura(temperatura) {
         // Gera um novo dado de temperatura aleatório entre 0 e 30 graus Celsius
         var novaTemperatura = Number((Math.random() * 25).toFixed(2));
 
@@ -257,18 +258,18 @@
         }
     }
 
-    // Chama a função para adicionar dados de temperatura a cada 10 segundos
-    setInterval(AdicionarDadoDeTemperatura, 10000); // Adiciona um dado a cada 10 segundos
+    // // Chama a função para adicionar dados de temperatura a cada 10 segundos
+    // setInterval(AdicionarDadoDeTemperatura, 10000); // Adiciona um dado a cada 10 segundos
 
 
 
 
-    // GRAFICO UMIDADE
+    // // GRAFICO UMIDADE
 
-    // Inicializa um array vazio para os dados de temperatura
+    // // Inicializa um array vazio para os dados de temperatura
 
 
-    var DadoUmidade = [];
+    // var DadoUmidade = [];
 
 
     var chart_umi = document.getElementById('chart_umidade').getContext('2d');
@@ -295,12 +296,11 @@
         }
     });
 
-    // Função para adicionar um novo dado de temperatura
-    let medumidade = 0
+    let DadoUmidade = []
 
-    function AdicionarDadoDeUmidade() {
+    function AdicionarDadoDeUmidade(umidade) {
         // Gera um novo dado de umidade aleatorio entre 0 e 100
-        var novaUmidade = Number((Math.random() * 40).toFixed(2));
+        var novaUmidade = umidade;
         // Adiciona o novo dado ao array de dados de temperatura
         DadoUmidade.push(novaUmidade);
         // Adiciona a contagem atual ao array de labels
@@ -351,11 +351,68 @@
         }
         
     }
+
+    // // Função para adicionar um novo dado de temperatura
+    // let medumidade = 0
+
+    // function AdicionarDadoDeUmidade() {
+    //     // Gera um novo dado de umidade aleatorio entre 0 e 100
+    //     var novaUmidade = Number((Math.random() * 40).toFixed(2));
+    //     // Adiciona o novo dado ao array de dados de temperatura
+    //     DadoUmidade.push(novaUmidade);
+    //     // Adiciona a contagem atual ao array de labels
+    //     grafico_umidade.data.labels.push(horaCompleta);
+
+    //     // Adiciona o novo dado ao conjunto de dados do gráfico
+    //     grafico_umidade.data.datasets[0].data.push(novaUmidade);
+
+    //     // Atualiza o gráfico
+    //     grafico_umidade.update();
+
+
+    //     let alerta_umidade = document.getElementById('indicador_umidade')
+    //     let umi_atual = document.getElementById('umidade_atual')
+    //     umi_atual.innerHTML = `${novaUmidade}%`
+
+    //     if (novaUmidade <= 18) {
+    //         alerta_umidade.style.backgroundColor = '#c4ee8e'
+    //     } else if (novaUmidade <= 25) {
+    //         alerta_umidade.style.backgroundColor = '#eccf4d'
+    //     } else {
+    //         alerta_umidade.style.backgroundColor = '#e66666'
+    //     }
+
+    //     let media_umidade = document.getElementById('mediaUmi')
+    //     let cor_umidade = document.getElementById('cor_umi')
+    //     medumidade += novaUmidade
+
+    //     if (grafico_umidade.data.datasets[0].data.length >= 7) {
+    //         let media = (medumidade / 6).toFixed(2)
+    //         media_umidade.innerHTML = `${media}%`
+
+    //         if(media <= 18) {
+    //             cor_umidade.style.backgroundColor = '#c4ee8e'
+    //         } else if (media <= 25) {
+    //             cor_umidade.style.backgroundColor = '#eccf4d'
+    //         } else {
+    //             cor_umidade.style.backgroundColor = '#e66666'
+    //         }
+
+    //         medumidade = 0 
+    //         grafico_umidade.data.datasets[0].data = []
+    //         grafico_umidade.data.labels = []
+    //         grafico_umidade.update();
+
+            
+
+    //     }
+        
+    // }
    
     function voltarHome(){
   window.location.href = '../SITE/index.html';}
     // Chama a função para adicionar dados de temperatura a cada 2 segundos
-    setInterval(AdicionarDadoDeUmidade, 10000); // Adiciona um dado a cada 10 segundos
+    // setInterval(AdicionarDadoDeUmidade, 10000); // Adiciona um dado a cada 10 segundos
 
 
 

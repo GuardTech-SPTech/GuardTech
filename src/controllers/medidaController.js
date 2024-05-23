@@ -41,8 +41,27 @@ function buscarMedidasEmTempoReal(req, res) {
     });
 }
 
+function buscarMediaMedidas(req, res){
+    var idArmazem = req.params.idArmazem;
+
+    console.log("Recuperando a media dos sensores")
+
+    medidaModel.buscarMediaMedidas(idArmazem).then(function(resultado){
+        if(resultado.length > 0) {
+            res.status(200).json(resultado);
+        }else{
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro){
+        console.log(erro);
+        console.log("Houve um erro ao buscar a media das medidads.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage)
+    });
+}
+
 module.exports = {
     buscarUltimasMedidas,
-    buscarMedidasEmTempoReal
+    buscarMedidasEmTempoReal,
+    buscarMediaMedidas
 
 }
