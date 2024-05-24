@@ -157,6 +157,7 @@ function obterMediaDados(idArmazem){
 
 function alertarMedias(resposta) {
     console.log(resposta)
+   
 
     var temp = resposta[0].media_temperatura;
     console.log(temp)
@@ -177,10 +178,10 @@ function alertarMedias(resposta) {
 
 function atualizacaoPeriodicaMedia() {
     JSON.parse(sessionStorage.ARMAZENS).forEach(item => {
-       
+
         obterMediaDados(item.idArmazem)
     });
-    setTimeout(atualizacaoPeriodica, 5000);
+    setTimeout(atualizacaoPeriodicaMedia, 5000);
 }
 
 
