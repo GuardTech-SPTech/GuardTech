@@ -204,14 +204,15 @@
     var mediatemp = 0;
 
     // Função para adicionar um novo dado de temperatura
-    function AdicionarDadoDeTemperatura(temperatura) {
+    function AdicionarDadoDeTemperatura(temperatura, momento) {
         // Gera um novo dado de temperatura aleatório entre 0 e 30 graus Celsius
-        var novaTemperatura = Number((Math.random() * 25).toFixed(2));
+        var novaTemperatura = temperatura;
+        console.log(momento)
 
         // Adiciona o novo dado ao array de dados de temperatura
         // DadoTemperatura.push(novaTemperatura);
         // Adiciona a hora atual ao array de labels 
-        grafico_temperatura.data.labels.push(horaCompleta); 
+        grafico_temperatura.data.labels.push(momento); 
 
         // Adiciona o novo dado ao conjunto de dados do gráfico
         grafico_temperatura.data.datasets[0].data.push(novaTemperatura);
@@ -298,13 +299,14 @@
 
     let DadoUmidade = []
 
-    function AdicionarDadoDeUmidade(umidade) {
+    function AdicionarDadoDeUmidade(umidade, momento) {
+        console.log(momento)
         // Gera um novo dado de umidade aleatorio entre 0 e 100
         var novaUmidade = umidade;
         // Adiciona o novo dado ao array de dados de temperatura
         DadoUmidade.push(novaUmidade);
         // Adiciona a contagem atual ao array de labels
-        grafico_umidade.data.labels.push(horaCompleta);
+        grafico_umidade.data.labels.push(momento); 
 
         // Adiciona o novo dado ao conjunto de dados do gráfico
         grafico_umidade.data.datasets[0].data.push(novaUmidade);

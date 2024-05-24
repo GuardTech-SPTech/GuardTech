@@ -163,6 +163,7 @@ function alertarMedias(resposta) {
     console.log(temp)
     var umi = resposta[0].media_umidade;
     console.log(umi);
+    var moment = resposta[0].horario
 
     if (document.getElementById(`temp_atual`) != null) {
         document.getElementById(`temp_atual`).innerHTML = temp + "°C";
@@ -171,8 +172,8 @@ function alertarMedias(resposta) {
         document.getElementById(`umidade_atual`).innerHTML = umi + "°%";
     }
 
-    AdicionarDadoDeUmidade(umi);
-    AdicionarDadoDeTemperatura(temp)
+    AdicionarDadoDeUmidade(umi, moment);
+    AdicionarDadoDeTemperatura(temp, moment)
 }
 
 
