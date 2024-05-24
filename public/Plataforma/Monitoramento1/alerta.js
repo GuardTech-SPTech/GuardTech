@@ -182,7 +182,7 @@ function atualizacaoPeriodicaMedia() {
 
         obterMediaDados(item.idArmazem)
     });
-    setTimeout(atualizacaoPeriodicaMedia, 5000);
+    setTimeout(atualizacaoPeriodicaMedia, 30000);
 }
 
 

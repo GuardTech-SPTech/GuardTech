@@ -207,6 +207,7 @@
     function AdicionarDadoDeTemperatura(temperatura, momento) {
         // Gera um novo dado de temperatura aleatório entre 0 e 30 graus Celsius
         var novaTemperatura = temperatura;
+        var tempToCalc = Number(temperatura);
         console.log(momento)
 
         // Adiciona o novo dado ao array de dados de temperatura
@@ -237,7 +238,7 @@
 
         let media_temperatura = document.getElementById('mediaTemp')
 
-        mediatemp += novaTemperatura
+        mediatemp += tempToCalc
 
         if (grafico_temperatura.data.datasets[0].data.length >= 7) {
             let media = (mediatemp / 7).toFixed(2)
@@ -299,10 +300,13 @@
 
     let DadoUmidade = []
 
+    let medUmidade = 0;
+
     function AdicionarDadoDeUmidade(umidade, momento) {
         console.log(momento)
         // Gera um novo dado de umidade aleatorio entre 0 e 100
         var novaUmidade = umidade;
+        var umidadeToCalc = Number(umidade)
         // Adiciona o novo dado ao array de dados de temperatura
         DadoUmidade.push(novaUmidade);
         // Adiciona a contagem atual ao array de labels
@@ -313,6 +317,8 @@
 
         // Atualiza o gráfico
         grafico_umidade.update();
+
+        
 
 
         let alerta_umidade = document.getElementById('indicador_umidade')
@@ -329,11 +335,17 @@
 
         let media_umidade = document.getElementById('mediaUmi')
         let cor_umidade = document.getElementById('cor_umi')
-        medumidade += novaUmidade
+
+        medumidade += umidadeToCalc
+        console.log("Nova", novaUmidade)
+
+        console.log("Media antes do calculo", medUmidade)
 
         if (grafico_umidade.data.datasets[0].data.length >= 7) {
             let media = (medumidade / 6).toFixed(2)
             media_umidade.innerHTML = `${media}%`
+
+            console.log(media)
 
             if(media <= 18) {
                 cor_umidade.style.backgroundColor = '#c4ee8e'
