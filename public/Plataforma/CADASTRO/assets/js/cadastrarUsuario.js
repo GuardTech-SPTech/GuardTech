@@ -2,7 +2,7 @@
 const idEmpresa = sessionStorage.getItem('idEmpresaSession');
 const nomeEmpresa = sessionStorage.getItem('empresaSession');
 const inputEmpresa = document.querySelector('#input_empresa');
-inputEmpresa.value = nomeEmpresa 
+inputEmpresa.value = nomeEmpresa
 
 
 
@@ -24,6 +24,68 @@ function cadastrarUsuario() {
     const senhaVar = input_senha.value
     const cpfVar = input_cpf.value
     const idEmpresaVar = idEmpresa
+
+    //CRIANDO VARIAVEIS BOOLEANAS PARA VALIDAÇÃO
+    let temMaiscula = false;
+    let temMinuscula = false;
+    let temNum = false;
+    let temEspecial = false;
+    let senhaValida = true;
+
+    //CRIANDO ARRAY PARA VALORES ESPECIAIS
+    let especiais = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', '-', '=', '[', ']', '{', '}', '|', ';', ':', ',', '.', '<', '>', '?'];
+
+    //LIMPANDO CAMPO DE ALERT DA SENHA
+    alert_senha.innerHTML = '';
+
+    //FOR PARA VALIDAÇÃO
+    for (let posicaoChar = 0; posicaoChar < senhaVar.length; posicaoChar++) {
+        let letra = senhaVar[posicaoChar];
+
+        if (letra >= 'A' && letra <= 'Z') {
+            temMaiscula = true;
+        }
+
+        if (letra >= 'a' && letra <= 'z') {
+            temMinuscula = true;
+        }
+
+        if (letra >= '0' && letra <= '9') {
+            temNum = true;
+        }
+
+        if (especiais.indexOf(letra) !== -1) {
+            temEspecial = true;
+        }
+    }
+
+    if (!temMaiscula) {
+        alert_senha.style.display = 'block';
+        alert_senha.innerHTML = 'A senha deve conter pelo menos uma letra maiscula';
+    }
+
+    if (!temMinuscula) {
+        alert_senha.style.display = 'block';
+        alert_senha.innerHTML = 'A senha deve conter pelo menos uma letra minuscula';
+    }
+
+    if (!temNum) {
+        alert_senha.style.display = 'block';
+        alert_senha.innerHTML = 'A senha deve conter pelo menos um numero';
+    }
+
+    if (!temEspecial) {
+        alert_senha.style.display = 'block';
+        alert_senha.innerHTML = 'A senha deve conter pelo menos 1 caractere especial';
+    }
+
+    if (temMaiscula && temMinuscula && temNum && temEspecial) {
+        alert_senha.innerHTML = '';
+        senhaValida = true
+    }
+
+    if (senhaValida) {
+
         fetch("../../admin/cadastrar", {
             method: "POST",
             headers: {
@@ -37,13 +99,13 @@ function cadastrarUsuario() {
                 cpfServer: cpfVar,
                 idEmpresaServer: idEmpresaVar
             })
-
+    
         }).then(function (resposta) {
             console.log("resposta: ", resposta);
-
+    
             if (resposta.ok) {
                 alert("Cadastro realizado com sucesso!")
-
+    
                 window.location.href = "../SITE/index.html"
             } else {
                 throw "Houve um erro ao tentar realizar o cadastro!";
@@ -52,7 +114,8 @@ function cadastrarUsuario() {
             .catch(function (resposta) {
                 console.log(`#ERRO: ${resposta}`);
             });
-
-    return false;
+    
+        return false;
+    }
 
 }

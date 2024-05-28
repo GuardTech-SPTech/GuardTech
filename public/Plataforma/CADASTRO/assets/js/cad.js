@@ -1,4 +1,7 @@
 function cad() {
+
+
+  
   const nomeVar = input_empresa.value
   const cepVar = input_cep.value
   const numeroVar = input_num.value
