@@ -5,15 +5,19 @@ const inputEmpresa = document.querySelector('#input_empresa');
 inputEmpresa.value = nomeEmpresa
 
 
+function showConfirm(){
+    const senha = input_senha.value;
+    const confirm = input_confirmar_senha.value;
+
+    if(senha != confirm){
+        alert_confirm.style.display = 'block'
+        alert_confirm.innerHTML = 'As senhas são diferentes!'
+    }else{
+        alert_confirm.style.display = 'none'
+    }
+}
 
 function cadastrarUsuario() {
-    // const nomeVar = input_empresa.value
-    // const cepVar = input_cep.value
-    // const numeroVar = input_num.value
-    // const logVar = input_logradouro.value;
-    // const bairroVar = input_bairro.value;
-    // const cidadeVar = input_cidade.value;
-    // const cnpjVar = input_cnpj.value
 
 
 
@@ -30,7 +34,7 @@ function cadastrarUsuario() {
     let temMinuscula = false;
     let temNum = false;
     let temEspecial = false;
-    let senhaValida = true;
+    let senhaValida = false;
 
     //CRIANDO ARRAY PARA VALORES ESPECIAIS
     let especiais = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', '-', '=', '[', ']', '{', '}', '|', ';', ':', ',', '.', '<', '>', '?'];
@@ -79,7 +83,7 @@ function cadastrarUsuario() {
         alert_senha.innerHTML = 'A senha deve conter pelo menos 1 caractere especial';
     }
 
-    if (temMaiscula && temMinuscula && temNum && temEspecial) {
+    if (temMaiscula && temMinuscula && temNum && temEspecial && (senhaVar == confirmarSenha)) {
         alert_senha.innerHTML = '';
         senhaValida = true
     }
