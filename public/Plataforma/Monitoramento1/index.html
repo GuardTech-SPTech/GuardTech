@@ -32,80 +32,59 @@
       </div>
     </div>
     <!-- Insere a tela -->
-    <div class="resultadoMonitoramento1">
-      <div class="parte1">
-
-        <div class="box1">
-
-          <h1> Quantidade de armazéns em urgência </h1>
-
-          <div class="boxResultados">
-
-            <div class="boxTemperatura">
-              <p>Temperatura</p>
-              <h1> 30% </h1>
-            </div>
-
-            <div class="boxUmidade">
-              <p> Umidade </p>
-              <h1> 40% </h1>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="box2">
-          <h1> Maior Recorrência de Alertas (mês) </h1>
-          <div class="boxResultados">
-            <div class="boxArmazem">
-              <p> Armazém </p>
-              <h1> 05 </h1>
-            </div>
-            <div class="boxAlerta">
-              <p> Alertas </p>
-              <h1> 10 </h1>
-            </div>
-          </div>
-        </div>
-
+    <div class="lastCaptures">
+      <h1> Útimas capturas</h1>
+      <div class="storages" id="storages">  
       </div>
-
-      <div class="lastCaptures">
-        <h1> Útimas capturas</h1>
-          <div class="storages" id="storages">
-            
-          </div>
-          </div>
-      </div>
+    </div>
+  </div>
 </body>
 
 </html>
 
 <script>
-
+  
+  let sensor = 1 
   function exibirArmazens() {
     JSON.parse(sessionStorage.ARMAZENS).forEach(item => {
-      document.getElementById("storages").innerHTML += `
-          <div class="box3" onclick="RedirecionarParaDashboard()">
-        <h1>${item.descricao}</h1>
-        <div class="IndicadoresTemp" id="indicador_temperatura_${item.idSensor}">
-          <p id="temperatura_armazem_${item.idSensor}">-º</p>
-          <div>
+      console.log(item)
+      if (document.getElementById(`armazem_${item.idArmazem}`)) {
+        console.log('ainda nao tem o armazem')
+      } else {
+        document.getElementById('storages').innerHTML += `
+        <div class="box3"  id='armazem_${item.idArmazem}'>
+          <h1>${item.descricao}</h1>
+          <div class="sensor_grid">
+            
+            </div>
+            </div>
+            `
+      sensor = 1 
+      }
 
-          </div>
-        </div>
-        <div class="IndicadoresUmi" id="indicador_umidade_${item.idSensor}">
-          <p id="umidade_armazem_${item.idSensor}">-%</p> 
-          <div> 
+      
+      document.getElementById(`armazem_${item.idArmazem}`).innerHTML += `
+      <div class="sensor" id='sensor_${item.idSensor}' onclick="RedirecionarParaDashboard()">
+              <span>Sensor ${sensor}</span>
+              <div class="indicadores">
+                
+                <div class="indicador" id="indicador_temperatura_${item.idSensor}">
+                  <span>30º</span>
+                </div>
+                <div class="indicador" id="indicador_umidade_${item.idSensor}">
+                  <span>30%</span>
+                </div>
+              </div>
+            </div>
+      `
+      
+      sensor += 1 
 
-          </div>  
-        </div>
-    </div>`
-    });
+      });
   }
 
   function RedirecionarParaDashboard() {
-    
-      window.location = "../dash teste/index.html"
-    }
+
+    window.location = "../dash teste/index.html"
+  }
 </script>
