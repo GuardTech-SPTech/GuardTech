@@ -21,15 +21,15 @@ function obterdados(idSensor) {
     }
     
     function alertar(resposta, idSensor) {
+    
 
     var temp = resposta[0].temperatura;
     var umi = resposta[0].umidade;
-    var card;
-    if (document.getElementById(`temperatura_armazem_${idSensor}`) != null) {
-        document.getElementById(`temperatura_armazem_${idSensor}`).innerHTML = temp + "°C";
+    if (document.getElementById(`indicador_temperatura_${idSensor}`) != null) {
+        document.getElementById(`indicador_temperatura_${idSensor}`).innerHTML = temp + "°C";
     }
-    if (document.getElementById(`umidade_armazem_${idSensor}`) != null) {
-        document.getElementById(`umidade_armazem_${idSensor}`).innerHTML = umi + "°%";
+    if (document.getElementById(`indicador_umidade_${idSensor}`) != null) {
+        document.getElementById(`indicador_umidade_${idSensor}`).innerHTML = umi + "°%";
     }
 
     // if (document.getElementById(`card_${idAquario}`)) {
