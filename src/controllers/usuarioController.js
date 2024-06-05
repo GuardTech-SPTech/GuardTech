@@ -26,10 +26,14 @@ function autenticar(req, res) {
                             res.json({
                                 id: resultadoAutenticar[0].id,
                                 email: resultadoAutenticar[0].email,
-                                nome: resultadoAutenticar[0].nome,
+                                nome: resultadoAutenticar[0].username,
                                 empresaId: resultadoAutenticar[0].empresaId,
+                                nomeCompleto: resultadoAutenticar[0].nomeCompleto,
+                                nomeEmpresa: resultadoAutenticar[0].empresa,
                                 armazens: resultadoArmazem
                             });
+
+                          
                         } else {
                             res.statsu(204).json({ aquarios: [] })
                         }

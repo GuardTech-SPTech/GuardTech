@@ -7,6 +7,7 @@ console.log(sessionStorage.NOME_COMPLETO_USUARIO)
 
 function SolicitarArmazem(){
     var templateParams = {
+        from_company: sessionStorage.NOME_EMPRESA,
         from_name: sessionStorage.NOME_COMPLETO_USUARIO,
         from_email: sessionStorage.EMAIL_USUARIO,
         to_name: 'GuardTech',
