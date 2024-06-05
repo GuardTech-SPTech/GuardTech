@@ -35,13 +35,13 @@ function login() {
             console.log(resposta);
 
             resposta.json().then(json => {
-                console.log(json);
-                console.log(JSON.stringify(json));
+                console.log('json da resposta', json);
+                console.log(json.username, json.nomeCompleto)
                 sessionStorage.EMAIL_USUARIO = json.email;
-                sessionStorage.NOME_USUARIO = json.nome;
+                sessionStorage.NOME_USUARIO = json.username;
+                sessionStorage.NOME_COMPLETO_USUARIO = json.nomeCompleto
                 sessionStorage.ID_USUARIO = json.id;
                 sessionStorage.ARMAZENS = JSON.stringify(json.armazens)
-                window.location = "../monitoramento1/index.html";
 
 
             });
