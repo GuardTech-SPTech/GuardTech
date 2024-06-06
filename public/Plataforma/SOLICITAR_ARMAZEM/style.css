@@ -154,3 +154,11 @@ select {
     background-color: #486618;
 }
 
+.box-endereco{
+    display: flex;
+    width: 80%;
+}
+
+.box-endereco input{
+    width: 50%;
+}

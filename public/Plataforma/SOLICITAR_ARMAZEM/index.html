@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/style.css">
-    <title>Cadastre seu Funcionário</title>
+    <title>Solicitação de Armazem</title>
     <link rel="icon" href="assets/sergio.usa.na.aba.ico">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -23,19 +23,27 @@
         </div>
         <div class="area-form">
             <div class="desc-form">
-                <p class="titulo-form">Cadastre-se</p>
+                <p class="titulo-form">Solicite um novo armazem</p>
             </div>
             <div class="form">
                 <input type="text" id="input_capacidade" placeholder="CAPACIDADE">
                 <input type="text" id="input_descricao" placeholder="DESCRICAO">
+                <div class="box-endereco">
+                    <input name="cep" type="text" id="input_cep" size="10" maxlength="9"
+                        placeholder="CEP">
+                    <input type="text" id="input_num" placeholder="NUMERO">
+                </div>
+                <input type="text" id="input_bairro" placeholder="BAIRRO">
+                <input type="text" id="input_cidade" placeholder="CIDADE">
+                <input type="text" id="input_complemento" placeholder="COMPLEMENTO">
                 <select id="select_tipo_armazem">
                     <option value="" disabled selected>Selecione um tipo</option>
                     <option value="Silo">Silo</option>
                 </select>
-                <textarea id="message" placeholder="Nos de mais infromações sobre o seu pedido, o porque dele, o prazo esperado, necessidades"></textarea>
+                <input type="text" id="message" placeholder="Nos de mais infromações sobre o seu pedido"></input>
             </div>
             <div class="area-button">
-                <button onclick="SolicitarArmazem()">Cadastrar</button>
+                <button onclick="SolicitarArmazem()">Solicitar</button>
             </div>
         </div>
     </div>
