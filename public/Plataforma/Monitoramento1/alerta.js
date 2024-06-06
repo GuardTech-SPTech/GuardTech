@@ -32,6 +32,26 @@ function obterdados(idSensor) {
         document.getElementById(`indicador_umidade_${idSensor}`).innerHTML = umi + "°%";
     }
 
+    let alerta_temperatura = document.getElementById(`indicador_temperatura_${idSensor}`)
+
+    if (temp <= 14) {
+        alerta_temperatura.style.backgroundColor = '#c4ee8e'
+    } else if (temp <= 18) {
+        alerta_temperatura.style.backgroundColor = '#eccf4d'
+    } else {
+        alerta_temperatura.style.backgroundColor = '#e66666'
+    }
+
+    let alerta_umidade = document.getElementById(`indicador_umidade_${idSensor}`)
+
+    if (umi <= 18) {
+        alerta_umidade.style.backgroundColor = '#c4ee8e'
+    } else if (umi <= 25) {
+        alerta_umidade.style.backgroundColor = '#eccf4d'
+    } else {
+        alerta_umidade.style.backgroundColor = '#e66666'
+    }
+
     // if (document.getElementById(`card_${idAquario}`)) {
     //     card = document.getElementById(`card_${idAquario}`)
     //     card.className = classe_temperatura;

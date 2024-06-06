@@ -35,8 +35,24 @@
     <div class="lastCaptures">
       <h1> Útimas capturas</h1>
       <div class="storages" id="storages">  
+        
       </div>
     </div>
+
+    <dialog open>
+      <div class="gridAlertas">
+        <div class="alerta">
+          <p>O armazem X execeu a temperatura</p>
+          <p>Sensor x || Posição: Inferior diretio</p>
+        </div>
+        <div class="alerta" id='notificacao'>
+          <p>O armazem X execeu a temperatura</p>
+          <p>Sensor x || Posição: Inferior diretio</p>
+          <div class="indicador_alerta">.</div>
+        </div>
+      </div>
+    </dialog>
+    
   </div>
 </body>
 
@@ -44,6 +60,16 @@
 
 <script>
   
+  const notificacoes = document.querySelectorAll('.alerta');
+
+  notificacoes.forEach(notificacao => {
+    notificacao.addEventListener('click', function() {
+      this.remove();
+    })
+  })
+
+
+
   let sensor = 1 
   function exibirArmazens() {
     JSON.parse(sessionStorage.ARMAZENS).forEach(item => {
