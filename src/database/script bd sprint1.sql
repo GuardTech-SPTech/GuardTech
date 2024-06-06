@@ -182,6 +182,24 @@ CREATE TABLE registro(
     CONSTRAINT fkRegistroSensor FOREIGN KEY (fkSensor) REFERENCES sensor(idSensor)
 );
 
+CREATE TABLE email(
+idEmail INT AUTO_INCREMENT,
+fkFuncionario INT,
+fkEmpresa INT,
+CONSTRAINT pkComposta PRIMARY KEY (idEmail, fkFuncionario, fkEmpresa),
+CONSTRAINT fkFuncionarioEmail FOREIGN KEY (fkFuncionario) references funcionario (idFuncionario),
+CONSTRAINT fkEmpresaEmail FOREIGN KEY (fkEmpresa) references empresa (idEmpresa),
+dtEmail DATETIME,
+capacidadeToneladas DECIMAL(6,2),
+descricao VARCHAR(300),
+cep CHAR(8),
+numero VARCHAR(10),
+bairro VARCHAR(45),
+cidade VARCHAR(45),
+complemento VARCHAR(45),
+tipoArmazem VARCHAR(45),
+observacoes VARCHAR (100)
+);
 
 CREATE TABLE perguntaFrequente(
 	idPerguntaFrequente INT PRIMARY KEY AUTO_INCREMENT, 
