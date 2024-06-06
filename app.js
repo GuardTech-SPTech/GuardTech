@@ -21,6 +21,7 @@ var empresaRouter = require("./src/routes/empresas");
 var adminRouter = require("./src/routes/admin");
 var medidasRouter = require("./src/routes/medidas");
 var enderecoRouter = require("./src/routes/endereco");  
+var solicitarRoute = require('./src/routes/solicitar')
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -35,6 +36,7 @@ app.use("/empresas", empresaRouter);
 app.use("/admin",adminRouter);
 app.use("/enderecos", enderecoRouter);
 app.use("/medidas", medidasRouter);
+app.use("/solicitar", solicitarRoute)
 
 app.listen(PORTA_APP, function () {
     console.log(`

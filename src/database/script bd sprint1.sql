@@ -243,6 +243,7 @@ SELECT * FROM sensor;
 SELECT * FROM tipofuncionario;
 SELECT * FROM telefone;
 SELECT * FROM tipoArmazem;
+SELECT * FROM email;
 
 -- JOIN EMPRESA - ARMAZEM - REGISTRO - SENSOR
 SELECT empresa.idEmpresa AS 'ID Empresa',

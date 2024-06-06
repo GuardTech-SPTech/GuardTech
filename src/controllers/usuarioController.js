@@ -24,7 +24,7 @@ function autenticar(req, res) {
                       .then((resultadoArmazem) => {
                         if(resultadoArmazem.length > 0 ) {
                             res.json({
-                                id: resultadoAutenticar[0].id,
+                                idUsuario: resultadoAutenticar[0].idFuncionario,
                                 email: resultadoAutenticar[0].email,
                                 nome: resultadoAutenticar[0].username,
                                 empresaId: resultadoAutenticar[0].empresaId,
