@@ -172,7 +172,7 @@ function alertarMedias(resposta) {
     }
 
     AdicionarDadoDeUmidade(umi);
-    AdicionarDadoDeTemperatura(temp)
+    AdicionarDadoDeTemperatura(temp);
 }
 
 
