@@ -29,10 +29,10 @@ const serial = async (
         {
             // altere!
             // Credenciais do banco de dados
-            host: 'localhost',
+            host: '10.18.32.173',
             user: 'aluno',
             password: 'Sptech#2024',
-            database: 'guardtechteste',
+            database: 'guardtech',
             port: 3307
         }
     ).promise();
@@ -80,8 +80,13 @@ const serial = async (
             // altere!
             // Este insert irá inserir os dados na tabela "medida"
             await poolBancoDados.execute(
-                'INSERT INTO registro (dht11_umidade, dht11_temperatura, momento) VALUES (?, ?, now())',
-                [dht11Umidade, dht11Temperatura]
+                'INSERT INTO registro (dht11_temperatura, dht11_umidade, dataHora, fkSensor) VALUES (?, ?, now(), 1) ',
+                [dht11Temperatura, dht11Umidade]
+            );
+
+            await poolBancoDados.execute(
+                'INSERT INTO registro (dht11_temperatura, dht11_umidade, dataHora, fkSensor) VALUES (?, ?, now(), 6) ',
+                [dht11Temperatura + 5, dht11Umidade - 2]
             );
             console.log("valores inseridos no banco: ", dht11Umidade + ", " + dht11Temperatura)
         
