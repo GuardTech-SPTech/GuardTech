@@ -1,4 +1,5 @@
 var medidaModel = require("../models/medidaModel");
+var armazemModel = require("../models/armazemModel");
 
 function buscarUltimasMedidas(req, res) {
 
@@ -59,9 +60,61 @@ function buscarMediaMedidas(req, res){
     });
 }
 
+function informacoesArmazem(req, res) {
+    var idArmazem = req.body.idArmazemServer;
+
+    if (idArmazem == undefined) {
+        res.status(400).send("Seu email está indefinida!");
+    } else {
+
+        armazemModel.infosArmazem(idArmazem)
+            .then(
+                function (resultadoArmazem) {
+                    console.log(`\nResultados encontrados: ${resultadoArmazem.length}`);
+                    console.log(`Resultados: ${JSON.stringify(resultadoArmazem)}`); // transforma JSON em String
+
+                    if (resultadoArmazem.length == 1) {
+                        console.log(resultadoArmazem);
+
+                    armazemModel.buscarSensores(idArmazem)
+                      .then((resultadoSensores) => {
+                        if(resultadoSensores) {
+                            res.json({
+                                nomeArmazem: resultadoArmazem[0].nome,
+                                enderecoArmazem: resultadoArmazem[0].endereco,
+                                tipoArmazem: resultadoArmazem[0].tipo,
+                                prazoArmazem: resultadoArmazem[0].prazo,
+                                sensores: resultadoSensores
+                            });
+
+                          
+                        } else {
+                            res.statsu(204).json({ aquarios: [] })
+                        }
+
+                      })
+
+                    } else if (resultadoAutenticar.length == 0) {
+                        res.status(403).send("Email e/ou senha inválido(s)");
+                    } else {
+                        res.status(403).send("Mais de um usuário com o mesmo login e senha!");
+                    }
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+
+}
+
 module.exports = {
     buscarUltimasMedidas,
     buscarMedidasEmTempoReal,
-    buscarMediaMedidas
+    buscarMediaMedidas,
+    informacoesArmazem
 
 }

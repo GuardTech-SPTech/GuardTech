@@ -16,4 +16,9 @@ router.get("/media/:idArmazem", function (req, res){
     medidaController.buscarMediaMedidas(req, res);
 })
 
+router.post("/armazem", function (req, res) {
+    console.log("Recebido pedido de autenticação: ", req.body);
+    medidaController.informacoesArmazem(req, res);
+});
+
 module.exports = router;

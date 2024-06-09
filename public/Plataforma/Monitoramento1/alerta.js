@@ -17,88 +17,75 @@ function obterdados(idSensor) {
         .catch(function (error) {
             console.error(`Erro na obtenção dos dados do aquario p/ gráfico: ${error.message}`);
         });
-        
-    }
-    
-    function alertar(resposta, idSensor) {
-    
 
+}
+
+function alertar(resposta, idSensor) {
+
+    let sensorEscolhido = sessionStorage.getItem("SENSOR_SELECIONADO")
     var temp = resposta[0].temperatura;
     var umi = resposta[0].umidade;
+
+    console.log(temp, umi)
+    console.log(sensorEscolhido)
     if (document.getElementById(`indicador_temperatura_${idSensor}`) != null) {
         document.getElementById(`indicador_temperatura_${idSensor}`).innerHTML = temp + "°C";
     }
     if (document.getElementById(`indicador_umidade_${idSensor}`) != null) {
-        document.getElementById(`indicador_umidade_${idSensor}`).innerHTML = umi + "°%";
+        document.getElementById(`indicador_umidade_${idSensor}`).innerHTML = umi + "%";
     }
+
+    if (document.getElementById(`temp_atual`) != null && idSensor == sensorEscolhido) {
+        document.getElementById(`temp_atual`).innerHTML = temp + "°C";
+    }
+    if (document.getElementById(`umidade_atual`) != null && idSensor == sensorEscolhido) {
+        document.getElementById(`umidade_atual`).innerHTML = umi + "%";
+    }
+
 
     let alerta_temperatura = document.getElementById(`indicador_temperatura_${idSensor}`)
+    let indicador_temperatura = document.getElementById(`indicador_temp`)
 
-    if (temp <= 14) {
-        alerta_temperatura.style.backgroundColor = '#c4ee8e'
-    } else if (temp <= 18) {
-        alerta_temperatura.style.backgroundColor = '#eccf4d'
-    } else {
-        alerta_temperatura.style.backgroundColor = '#e66666'
+    if (alerta_temperatura) {
+        if (temp <= 14) {
+            alerta_temperatura.style.backgroundColor = '#c4ee8e'
+        } else if (temp <= 18) {
+            alerta_temperatura.style.backgroundColor = '#eccf4d'
+        } else {
+            alerta_temperatura.style.backgroundColor = '#e66666'
+        }
+    } else if (indicador_temperatura && idSensor == sensorEscolhido) {
+        if (temp <= 14) {
+            indicador_temperatura.style.backgroundColor = '#c4ee8e'
+        } else if (temp <= 18) {
+            indicador_temperatura.style.backgroundColor = '#eccf4d'
+        } else {
+            indicador_temperatura.style.backgroundColor = '#e66666'
+        }
     }
+
 
     let alerta_umidade = document.getElementById(`indicador_umidade_${idSensor}`)
+    let indicador_umidade = document.getElementById(`indicador_umidade`)
 
-    if (umi <= 18) {
-        alerta_umidade.style.backgroundColor = '#c4ee8e'
-    } else if (umi <= 25) {
-        alerta_umidade.style.backgroundColor = '#eccf4d'
-    } else {
-        alerta_umidade.style.backgroundColor = '#e66666'
+    if (alerta_umidade) {
+        if (umi <= 18) {
+            alerta_umidade.style.backgroundColor = '#c4ee8e'
+        } else if (umi <= 25) {
+            alerta_umidade.style.backgroundColor = '#eccf4d'
+        } else {
+            alerta_umidade.style.backgroundColor = '#e66666'
+        }
+    } else if (indicador_umidade && idSensor == sensorEscolhido){
+        if (umi <= 18) {
+            indicador_umidade.style.backgroundColor = '#c4ee8e'
+        } else if (umi <= 25) {
+            indicador_umidade.style.backgroundColor = '#eccf4d'
+        } else {
+            indicador_umidade.style.backgroundColor = '#e66666'
+        }
     }
 
-    // if (document.getElementById(`card_${idAquario}`)) {
-    //     card = document.getElementById(`card_${idAquario}`)
-    //     card.className = classe_temperatura;
-    // }
-
-    
-
-    // var grauDeAviso = '';
-
-    // var limites = {
-    //     muito_quente: 23,
-    //     quente: 22,
-    //     ideal: 20,
-    //     frio: 10,
-    //     muito_frio: 5
-    // };
-
-    // var classe_temperatura = 'cor-alerta';
-
-    // if (temp >= limites.muito_quente) {
-    //     classe_temperatura = 'cor-alerta perigo-quente';
-    //     grauDeAviso = 'perigo quente'
-    //     grauDeAvisoCor = 'cor-alerta perigo-quente'
-    //     exibirAlerta(temp, idAquario, grauDeAviso, grauDeAvisoCor)
-    // }
-    // else if (temp < limites.muito_quente && temp >= limites.quente) {
-    //     classe_temperatura = 'cor-alerta alerta-quente';
-    //     grauDeAviso = 'alerta quente'
-    //     grauDeAvisoCor = 'cor-alerta alerta-quente'
-    //     exibirAlerta(temp, idAquario, grauDeAviso, grauDeAvisoCor)
-    // }
-    // else if (temp < limites.quente && temp > limites.frio) {
-    //     classe_temperatura = 'cor-alerta ideal';
-    //     removerAlerta(idAquario);
-    // }
-    // else if (temp <= limites.frio && temp > limites.muito_frio) {
-    //     classe_temperatura = 'cor-alerta alerta-frio';
-    //     grauDeAviso = 'alerta frio'
-    //     grauDeAvisoCor = 'cor-alerta alerta-frio'
-    //     exibirAlerta(temp, idAquario, grauDeAviso, grauDeAvisoCor)
-    // }
-    // else if (temp <= limites.muito_frio) {
-    //     classe_temperatura = 'cor-alerta perigo-frio';
-    //     grauDeAviso = 'perigo frio'
-    //     grauDeAvisoCor = 'cor-alerta perigo-frio'
-    //     exibirAlerta(temp, idAquario, grauDeAviso, grauDeAvisoCor)
-    // }
 
 
 }
@@ -154,30 +141,30 @@ function atualizacaoPeriodica() {
 
 
 
-function obterMediaDados(idArmazem){
+function obterMediaDados(idArmazem) {
     fetch(`/medidas/media/${idArmazem}`)
-    .then(resposta => {
-        if (resposta.status == 200) {
-            resposta.json().then(resposta => {
+        .then(resposta => {
+            if (resposta.status == 200) {
+                resposta.json().then(resposta => {
 
-                console.log(sessionStorage.ARMAZENS)
+                    console.log(sessionStorage.ARMAZENS)
 
-                console.log(`media dos dados recebidos: ${JSON.stringify(resposta)}`);
+                    console.log(`media dos dados recebidos: ${JSON.stringify(resposta)}`);
 
-                alertarMedias(resposta, idArmazem);
-            });
-        } else {
-            console.error(`Nenhum dado encontrado para o id ${idArmazem} ou erro na API`);
-        }
-    })
-    .catch(function (error) {
-        console.error(`Erro na obtenção dos dados do aquario p/ gráfico: ${error.message}`);
-    });
+                    alertarMedias(resposta, idArmazem);
+                });
+            } else {
+                console.error(`Nenhum dado encontrado para o id ${idArmazem} ou erro na API`);
+            }
+        })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados do aquario p/ gráfico: ${error.message}`);
+        });
 }
 
 function alertarMedias(resposta) {
     console.log(resposta)
-   
+
 
     var temp = resposta[0].media_temperatura;
     console.log(temp)
@@ -205,12 +192,5 @@ function atualizacaoPeriodicaMedia() {
     setTimeout(atualizacaoPeriodicaMedia, 30000);
 }
 
-
-
-
-
-
-
 let medumidade = 0
-
 

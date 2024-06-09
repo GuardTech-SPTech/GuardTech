@@ -74,11 +74,11 @@
   function exibirArmazens() {
     JSON.parse(sessionStorage.ARMAZENS).forEach(item => {
       console.log(item)
-      if (document.getElementById(`armazem_${item.idArmazem}`)) {
+      if (document.getElementById(`${item.idArmazem}`)) {
         console.log('ainda nao tem o armazem')
       } else {
         document.getElementById('storages').innerHTML += `
-        <div class="box3"  id='armazem_${item.idArmazem}'>
+        <div class="box3"  id='${item.idArmazem}'>
           <h1>${item.descricao}</h1>
           <div class="sensor_grid">
             
@@ -89,13 +89,13 @@
       }
 
       
-      document.getElementById(`armazem_${item.idArmazem}`).innerHTML += `
-      <div class="sensor" id='sensor_${item.idSensor}' onclick="RedirecionarParaDashboard()">
+      document.getElementById(`${item.idArmazem}`).innerHTML += `
+      <div class="sensor" id='${item.idSensor}' >
               <span>Sensor ${sensor}</span>
               <div class="indicadores">
                 
                 <div class="indicador" id="indicador_temperatura_${item.idSensor}">
-                  <span>30º</span>
+                  <span>30º</span>  
                 </div>
                 <div class="indicador" id="indicador_umidade_${item.idSensor}">
                   <span>30%</span>
@@ -105,12 +105,18 @@
       `
       
       sensor += 1 
-
+      
       });
+    const sensores = document.querySelectorAll('.sensor')
+    sensores.forEach(item => {
+      item.addEventListener('click', RedirecionarParaDashboard)
+    })
+    // sensores.addEventListener('click', RedirecionarParaDashboard)
   }
 
   function RedirecionarParaDashboard() {
-
+    sessionStorage.setItem('SENSOR_SELECIONADO', this.id)
+    sessionStorage.setItem('ARMAZEM_SELECIONADO', this.parentNode.id)
     window.location = "../dash teste/index.html"
   }
 </script>
