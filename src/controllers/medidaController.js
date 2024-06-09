@@ -111,10 +111,91 @@ function informacoesArmazem(req, res) {
 
 }
 
+
+function buscarMedidasDia(req, res){
+    var idSensor = req.params.idSensor;
+    
+    console.log("Recuperando as medidas do dia")
+
+    medidaModel.buscarMedidasDia(idSensor).then(function(resultado){
+        if(resultado.length > 0) {
+            res.status(200).json(resultado);
+        }else{
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro){
+        console.log(erro);
+        console.log("Houve um erro ao buscar as medidas do dia", erro.sqlMessage);
+        res.stastus(500).json(erro.sqlMessage)
+    })
+}
+
+function buscarMedidasMes(req, res){
+    var idSensor = req.params.idSensor;
+    
+
+    console.log("Recuperando as medidas do mês")
+
+    medidaModel.buscarMedidasMes(idSensor).then(function(resultado) {
+        if(resultado.length > 0) {
+            res.status(200).json(resultado);
+        }else{
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as medidas do mês", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage)
+    })
+}
+
+
+
+function buscarMedidasSemana(req, res){
+    var idSensor = req.params.idSensor;
+    
+    console.log("Recuperando as medidas da semana")
+
+    medidaModel.buscarMedidasSemana(idSensor).then(function(resultado) {
+        if(resultado.length > 0) {
+            res.status(200).json(resultado);
+        }else{
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as medidas da semana", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage)
+    })
+}
+
+
+function buscarMedidasAno(req, res){
+    var idSensor = req.params.idSensor;
+
+    console.log("Recuperando as medidas do ano")
+
+    medidaModel.buscarMedidasAno(idSensor).then(function(resultado) {
+        if(resultado.length > 0){
+            res.status(200).json(resultado);
+        }else{
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(erro =>{
+        console.log(erro)
+        console.log("Houve um erro ao buscar as medidas do ano", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage)
+    })
+}
+
 module.exports = {
     buscarUltimasMedidas,
     buscarMedidasEmTempoReal,
     buscarMediaMedidas,
-    informacoesArmazem
+    informacoesArmazem,
+    buscarMedidasDia,
+    buscarMedidasMes,
+    buscarMedidasSemana,
+    buscarMedidasAno
 
 }

@@ -21,4 +21,21 @@ router.post("/armazem", function (req, res) {
     medidaController.informacoesArmazem(req, res);
 });
 
+router.get("/dia/:idSensor", function(req, res){
+    medidaController.buscarMedidasDia(req, res);
+})
+
+router.get("/semana/:idSensor", function(req, res){
+    medidaController.buscarMedidasSemana(req, res);
+})
+
+router.get("/mes/:idSensor", function(req, res){
+    medidaController.buscarMedidasMes(req, res);
+})
+
+router.get("/ano/:idSensor", function(req, res){
+    medidaController.buscarMedidasAno(req, res);
+})
+
+
 module.exports = router;

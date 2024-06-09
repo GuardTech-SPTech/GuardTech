@@ -57,8 +57,98 @@ GROUP BY
     return database.executar(instrucaoSql)
 }
 
+function buscarMedidasAno(idSensor) {
+    var instrucaoSql = `SELECT 
+    MONTH(dataHora) AS mes,
+    AVG(dht11_temperatura) AS media_temperatura,
+    AVG(dht11_umidade) AS media_umidade
+FROM registro
+WHERE YEAR(dataHora) = (SELECT YEAR(CURDATE()))
+AND fkSensor = ${idSensor}
+GROUP BY MONTH(dataHora)
+ORDER BY mes;
+`
+
+
+    console.log("Executando a instrução SQL:", instrucaoSql)
+
+    return database.executar(instrucaoSql)
+}
+
+function buscarMedidasMes(idSensor) {
+    var instrucaoSql = `SELECT 
+    (WEEK(dataHora, 0) - WEEK(DATE_SUB(dataHora, INTERVAL DAYOFMONTH(dataHora)-1 DAY), 1) + 1) AS semana_do_mes,
+    AVG(dht11_temperatura) AS media_temperatura,
+    AVG(dht11_umidade) AS media_umidade
+FROM registro
+WHERE YEAR(dataHora) = 2024
+  AND MONTH(dataHora) = ${idSensor }
+  AND fkSensor = 1
+GROUP BY semana_do_mes
+ORDER BY semana_do_mes;
+`
+
+    console.log("Executando a instrução SQL:", instrucaoSql)
+
+    return database.executar(instrucaoSql)
+}
+
+function buscarMedidasSemana(idSensor) {
+    var instrucaoSql = `SELECT 
+    DAYOFWEEK(dataHora) - 1 AS dia_da_semana_numero,
+    AVG(dht11_temperatura) AS media_temperatura,
+    AVG(dht11_umidade) AS media_umidade
+FROM 
+    registro
+WHERE 
+    fkSensor = ${idSensor}
+GROUP BY 
+    dia_da_semana_numero
+ORDER BY 
+    dia_da_semana_numero;
+`
+
+    console.log("Executando a instrução SQL:", instrucaoSql)
+
+    return database.executar(instrucaoSql)
+}
+
+function buscarMedidasDia(idSensor) {
+    var instrucaoSql = `SELECT 
+    (HOUR(dataHora) DIV 3) * 3 AS intervalo,  -- Divide as horas em intervalos de 3 horas e normaliza para o início do intervalo
+    AVG(dht11_temperatura) AS media_temperatura,
+    AVG(dht11_umidade) AS media_umidade
+FROM 
+    registro
+WHERE 
+    YEAR(dataHora) = YEAR(CURDATE())
+    AND MONTH(dataHora) = MONTH(CURDATE())
+    AND DAY(dataHora) = DAY(CURDATE())
+    AND fkSensor = ${idSensor}
+GROUP BY 
+    (HOUR(dataHora) DIV 3) * 3
+ORDER BY 
+    intervalo;
+`;
+
+
+    console.log("Executando a instrução SQL:", instrucaoSql)
+
+    return database.executar(instrucaoSql)
+}
+
+
+
+
+
+
+
 module.exports = {
     buscarUltimasMedidas,
     buscarMedidasEmTempoReal,
-    buscarMediaMedidas
+    buscarMediaMedidas,
+    buscarMedidasDia,
+    buscarMedidasSemana,
+    buscarMedidasMes,
+    buscarMedidasAno
 }
