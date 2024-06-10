@@ -45,7 +45,7 @@ function login() {
                 sessionStorage.ID_EMPRESA = json.empresaId;
                 sessionStorage.ARMAZENS = JSON.stringify(json.armazens)
                 
-                window.location.href = '../Perfil/index.html'
+                window.location.href = '../Monitoramento1/index.html'
             });
 
         } else {
