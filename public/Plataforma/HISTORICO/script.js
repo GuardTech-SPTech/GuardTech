@@ -1,12 +1,36 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const sensorSelecionado = sessionStorage.getItem("SENSOR_SELECIONADO")
+const sensores = JSON.parse(sessionStorage.SENSORES)
+const selectSensor = document.getElementById('select_sensores')
+let sensorSelecionado;
+let myChart;
 
-    let myChart;
+function updateSensorSelecionado(sensor){
+    sessionStorage.setItem('SENSOR_SELECIONADO', sensor)
+
+    sensorSelecionado = sessionStorage.getItem("SENSOR_SELECIONADO")
+
+    updateChart(select_periodo.value)
+
+    
+
+}
+
+
+sensores.forEach((sensor, index) =>{
+    selectSensor.innerHTML += `<option value = ${sensor.idSensor}> Sensor ${index + 1}`
+})
+ 
+
+document.addEventListener("DOMContentLoaded", function () {
+     sensorSelecionado = sessionStorage.getItem("SENSOR_SELECIONADO")
+
+    
 
     console.log(sensorSelecionado)
 
     const ctx = document.getElementById('myChart').getContext('2d');
-    window.updateChart = function (option = 'meses') {
+    window.updateChart = function (option) {
+
+        console.log("A FUNÇÃO FOI CHAMADA")
         if (myChart) {
             myChart.destroy();
         }
@@ -195,3 +219,4 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     };
 });
+
