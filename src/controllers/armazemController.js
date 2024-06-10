@@ -1,9 +1,11 @@
-var aquarioModel = require("../models/aquarioModel");
+var armazemModel = require("../models/armazemModel");
 
 function buscarArmazemPorEmpresa(req, res) {
-  var idUsuario = req.params.idUsuario;
 
-  aquarioModel.buscarArmazemPorEmpresa(idUsuario).then((resultado) => {
+  console.log(req.params)
+  var idEmpresa = req.params.empresaId;
+
+  armazemModel.buscarArmazemPorEmpresa(idEmpresa).then((resultado) => {
     if (resultado.length > 0) {
       res.status(200).json(resultado);
       console.log(resultado);
@@ -29,7 +31,7 @@ function cadastrar(req, res) {
   } else {
 
 
-    aquarioModel.cadastrar(descricao, idUsuario)
+    armazemModel.cadastrar(descricao, idUsuario)
       .then((resultado) => {
         res.status(201).json(resultado);
       }

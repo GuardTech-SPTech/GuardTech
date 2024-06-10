@@ -3,7 +3,7 @@ var router = express.Router();
 
 var aquarioController = require("../controllers/armazemController");
 
-router.get("/:empresaId", function (req, res) {
+router.get("/listar/:empresaId", function (req, res) {
   aquarioController.buscarArmazemPorEmpresa(req, res);
 });
 

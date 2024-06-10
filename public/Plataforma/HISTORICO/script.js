@@ -1,6 +1,7 @@
 const sensores = JSON.parse(sessionStorage.SENSORES)
 const selectSensor = document.getElementById('select_sensores')
-let sensorSelecionado;
+
+let sensorSelecionado = sessionStorage.getItem("SENSOR_SELECIONADO")
 let myChart;
 
 function updateSensorSelecionado(sensor){
@@ -170,7 +171,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         });
                     });
                 }
-            });
+            })
         } else if (option === 'dia') {
             fetch(`../../medidas/dia/${sensorSelecionado}`, {
                 method: "GET"
@@ -215,7 +216,8 @@ document.addEventListener("DOMContentLoaded", function () {
                         });
                     });
                 }
-            });
+            }).catch(   
+            );;
         }
     };
 });
