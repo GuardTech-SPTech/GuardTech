@@ -135,6 +135,7 @@ body {
     align-self: flex-end;
     justify-content: center; 
     align-items: center;
+    margin-left: 10px;
 }
 
 .dentroImob {
@@ -155,4 +156,10 @@ body {
     height: auto;
     max-height: 400px; 
     width: 100%;
+}
+
+.header-container{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
 }

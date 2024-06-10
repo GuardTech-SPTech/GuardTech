@@ -31,18 +31,23 @@
             </div>
         </div>
         <div class="container">
-            <div class="imob">
-                <div class="dentroImob">
-
-                    <select name="sensores" onchange="updateSensorSelecionado(this.value)" id="select_sensores">
-                        
-                    </select>
-                    <select class="select1" id="select_periodo" onchange="updateChart(this.value)">
-                        <option value="meses">Meses</option>
-                        <option value="ano">Ano</option>
-                        <option value="semana">Semana</option>
-                        <option value="dia">Dia</option>
-                    </select>
+            <div class="header-container">
+                <div class="imob">
+                    <div class="dentroImob">
+                        <select class="select1" name="sensores" onchange="updateSensorSelecionado(this.value)" id="select_sensores">
+                        </select>
+                    </div>
+                </div>
+                <div class="imob">
+                    <div class="dentroImob">
+    
+                        <select class="select1" id="select_periodo" onchange="updateChart(this.value)">
+                            <option value="meses">Meses</option>
+                            <option value="ano">Ano</option>
+                            <option value="semana">Semana</option>
+                            <option value="dia">Dia</option>
+                        </select>
+                    </div>
                 </div>
             </div>
             <canvas id="myChart"></canvas>
