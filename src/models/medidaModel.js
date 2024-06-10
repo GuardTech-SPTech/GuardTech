@@ -28,6 +28,18 @@ function buscarMedidasEmTempoReal(idSensor) {
     return database.executar(instrucaoSql);
 }
 
+function buscarMediaHora(idSensor) {
+    var instrucaoSql = `select fkSensor as idSensor, sum(dht11_temperatura) as somaTemperatura, sum(dht11_umidade) as SomaUmidade,
+    count(fksensor) as quantidadeDeDados
+    from registro 
+    where dataHora >= now() - interval 1 hour and fkSensor = ${idSensor} 
+    group by fkSensor
+`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 
 function buscarMediaMedidas(idArmazem) {
     var instrucaoSql = `SELECT 
@@ -81,9 +93,15 @@ function buscarMedidasMes(idSensor) {
     AVG(dht11_temperatura) AS media_temperatura,
     AVG(dht11_umidade) AS media_umidade
 FROM registro
+<<<<<<< HEAD
+WHERE YEAR(dataHora) = 2024
+  AND MONTH(dataHora) = ${idSensor}
+  AND fkSensor = 1
+=======
 WHERE YEAR(dataHora) = (SELECT YEAR(CURDATE()))
   AND MONTH(dataHora) = (SELECT MONTH(CURDATE()))
   AND fkSensor = ${idSensor}
+>>>>>>> 55f96a30502e9bf64bc687d8d1db48eeeca664fc
 GROUP BY semana_do_mes
 ORDER BY semana_do_mes;
 `
@@ -150,5 +168,6 @@ module.exports = {
     buscarMedidasDia,
     buscarMedidasSemana,
     buscarMedidasMes,
-    buscarMedidasAno
+    buscarMedidasAno,
+    buscarMediaHora
 }

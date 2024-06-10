@@ -20,6 +20,62 @@ function obterdados(idSensor) {
 
 }
 
+function obterMediaHora(idSensor) {
+    fetch(`/medidas/mediaHora/${idSensor}`)
+        .then(resposta => {
+            if (resposta.status == 200) {
+                resposta.json().then(resposta => {
+
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+                    // alertar(resposta, idSensor);
+                    console.log(resposta)
+                    plotarMedia(resposta, idSensor)
+                });
+            } else {
+                console.error(`Nenhum média ${idSensor} `);
+            }
+        })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados do aquario p/ gráfico: ${error.message}`);
+        });
+
+}
+
+function plotarMedia(resposta, idSensor) {
+    let sensorEscolhido = sessionStorage.getItem("SENSOR_SELECIONADO")
+    if (sensorEscolhido == idSensor) {
+        let somaTemperatura = resposta[0].somaTemperatura
+        let somaUmidade = resposta[0].SomaUmidade
+        let quantidadeDados = resposta[0].quantidadeDeDados
+        let mediaTemperatura = (somaTemperatura / quantidadeDados).toFixed(2)
+        let mediaUmidade = (somaUmidade / quantidadeDados).toFixed(2)
+
+        const mediaTemp = document.getElementById('mediaTemp')
+        const mediaUmi = document.getElementById('mediaUmi')
+        const alerta_temperatura = document.getElementById('cor_temp')
+        const alerta_umidade = document.getElementById('cor_umi')
+        mediaTemp.innerHTML = `${mediaTemperatura}ºC`
+        mediaUmi.innerHTML = `${mediaUmidade}%`
+
+        if (mediaTemp <= 14) {
+            alerta_temperatura.style.backgroundColor = '#c4ee8e'
+        } else if (mediaTemp <= 18) {
+            alerta_temperatura.style.backgroundColor = '#eccf4d'
+        } else {
+            alerta_temperatura.style.backgroundColor = '#e66666'
+        }
+
+        if (mediaUmidade <= 18) {
+            alerta_umidade.style.backgroundColor = '#c4ee8e'
+        } else if (mediaUmidade <= 25) {
+            alerta_umidade.style.backgroundColor = '#eccf4d'
+        } else {
+            alerta_umidade.style.backgroundColor = '#e66666'
+        }
+    }
+}
+
 function alertar(resposta, idSensor) {
 
     let sensorEscolhido = sessionStorage.getItem("SENSOR_SELECIONADO")
@@ -76,7 +132,7 @@ function alertar(resposta, idSensor) {
         } else {
             alerta_umidade.style.backgroundColor = '#e66666'
         }
-    } else if (indicador_umidade && idSensor == sensorEscolhido){
+    } else if (indicador_umidade && idSensor == sensorEscolhido) {
         if (umi <= 18) {
             indicador_umidade.style.backgroundColor = '#c4ee8e'
         } else if (umi <= 25) {
@@ -86,7 +142,36 @@ function alertar(resposta, idSensor) {
         }
     }
 
+    AdicionarDadoNoGrafico(resposta, idSensor)
+}
 
+function AdicionarDadoNoGrafico(resposta, idSensor) {
+
+    let sensorEscolhido = sessionStorage.getItem("SENSOR_SELECIONADO")
+
+    if(sensorEscolhido == idSensor) {
+        const temperatura = resposta[0].temperatura
+        const umidade = resposta[0].umidade
+        const momento = resposta[0].momento_grafico
+    
+        grafico_temperatura.data.labels.push(momento)
+        grafico_temperatura.data.datasets[0].data.push(temperatura)
+        
+        grafico_umidade.data.labels.push(momento)
+        grafico_umidade.data.datasets[0].data.push(umidade)
+
+        if(grafico_temperatura.data.labels.length > 7) {
+            grafico_temperatura.data.labels.splice(0,1)
+            grafico_temperatura.data.datasets[0].data.splice(0,1)
+
+            grafico_umidade.data.labels.splice(0,1)
+            grafico_umidade.data.datasets[0].data.splice(0,1)
+        }
+
+        grafico_umidade.update()
+        grafico_temperatura.update()
+
+    }
 
 }
 
@@ -116,81 +201,12 @@ function exibirCards() {
     }
 }
 
-function transformarEmDiv({ idAquario, temp, grauDeAviso, grauDeAvisoCor }) {
-
-    var descricao = JSON.parse(sessionStorage.AQUARIOS).find(item => item.id == idAquario).descricao;
-    return `
-    <div class="mensagem-alarme">
-        <div class="informacao">
-            <div class="${grauDeAvisoCor}">&#12644;</div> 
-            <h3>${descricao} está em estado de ${grauDeAviso}!</h3>
-            <small>Temperatura capturada: ${temp}°C.</small>   
-        </div>
-        <div class="alarme-sino"></div>
-    </div>
-    `;
-}
-
-
 function atualizacaoPeriodica() {
     JSON.parse(sessionStorage.ARMAZENS).forEach(item => {
         obterdados(item.idSensor)
+        obterMediaHora(item.idSensor)
     });
     setTimeout(atualizacaoPeriodica, 5000);
 }
 
-
-
-function obterMediaDados(idArmazem) {
-    fetch(`/medidas/media/${idArmazem}`)
-        .then(resposta => {
-            if (resposta.status == 200) {
-                resposta.json().then(resposta => {
-
-                    console.log(sessionStorage.ARMAZENS)
-
-                    console.log(`media dos dados recebidos: ${JSON.stringify(resposta)}`);
-
-                    alertarMedias(resposta, idArmazem);
-                });
-            } else {
-                console.error(`Nenhum dado encontrado para o id ${idArmazem} ou erro na API`);
-            }
-        })
-        .catch(function (error) {
-            console.error(`Erro na obtenção dos dados do aquario p/ gráfico: ${error.message}`);
-        });
-}
-
-function alertarMedias(resposta) {
-    console.log(resposta)
-
-
-    var temp = resposta[0].media_temperatura;
-    console.log(temp)
-    var umi = resposta[0].media_umidade;
-    console.log(umi);
-    var moment = resposta[0].horario
-
-    if (document.getElementById(`temp_atual`) != null) {
-        document.getElementById(`temp_atual`).innerHTML = temp + "°C";
-    }
-    if (document.getElementById(`umidade_atual`) != null) {
-        document.getElementById(`umidade_atual`).innerHTML = umi + "°%";
-    }
-
-    AdicionarDadoDeUmidade(umi, moment);
-    AdicionarDadoDeTemperatura(temp, moment)
-}
-
-
-function atualizacaoPeriodicaMedia() {
-    JSON.parse(sessionStorage.ARMAZENS).forEach(item => {
-
-        obterMediaDados(item.idArmazem)
-    });
-    setTimeout(atualizacaoPeriodicaMedia, 30000);
-}
-
-let medumidade = 0
 

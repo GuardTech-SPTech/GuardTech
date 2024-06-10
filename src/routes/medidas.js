@@ -11,6 +11,10 @@ router.get("/tempo-real/:idSensor", function (req, res) {
     medidaController.buscarMedidasEmTempoReal(req, res);
 })
 
+router.get("/mediaHora/:idSensor", function (req, res) {
+    medidaController.buscarMediaHora(req, res);
+})
+
 
 router.get("/media/:idArmazem", function (req, res){
     medidaController.buscarMediaMedidas(req, res);
