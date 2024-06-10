@@ -93,9 +93,15 @@ function buscarMedidasMes(idSensor) {
     AVG(dht11_temperatura) AS media_temperatura,
     AVG(dht11_umidade) AS media_umidade
 FROM registro
+<<<<<<< HEAD
 WHERE YEAR(dataHora) = 2024
   AND MONTH(dataHora) = ${idSensor}
   AND fkSensor = 1
+=======
+WHERE YEAR(dataHora) = (SELECT YEAR(CURDATE()))
+  AND MONTH(dataHora) = (SELECT MONTH(CURDATE()))
+  AND fkSensor = ${idSensor}
+>>>>>>> 55f96a30502e9bf64bc687d8d1db48eeeca664fc
 GROUP BY semana_do_mes
 ORDER BY semana_do_mes;
 `
