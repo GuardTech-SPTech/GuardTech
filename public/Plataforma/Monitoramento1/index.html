@@ -34,13 +34,13 @@
     <!-- Insere a tela -->
     <div class="lastCaptures">
       <h1> Útimas capturas</h1>
-      <div class="storages" id="storages">  
-        
+      <div class="storages" id="storages">
+
       </div>
     </div>
 
     <dialog open>
-      <div class="gridAlertas">
+      <div class="gridAlertas" id="notificacoes">
         <div class="alerta">
           <p>O armazem X execeu a temperatura</p>
           <p>Sensor x || Posição: Inferior diretio</p>
@@ -52,25 +52,24 @@
         </div>
       </div>
     </dialog>
-    
+
   </div>
 </body>
 
 </html>
 
 <script>
-  
   const notificacoes = document.querySelectorAll('.alerta');
 
   notificacoes.forEach(notificacao => {
-    notificacao.addEventListener('click', function() {
+    notificacao.addEventListener('click', function () {
       this.remove();
     })
   })
 
 
 
-  let sensor = 1 
+  let sensor = 1
   function exibirArmazens() {
     JSON.parse(sessionStorage.ARMAZENS).forEach(item => {
       console.log(item)
@@ -85,10 +84,10 @@
             </div>
             </div>
             `
-      sensor = 1 
+        sensor = 1
       }
 
-      
+
       document.getElementById(`${item.idArmazem}`).innerHTML += `
       <div class="sensor" id='${item.idSensor}' >
               <span>Sensor ${sensor}</span>
@@ -103,10 +102,10 @@
               </div>
             </div>
       `
-      
-      sensor += 1 
-      
-      });
+
+      sensor += 1
+
+    });
     const sensores = document.querySelectorAll('.sensor')
     sensores.forEach(item => {
       item.addEventListener('click', RedirecionarParaDashboard)
@@ -115,6 +114,7 @@
   }
 
   function RedirecionarParaDashboard() {
+    alert(this.id)
     sessionStorage.setItem('SENSOR_SELECIONADO', this.id)
     sessionStorage.setItem('ARMAZEM_SELECIONADO', this.parentNode.id)
     window.location = "../dash teste/index.html"

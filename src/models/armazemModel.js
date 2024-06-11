@@ -3,6 +3,7 @@ var database = require("../database/config");
 function buscarArmazemPorEmpresa(empresaId) {
 
   var instrucaoSql = ` SELECT * from armazem as a 
+  JOIN sensor on a.idarmazem = sensor.fkarmazem
   join endereco as e on a.fkEndereco = e.idEndereco 
   JOIN tipoArmazem as ta on a.fkTipoArmazenamento = ta.idTipoArmazem 
   WHERE a.fkEmpresa = ${empresaId}`;
