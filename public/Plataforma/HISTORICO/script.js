@@ -146,7 +146,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         myChart = new Chart(ctx, {
                             type: 'bar',
                             data: {
-                                labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+                                labels: ['Dom', 'Seg', 'Ter', 'Quar', 'Qui', 'Sex', 'Sáb'],
                                 datasets: [{
                                     label: 'Temperatura',
                                     data: dadosTemp,
