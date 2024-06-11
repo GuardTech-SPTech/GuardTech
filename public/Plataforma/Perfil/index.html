@@ -35,7 +35,7 @@
             <div class="area-perfil">
                 <div class="empresa-perfil">
                     <div class="box-nome">
-                        <h2>Milho XPTO</h2>
+                        <h2 id="nomeEmpresa"></h2>
                     </div>
                     <div class="desc-perfil">
                         <div class="imagem-perfil">
@@ -43,10 +43,10 @@
                         </div>
                         <div class="meta-dado">
                             <div class="area-email">
-                                <p>milho.xpto@email.com</p>
+                                <p id="emailEmpresa"></p>
                             </div>
                             <div class="area-num">
-                                <p>11 3683-2671</p>
+                                <p id="telefoneEmpresa"></p>
                             </div>
                         </div>
                     </div>
@@ -158,4 +158,10 @@
     function abrirTelaCadastroFuncionario(){
         window.location.href = '../CADASTROFUNCIONARIO/index.html'
     }
+
+    nomeEmpresa.innerHTML = `${sessionStorage.NOME_EMPRESA}`;
+    emailEmpresa.innerHTML = `${sessionStorage.EMAIL_USUARIO}`;
+    telefoneEmpresa.innerHTML = `${sessionStorage.TELEFONE}`;
+
+    
 </script>

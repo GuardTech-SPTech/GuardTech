@@ -43,7 +43,8 @@ function login() {
                 sessionStorage.ID_USUARIO = json.idUsuario;
                 sessionStorage.NOME_EMPRESA = json.nomeEmpresa;
                 sessionStorage.ID_EMPRESA = json.empresaId;
-                sessionStorage.ARMAZENS = JSON.stringify(json.armazens)
+                sessionStorage.ARMAZENS = JSON.stringify(json.armazens);
+                sessionStorage.TELEFONE = json.telefone;
                 
                 window.location.href = '../Monitoramento1/index.html'
             });

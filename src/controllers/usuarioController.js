@@ -31,7 +31,8 @@ function autenticar(req, res) {
                                         empresaId: resultadoAutenticar[0].empresaId,
                                         nomeCompleto: resultadoAutenticar[0].nomeCompleto,
                                         nomeEmpresa: resultadoAutenticar[0].empresa,
-                                        armazens: resultadoArmazem
+                                        armazens: resultadoArmazem,
+                                        telefone: resultadoAutenticar[0].telefone
                                     });
                                 } else {
                                     res.status(204).json({ aquarios: [] });
@@ -72,6 +73,8 @@ function cadastrar(req, res) {
             res.status(500).json(erro.sqlMessage);
         });
 }
+
+
 
 module.exports = {
     autenticar,
