@@ -12,7 +12,7 @@
 <body>
     <div class="screen">
         <div class="header">
-            <p onclick="voltarHome()">Voltar</p>
+            <p onclick="voltarPerfil()">Voltar</p>
             <h2>GUARDTECH+</h2>
             <img class="logo" src="images/guardsemescrita.png">
         </div>
@@ -61,7 +61,7 @@
                         <div class="separar">
                             <div class="box-funcionario">
                                 <div class="adicionar">
-                                    <img onclick="abrirTelaCadastroFunc()" src="./images/adicionar 5.svg" alt="">
+                                    <img onclick="abrirTelaCadastroFuncionario()" src="./images/adicionar 5.svg" alt="">
                                 </div>
                             </div>
 
@@ -147,11 +147,15 @@
 
 
 <script>
-    function voltarHome() {
-        window.location.href = '../SITE/index.html';
+    function voltarPerfil() {
+        window.location.href = '../Perfil/index.html';
     }
 
     function abrirTelaCadastroArmazem() {
         window.location.href = '../SOLICITAR_ARMAZEM/index.html'
+    }
+
+    function abrirTelaCadastroFuncionario(){
+        window.location.href = '../CADASTROFUNCIONARIO/index.html'
     }
 </script>
