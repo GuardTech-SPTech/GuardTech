@@ -1,7 +1,7 @@
 
 const container = document.getElementById('showPropriedades')
 
-fetch(`../../armazem/listar/${sessionStorage.getItem("ID_EMPRESA")}`, {
+fetch(`../../armazem/toPerfil/${sessionStorage.getItem("ID_EMPRESA")}`, {
     method: "GET",
 }).then(resposta => {
     console.log(resposta)
@@ -28,7 +28,7 @@ fetch(`../../armazem/listar/${sessionStorage.getItem("ID_EMPRESA")}`, {
                 dadosPropriedade.className = 'dados-propriedade';
 
                 const span1 = document.createElement('span');
-                span1.textContent = armazem.cidade;
+                span1.textContent = `Nome: ${armazem.descricao};`
 
                 const span2 = document.createElement('span');
                 span2.textContent = `Tipo: ${armazem.nome}`;
@@ -38,6 +38,9 @@ fetch(`../../armazem/listar/${sessionStorage.getItem("ID_EMPRESA")}`, {
 
                 const span4 = document.createElement('span');
                 span4.textContent = `Bairro: ${armazem.bairro}`;
+                
+                const span5 = document.createElement('span')
+                span5.textContent = `Cidade: ${armazem.cidade}`
 
                 // Anexa os spans aos dados da propriedade
                 dadosPropriedade.appendChild(span1);
@@ -49,27 +52,13 @@ fetch(`../../armazem/listar/${sessionStorage.getItem("ID_EMPRESA")}`, {
                 infoProp.appendChild(img);
                 infoProp.appendChild(dadosPropriedade);
 
-                // Cria a seção de descrição da propriedade
-                const descProp = document.createElement('div');
-                descProp.className = 'desc-prop';
+                // Cria a seção de descrição da proprieda
 
-                const tituloDesc = document.createElement('span');
-                tituloDesc.className = 'titulo-desc';
-                tituloDesc.innerHTML = 'Descrição:<br>';
+                
 
-                const br = document.createElement('br');
-
-                const spanDesc = document.createElement('span');
-                spanDesc.textContent = armazem.descricao;
-
-                // Anexa os elementos à seção de descrição da propriedade
-                descProp.appendChild(tituloDesc);
-                descProp.appendChild(br);
-                descProp.appendChild(spanDesc);
-
-                // Anexa as seções de informações e descrição ao contêiner principal
+                // Anexa as seções de informações ao contêiner principal
                 boxProp.appendChild(infoProp);
-                boxProp.appendChild(descProp);
+
 
                 container.appendChild(boxProp)
 

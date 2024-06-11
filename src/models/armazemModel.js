@@ -12,6 +12,15 @@ function buscarArmazemPorEmpresa(empresaId) {
   return database.executar(instrucaoSql);
 }
 
+function buscarArmazemporEmpresatoPerfil(empresaId) {
+  var instrucaoSql = `SELECT * FROM armazem AS a JOIN endereco AS e ON a.fkEndereco = e.idEndereco
+    JOIN tipoArmazem AS ta ON a.fkTipoArmazenamento = ta.idTipoArmazem WHERE a.fkEmpresa = 1;`
+
+    console.log("Executando a instrução SQL:", instrucaoSql)
+
+    return database.executar(instrucaoSql)
+}
+
 function infosArmazem(idArmazem) {
 
   var instrucaoSql = `
@@ -38,5 +47,6 @@ function buscarSensores(idArmazem) {
 module.exports = {
   buscarArmazemPorEmpresa,
   infosArmazem,
-  buscarSensores
+  buscarSensores,
+  buscarArmazemporEmpresatoPerfil
 }

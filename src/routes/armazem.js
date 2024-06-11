@@ -11,4 +11,8 @@ router.post("/cadastrar", function (req, res) {
   aquarioController.cadastrar(req, res);
 })
 
+router.get("/toPerfil/:empresaId", function (req, res) {
+  aquarioController.buscarArmazemPorEmpresatoPerfil(req, res)
+})
+
 module.exports = router;

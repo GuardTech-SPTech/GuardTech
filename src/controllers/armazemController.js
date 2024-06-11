@@ -19,6 +19,25 @@ function buscarArmazemPorEmpresa(req, res) {
   });
 }
 
+function buscarArmazemPorEmpresatoPerfil(req, res) {
+
+  console.log(req.params)
+  var idEmpresa = req.params.empresaId;
+
+  armazemModel.buscarArmazemporEmpresatoPerfil(idEmpresa).then((resultado) => {
+    if (resultado.length > 0) {
+      res.status(200).json(resultado);
+      console.log(resultado);
+    } else {
+      res.status(204).json([]);
+    }
+  }).catch(function (erro) {
+    console.log(erro);
+    console.log("Houve um erro ao buscar os armazens para o perfil: ", erro.sqlMessage);
+    res.status(500).json(erro.sqlMessage);
+  });
+}
+
 
 function cadastrar(req, res) {
   var descricao = req.body.descricao;
@@ -48,5 +67,6 @@ function cadastrar(req, res) {
 
 module.exports = {
   buscarArmazemPorEmpresa,
+  buscarArmazemPorEmpresatoPerfil,
   cadastrar
 }
