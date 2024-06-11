@@ -5,6 +5,7 @@ function autenticar(req, res) {
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
     var nome = req.body.nomeServer;
+    
 
     if (email == undefined) {
         res.status(400).send("Seu email está indefinida!");
@@ -53,9 +54,18 @@ function autenticar(req, res) {
 }
 
 function cadastrar(req, res) {
-    const { nomeServer, usernameServer, emailServer, cpfServer, senhaServer, tipoFuncionarioServer } = req.body;
+    console.log(req.body)
+   
+    // const { nomeServer, usernameServer, emailServer, cpfServer, senhaServer, tipoFuncionarioServer} = req.body;
+    const nomeServer = req.body.nomeServer;
+    const usernameServer = req.body.usernameServer;
+    const emailServer = req.body.emailServer;
+    const cpfServer = req.body.cpfServer;
+    const senhaServer = req.body.senhaServer;
+    const tipoFuncionarioServer = req.body.tipoFuncionarioServer;
+    const idEmpresaServer  = req.body.idEmpresaServer;
 
-    usuarioModel.cadastrarFuncionario(nomeServer, usernameServer, emailServer, cpfServer, senhaServer, tipoFuncionarioServer)
+    usuarioModel.cadastrarFuncionario(nomeServer, idEmpresaServer, usernameServer, emailServer, cpfServer, senhaServer, tipoFuncionarioServer)
         .then(resultado => res.status(201).json(resultado))
         .catch(erro => {
             console.error('Erro ao cadastrar funcionário:', erro);

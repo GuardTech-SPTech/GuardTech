@@ -48,6 +48,9 @@ function cadastrarFuncionario() {
     const cpf = document.querySelector('#input_cpf').value;
     const senha = document.querySelector('#input_senha').value;
     const tipoFuncionario = document.querySelector('#select_tipo_funcionario').value;
+    const fkEmpresa = sessionStorage.ID_EMPRESA;
+
+    console.log("ID DA EMPRESA", sessionStorage.ID_EMPRESA)
 
     fetch("/usuarios/cadastrar", {  // Certifique-se de que esta rota está correta conforme a configuração do seu servidor
         method: "POST",
@@ -60,14 +63,15 @@ function cadastrarFuncionario() {
             emailServer: email,
             cpfServer: cpf,
             senhaServer: senha,
-            tipoFuncionarioServer: tipoFuncionario
+            tipoFuncionarioServer: tipoFuncionario,
+            idEmpresaServer: fkEmpresa
         })
     }).then(function (resposta) {
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
             alert("Cadastro de funcionário realizado com sucesso!");
-            window.location.href = "../SITE/index.html";
+            window.location.href = "../Perfil/index.html";
         } else {
             throw "Houve um erro ao tentar realizar o cadastro!";
         }

@@ -7,11 +7,13 @@ function autenticar(nome, email, senha) {
     return database.executar(instrucaoSql);
 }
 
-function cadastrarFuncionario(nome, username, email, cpf, senha, tipoFuncionario) {
+function cadastrarFuncionario(nome, fkEmpresa, username, email, cpf, senha, tipoFuncionario) {
     const instrucaoSql = `
-        INSERT INTO funcionario (nome, username, email, cpf, senha, tipoFuncionario)
-        VALUES ('${nome}', '${username}', '${email}', '${cpf}', '${senha}', '${tipoFuncionario}');
+        INSERT INTO funcionario (nomeCompleto, fkEmpresa, username, email, cpf, senha, fktipoFuncionario)
+        VALUES ('${nome}', ${fkEmpresa}, '${username}', '${email}', '${cpf}', '${senha}', '${tipoFuncionario}');
     `;
+
+    console.log("Executando a instrução sql:", instrucaoSql )
     return database.executar(instrucaoSql);
 }
 
