@@ -12,6 +12,7 @@
     <script src="http://www.chartjs.org/dist/2.7.1/Chart.js"></script>
     <script src="http://www.chartjs.org/samples/latest/utils.js"></script>
     <script src="../Monitoramento1/alerta.js"></script>
+    <script src="https://kit.fontawesome.com/1f12696c43.js" crossorigin="anonymous"></script>
 </head>
 
 <body onload="buscarDados(), atualizacaoPeriodica()">
@@ -69,22 +70,56 @@
                     </div>
                 </div>
                 <div class="parametros-box">
-                    <h1>Parâmetros</h1>
-                    <p>Ideais</p>
-                    <div class="temp-umi-box">
-                        <div class="parametro-temp">
-                            <div class="parametro-back">
-                                <h2>14°</h2>
+                    <div class="header-parametros">
+                        <img src="./imagens/temperatura-baixa.png" onclick="mostrarParametrosTemp()">
+                        <h1>Parâmetros</h1>
+                        <img src="./imagens/ponto-de-condensacao-da-agua.png" onclick="mostrarParametrosUmi()">
+                    </div>
+                    <div class="box-parametros-cards" id="parametros-temp">
+                        <div class="card-parametro1">
+                            <small>Ideal</small>
+                            <div class="container-cards-parametro">
+                                <i class="fa-solid fa-angle-down"></i>
+                                <span>14°</span>
                             </div>
-                            <p>Temperatura</p>
                         </div>
-                        <div class="parametro-umi">
-                            <div class="parametro-back">
-                                <h2>18%</h2>
+                        <div class="card-parametro2">
+                            <small>Alerta</small>
+                            <div class="container-cards-parametro">
+                                <i class="fa-solid fa-angle-down"></i>
+                                <span>18°</span>
                             </div>
-                            <p>Umidade</p>
                         </div>
-
+                        <div class="card-parametro3">
+                            <small>Perigo</small>
+                            <div class="container-cards-parametro">
+                                <i class="fa-solid fa-angle-up"></i>
+                                <span>18°</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="display-hidden" id="parametros-umi">
+                        <div class="card-parametro1">
+                            <small>Ideal</small>
+                            <div class="container-cards-parametro">
+                                <i class="fa-solid fa-angle-down"></i>
+                                <span>18%</span>
+                            </div>
+                        </div>
+                        <div class="card-parametro2">
+                            <small>Alerta</small>
+                            <div class="container-cards-parametro">
+                                <i class="fa-solid fa-angle-down"></i>
+                                <span>25%</span>
+                            </div>
+                        </div>
+                        <div class="card-parametro3">
+                            <small>Perigo</small>
+                            <div class="container-cards-parametro">
+                                <i class="fa-solid fa-angle-up"></i>
+                                <span>25%</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -241,7 +276,7 @@
                 addSensorPosicao.innerHTML = sensor.posicao
             }
 
-        sessionStorage.setItem('SENSOR_SELECIONADO', idSensorSelect)
+            sessionStorage.setItem('SENSOR_SELECIONADO', idSensorSelect)
         });
     }
 
@@ -392,7 +427,7 @@
                 y: {
                     beginAtZero: true
                 }
-                
+
             }
         }
     });
@@ -528,6 +563,20 @@
     // Chama a função para adicionar dados de temperatura a cada 2 segundos
     // setInterval(AdicionarDadoDeUmidade, 10000); // Adiciona um dado a cada 10 segundos
 
+    const parametrosTemp = document.getElementById('parametros-temp')
+    const parametrosUmi = document.getElementById('parametros-umi')
 
+    function mostrarParametrosUmi() {
+        parametrosTemp.classList.remove('box-parametros-cards')
+        parametrosTemp.classList.add('display-hidden')
+        parametrosUmi.classList.remove('display-hidden')
+        parametrosUmi.classList.add('box-parametros-cards')
+    }
 
+    function mostrarParametrosTemp() {
+        parametrosTemp.classList.remove('display-hidden')
+        parametrosTemp.classList.add('box-parametros-cards')
+        parametrosUmi.classList.remove('box-parametros-cards')
+        parametrosUmi.classList.add('display-hidden')
+    }
 </script>
