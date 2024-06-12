@@ -21,15 +21,15 @@ function obterdados(idSensor) {
     }
     
     function alertar(resposta, idSensor) {
+    
 
     var temp = resposta[0].temperatura;
     var umi = resposta[0].umidade;
-    var card;
-    if (document.getElementById(`temperatura_armazem_${idSensor}`) != null) {
-        document.getElementById(`temperatura_armazem_${idSensor}`).innerHTML = temp + "°C";
+    if (document.getElementById(`indicador_temperatura_${idSensor}`) != null) {
+        document.getElementById(`indicador_temperatura_${idSensor}`).innerHTML = temp + "°C";
     }
-    if (document.getElementById(`umidade_armazem_${idSensor}`) != null) {
-        document.getElementById(`umidade_armazem_${idSensor}`).innerHTML = umi + "°%";
+    if (document.getElementById(`indicador_umidade_${idSensor}`) != null) {
+        document.getElementById(`indicador_umidade_${idSensor}`).innerHTML = umi + "°%";
     }
 
     // if (document.getElementById(`card_${idAquario}`)) {
@@ -163,6 +163,7 @@ function alertarMedias(resposta) {
     console.log(temp)
     var umi = resposta[0].media_umidade;
     console.log(umi);
+    var moment = resposta[0].horario
 
     if (document.getElementById(`temp_atual`) != null) {
         document.getElementById(`temp_atual`).innerHTML = temp + "°C";
@@ -171,8 +172,13 @@ function alertarMedias(resposta) {
         document.getElementById(`umidade_atual`).innerHTML = umi + "°%";
     }
 
+<<<<<<< HEAD
     AdicionarDadoDeUmidade(umi);
     AdicionarDadoDeTemperatura(temp);
+=======
+    AdicionarDadoDeUmidade(umi, moment);
+    AdicionarDadoDeTemperatura(temp, moment)
+>>>>>>> d82c5d1a9fdf177a1a5ab1076b2ee32205574b1e
 }
 
 
@@ -181,7 +187,7 @@ function atualizacaoPeriodicaMedia() {
 
         obterMediaDados(item.idArmazem)
     });
-    setTimeout(atualizacaoPeriodicaMedia, 5000);
+    setTimeout(atualizacaoPeriodicaMedia, 30000);
 }
 
 

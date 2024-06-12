@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/style.css">
+    <title>Solicitação de Armazem</title>
+    <link rel="icon" href="assets/sergio.usa.na.aba.ico">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container-form">
+        <div class="area-logo">
+            <div class="box-logo">
+                <h2 class="titulo-logo">Faça uma nova solicitação</h2>
+                <div class="logo">
+                    <img src="assets/logo sem (claro) sem escrita 1.png" alt="">
+                </div>
+                <p class="flush"><a href="../Perfil/index.html">Voltar</a></p>
+            </div>
+        </div>
+        <div class="area-form">
+            <div class="desc-form">
+                <p class="titulo-form">Solicite um novo armazem</p>
+            </div>
+            <div class="form">
+                <input type="text" id="input_capacidade" placeholder="CAPACIDADE">
+                <input type="text" id="input_descricao" placeholder="DESCRICAO">
+                <div class="box-endereco">
+                    <input name="cep" type="text" id="input_cep" size="10" maxlength="9"
+                        placeholder="CEP">
+                    <input type="text" id="input_num" placeholder="NUMERO">
+                </div>
+                <input type="text" id="input_bairro" placeholder="BAIRRO">
+                <input type="text" id="input_cidade" placeholder="CIDADE">
+                <input type="text" id="input_complemento" placeholder="COMPLEMENTO">
+                <select id="select_tipo_armazem">
+                    <option value="" disabled selected>Selecione um tipo</option>
+                    <option value="Silo">Silo</option>
+                </select>
+                <input type="text" id="message" placeholder="Nos de mais infromações sobre o seu pedido"></input>
+            </div>
+            <div class="area-button">
+                <button onclick="SolicitarArmazem()">Solicitar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script src="solicitar.js"></script>
+</body>
+
+</html>

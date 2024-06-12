@@ -31,7 +31,8 @@
                 <input type="text" id="input_cpf" placeholder="CPF">
                 <small id="alert_senha"></small>
                 <input type="text" id="input_senha" placeholder="SENHA">
-                <input type="text" id="input_confirmar_senha" placeholder="CONFIRMAR SENHA">
+                <small id="alert_confirm"></small>
+                <input type="text" id="input_confirmar_senha" onkeyup="showConfirm()" placeholder="CONFIRMAR SENHA">
             </div>
             <div class="area-button">
                 <button onclick="cadastrarUsuario()">Cadastrar</button>

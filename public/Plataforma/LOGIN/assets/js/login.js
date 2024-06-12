@@ -32,18 +32,19 @@ function login() {
 
         if (resposta.ok) {
             console.log('esta ok')
-            console.log(resposta);
+            console.log("RESPOSTA",  resposta);
 
             resposta.json().then(json => {
-                console.log(json);
-                console.log(JSON.stringify(json));
+                console.log('json da resposta', json);
+                console.log(json.username, json.nomeCompleto)
                 sessionStorage.EMAIL_USUARIO = json.email;
-                sessionStorage.NOME_USUARIO = json.nome;
+                sessionStorage.NOME_USUARIO = json.username;
+                sessionStorage.NOME_COMPLETO_USUARIO = json.nomeCompleto;
                 sessionStorage.ID_USUARIO = json.id;
+                sessionStorage.NOME_EMPRESA = json.nomeEmpresa;
                 sessionStorage.ARMAZENS = JSON.stringify(json.armazens)
-                window.location = "../monitoramento1/index.html";
 
-
+                window.location.href = '../Perfil/index.html'
             });
 
         } else {
