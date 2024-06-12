@@ -1,4 +1,5 @@
 var medidaModel = require("../models/medidaModel");
+var armazemModel = require("../models/armazemModel");
 
 function buscarUltimasMedidas(req, res) {
 
@@ -28,7 +29,27 @@ function buscarMedidasEmTempoReal(req, res) {
 
     console.log(`Recuperando medidas em tempo real`);
 
-    medidaModel.buscarMedidasEmTempoReal(idSensor).then(function (resultado) {
+    medidaModel.buscarMedidasEmTempoReal(idSensor)
+        .then(function (resultado) {
+        if (resultado.length > 0) {
+            
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+function buscarMediaHora(req, res) {
+    var idSensor = req.params.idSensor;
+
+    console.log(`Buscando média da ultima`);
+
+    medidaModel.buscarMediaHora(idSensor)
+        .then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -59,9 +80,143 @@ function buscarMediaMedidas(req, res){
     });
 }
 
+function informacoesArmazem(req, res) {
+    var idArmazem = req.body.idArmazemServer;
+
+    if (idArmazem == undefined) {
+        res.status(400).send("Seu email está indefinida!");
+    } else {
+
+        armazemModel.infosArmazem(idArmazem)
+            .then(
+                function (resultadoArmazem) {
+                    console.log(`\nResultados encontrados: ${resultadoArmazem.length}`);
+                    console.log(`Resultados: ${JSON.stringify(resultadoArmazem)}`); // transforma JSON em String
+
+                    if (resultadoArmazem.length == 1) {
+                        console.log(resultadoArmazem);
+
+                    armazemModel.buscarSensores(idArmazem)
+                      .then((resultadoSensores) => {
+                        if(resultadoSensores) {
+                            res.json({
+                                nomeArmazem: resultadoArmazem[0].nome,
+                                enderecoArmazem: resultadoArmazem[0].endereco,
+                                tipoArmazem: resultadoArmazem[0].tipo,
+                                prazoArmazem: resultadoArmazem[0].prazo,
+                                sensores: resultadoSensores
+                            });
+
+                          
+                        } else {
+                            res.statsu(204).json({ aquarios: [] })
+                        }
+
+                      })
+
+                    } else if (resultadoAutenticar.length == 0) {
+                        res.status(403).send("Email e/ou senha inválido(s)");
+                    } else {
+                        res.status(403).send("Mais de um usuário com o mesmo login e senha!");
+                    }
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+
+}
+
+
+function buscarMedidasDia(req, res){
+    var idSensor = req.params.idSensor;
+    
+    console.log("Recuperando as medidas do dia")
+
+    medidaModel.buscarMedidasDia(idSensor).then(function(resultado){
+        if(resultado.length > 0) {
+            res.status(200).json(resultado);
+        }else{
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro){
+        console.log(erro);
+        console.log("Houve um erro ao buscar as medidas do dia", erro.sqlMessage);
+        res.stastus(500).json(erro.sqlMessage)
+    })
+}
+
+function buscarMedidasMes(req, res){
+    var idSensor = req.params.idSensor;
+    
+
+    console.log("Recuperando as medidas do mês")
+
+    medidaModel.buscarMedidasMes(idSensor).then(function(resultado) {
+        if(resultado.length > 0) {
+            res.status(200).json(resultado);
+        }else{
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as medidas do mês", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage)
+    })
+}
+
+
+
+function buscarMedidasSemana(req, res){
+    var idSensor = req.params.idSensor;
+    
+    console.log("Recuperando as medidas da semana")
+
+    medidaModel.buscarMedidasSemana(idSensor).then(function(resultado) {
+        if(resultado.length > 0) {
+            res.status(200).json(resultado);
+        }else{
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as medidas da semana", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage)
+    })
+}
+
+
+function buscarMedidasAno(req, res){
+    var idSensor = req.params.idSensor;
+
+    console.log("Recuperando as medidas do ano")
+
+    medidaModel.buscarMedidasAno(idSensor).then(function(resultado) {
+        if(resultado.length > 0){
+            res.status(200).json(resultado);
+        }else{
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(erro =>{
+        console.log(erro)
+        console.log("Houve um erro ao buscar as medidas do ano", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage)
+    })
+}
+
 module.exports = {
     buscarUltimasMedidas,
     buscarMedidasEmTempoReal,
-    buscarMediaMedidas
+    buscarMediaMedidas,
+    informacoesArmazem,
+    buscarMedidasDia,
+    buscarMedidasMes,
+    buscarMedidasSemana,
+    buscarMedidasAno,
+    buscarMediaHora
 
 }

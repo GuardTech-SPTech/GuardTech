@@ -25,7 +25,7 @@
             </div>
             <div class="nav-bar-R">
                 <ul>
-                    <li><a href="../dash teste/index.html">Monitoramento</a></li>
+                    <li><a href="../Monitoramento1/index.html">Monitoramento</a></li>
                     <li><a href="../HISTORICO/index.html">Histórico</a></li>
                 </ul>
             </div>
@@ -35,7 +35,7 @@
             <div class="area-perfil">
                 <div class="empresa-perfil">
                     <div class="box-nome">
-                        <h2>Milho XPTO</h2>
+                        <h2 id="nomeEmpresa"></h2>
                     </div>
                     <div class="desc-perfil">
                         <div class="imagem-perfil">
@@ -43,10 +43,10 @@
                         </div>
                         <div class="meta-dado">
                             <div class="area-email">
-                                <p>milho.xpto@email.com</p>
+                                <p id="emailEmpresa"></p>
                             </div>
                             <div class="area-num">
-                                <p>11 3683-2671</p>
+                                <p id="telefoneEmpresa"></p>
                             </div>
                         </div>
                     </div>
@@ -57,24 +57,24 @@
                     <div class="titulo-funcionario">
                         <h3>Funcionários</h3>
                     </div>
-                    <div class="container-funcionario">
-                        <div class="separar">
+                    <div  class="container-funcionario">
+                        <div id="div_funcionarios" class="separar">
                             <div class="box-funcionario">
                                 <div class="adicionar">
-                                    <img onclick="abrirTelaCadastroFunc()" src="./images/adicionar 5.svg" alt="">
+                                    <img onclick="abrirTelaCadastroFuncionario()" src="./images/adicionar 5.svg" alt="">
                                 </div>
                             </div>
 
-                            <div class="box-funcionario">
+                            <!-- <div class="box-funcionario">
                                 <div class="card-funcionario">
                                     <p>Walter Santos <br>
                                         <span>Operador</span>
                                     </p>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
 
-                        <div class="separar">
+                        <!-- <div class="separar">
                             <div class="box-funcionario">
                                 <div class="card-funcionario">
                                     <p>Carlos Miguel <br>
@@ -105,16 +105,13 @@
                                     </p>
                                 </div>
                             </div>
-                        </div>
-
-
-
+                        </div> -->
                     </div>
                 </div>
             </div>
-            <div class="area-propriedades">
+            <div class="area-propriedades" id="showPropriedades">
                 <h3>Minhas Propriedades</h3>
-                <div class="box-prop">
+                <!-- <div class="box-prop">
                     <div class="info-prop">
                         <img src="./images/imagem.svg" alt="">
                         <div class="dados-propriedade">
@@ -130,7 +127,7 @@
                         <span>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
                             laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et</span>
                     </div>
-                </div>
+                </div> -->
                 <div class="add-prop">
                     <img onclick="abrirTelaCadastroArmazem()" src="./images/adicionar 5.svg" alt="">
                     <span>Solicitar Novo Armazém</span>
@@ -141,14 +138,57 @@
     </div>
 </body>
 
+<script src="./perfilDom.js"></script>
+
 </html>
 
+
 <script>
-    function voltarHome() {
-        window.location.href = '../SITE/index.html';
-    }
+function voltarHome(){
+  window.location.href = '../SITE/index.html';
+}
 
     function abrirTelaCadastroArmazem() {
         window.location.href = '../SOLICITAR_ARMAZEM/index.html'
     }
+
+    function abrirTelaCadastroFuncionario(){
+        window.location.href = '../CADASTROFUNCIONARIO/index.html'
+    }
+
+    nomeEmpresa.innerHTML = `${sessionStorage.NOME_EMPRESA}`;
+    emailEmpresa.innerHTML = `${sessionStorage.EMAIL_USUARIO}`;
+    telefoneEmpresa.innerHTML = `${sessionStorage.TELEFONE}`;
+
+    function mostrarFuncionario() {
+        fetch(`../../usuarios/funcionario/${sessionStorage.ID_EMPRESA}`, {
+            method: "GET",
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            resposta.json().then(json => {
+                console.log('json da resposta', json);
+            for(let posicao = 0; posicao < json.length; posicao++) {
+                div_funcionarios.innerHTML += `
+                <div class="box-funcionario">
+                    <div class="card-funcionario">
+                        <p>${json[posicao].username}<br>
+                            <span>${json[posicao].funcao}</span>
+                        </p>
+                    </div>
+                </div>`
+            }
+            });
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+
+    }
+
+    mostrarFuncionario()
+
+    
 </script>

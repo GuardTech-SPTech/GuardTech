@@ -13,63 +13,88 @@
 <body onload="exibirArmazens(), atualizacaoPeriodica()">
   <div class="screen">
     <div class="header">
-      <p>Voltar</p>
+      <p onclick="voltarHome()"> Voltar</p>
       <h2>GUARDTECH+</h2>
       <img class="logo" src="imagens/guardsemescrita.png">
     </div>
     <div class="box-nav-bar">
       <div class="nav-bar-L">
         <ul>
-          <li><a href="">Perfil</a></li>
-          <li><a href="">Dúvidas Frequentes</a></li>
+          <li><a href="../Perfil/index.html">Perfil</a></li>
+          <li><a href="../CONTATO/contato.html">Dúvidas Frequentes</a></li>
         </ul>
       </div>
       <div class="nav-bar-R">
         <ul>
-          <li><a href="">Monitoramento</a></li>
-          <li><a href="">Histórico</a></li>
+          <li><a href="../Monitoramento1/index.html">Monitoramento</a></li>
+          <li><a href="../HISTORICO/index.html">Histórico</a></li>
         </ul>
       </div>
     </div>
     <!-- Insere a tela -->
     <div class="lastCaptures">
       <h1> Útimas capturas</h1>
-      <div class="storages" id="storages">  
+      <div class="storages" id="storages">
+
       </div>
     </div>
+
+    <dialog open>
+      <div class="gridAlertas" id="notificacoes">
+        <div class="alerta">
+          <p>O armazem X execeu a temperatura</p>
+          <p>Sensor x || Posição: Inferior diretio</p>
+        </div>
+        <div class="alerta" id='notificacao'>
+          <p>O armazem X execeu a temperatura</p>
+          <p>Sensor x || Posição: Inferior diretio</p>
+          <div class="indicador_alerta">.</div>
+        </div>
+      </div>
+    </dialog>
+
   </div>
 </body>
 
 </html>
 
 <script>
-  
-  let sensor = 1 
+  const notificacoes = document.querySelectorAll('.alerta');
+
+  notificacoes.forEach(notificacao => {
+    notificacao.addEventListener('click', function () {
+      this.remove();
+    })
+  })
+
+
+
+  let sensor = 1
   function exibirArmazens() {
     JSON.parse(sessionStorage.ARMAZENS).forEach(item => {
       console.log(item)
-      if (document.getElementById(`armazem_${item.idArmazem}`)) {
+      if (document.getElementById(`${item.idArmazem}`)) {
         console.log('ainda nao tem o armazem')
       } else {
         document.getElementById('storages').innerHTML += `
-        <div class="box3"  id='armazem_${item.idArmazem}'>
+        <div class="box3"  id='${item.idArmazem}'>
           <h1>${item.descricao}</h1>
           <div class="sensor_grid">
             
             </div>
             </div>
             `
-      sensor = 1 
+        sensor = 1
       }
 
-      
-      document.getElementById(`armazem_${item.idArmazem}`).innerHTML += `
-      <div class="sensor" id='sensor_${item.idSensor}' onclick="RedirecionarParaDashboard()">
+
+      document.getElementById(`${item.idArmazem}`).innerHTML += `
+      <div class="sensor" id='${item.idSensor}' >
               <span>Sensor ${sensor}</span>
               <div class="indicadores">
                 
                 <div class="indicador" id="indicador_temperatura_${item.idSensor}">
-                  <span>30º</span>
+                  <span>30º</span>  
                 </div>
                 <div class="indicador" id="indicador_umidade_${item.idSensor}">
                   <span>30%</span>
@@ -77,14 +102,21 @@
               </div>
             </div>
       `
-      
-      sensor += 1 
 
-      });
+      sensor += 1
+
+    });
+    const sensores = document.querySelectorAll('.sensor')
+    sensores.forEach(item => {
+      item.addEventListener('click', RedirecionarParaDashboard)
+    })
+    // sensores.addEventListener('click', RedirecionarParaDashboard)
   }
 
   function RedirecionarParaDashboard() {
-
+    alert(this.id)
+    sessionStorage.setItem('SENSOR_SELECIONADO', this.id)
+    sessionStorage.setItem('ARMAZEM_SELECIONADO', this.parentNode.id)
     window.location = "../dash teste/index.html"
   }
 </script>

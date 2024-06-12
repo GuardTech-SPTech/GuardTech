@@ -40,11 +40,13 @@ function login() {
                 sessionStorage.EMAIL_USUARIO = json.email;
                 sessionStorage.NOME_USUARIO = json.username;
                 sessionStorage.NOME_COMPLETO_USUARIO = json.nomeCompleto;
-                sessionStorage.ID_USUARIO = json.id;
+                sessionStorage.ID_USUARIO = json.idUsuario;
                 sessionStorage.NOME_EMPRESA = json.nomeEmpresa;
-                sessionStorage.ARMAZENS = JSON.stringify(json.armazens)
-
-                window.location.href = '../Perfil/index.html'
+                sessionStorage.ID_EMPRESA = json.empresaId;
+                sessionStorage.ARMAZENS = JSON.stringify(json.armazens);
+                sessionStorage.TELEFONE = json.telefone;
+                
+                window.location.href = '../Monitoramento1/index.html'
             });
 
         } else {

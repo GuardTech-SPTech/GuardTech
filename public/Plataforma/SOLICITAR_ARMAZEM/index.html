@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/style.css">
-    <title>Solicitação de Armazem</title>
-    <link rel="icon" href="assets/sergio.usa.na.aba.ico">
+    <title>Solicitação de Armázem</title>
+    <link rel="icon" href="../CONTATO/imagens/sergio.usa.na.aba.ico">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -23,24 +23,25 @@
         </div>
         <div class="area-form">
             <div class="desc-form">
-                <p class="titulo-form">Solicite um novo armazem</p>
+                <p class="titulo-form">Solicite um novo armazém</p>
             </div>
             <div class="form">
-                <input type="text" id="input_capacidade" placeholder="CAPACIDADE">
-                <input type="text" id="input_descricao" placeholder="DESCRICAO">
+                <input type="text" id="input_capacidade" placeholder="Capacidade">
+                <input type="text" id="input_descricao" placeholder="Descrição">
                 <div class="box-endereco">
                     <input name="cep" type="text" id="input_cep" size="10" maxlength="9"
                         placeholder="CEP">
-                    <input type="text" id="input_num" placeholder="NUMERO">
+                    <input type="text" id="input_num" placeholder="Número">
                 </div>
-                <input type="text" id="input_bairro" placeholder="BAIRRO">
-                <input type="text" id="input_cidade" placeholder="CIDADE">
-                <input type="text" id="input_complemento" placeholder="COMPLEMENTO">
+                <input type="text" id="input_bairro" placeholder="Bairro">
+                <input type="text" id="input_cidade" placeholder="Cidade">
+                <input type="text" id="input_complemento" placeholder="Complemento">
                 <select id="select_tipo_armazem">
                     <option value="" disabled selected>Selecione um tipo</option>
-                    <option value="Silo">Silo</option>
+                    <option value="Silo curto">Silo (curto)</option>
+                    <option value="Silo longo">Silo (longo)</option>
                 </select>
-                <input type="text" id="message" placeholder="Nos de mais infromações sobre o seu pedido"></input>
+                <input type="text" id="input_obs" placeholder="Observações"></input>
             </div>
             <div class="area-button">
                 <button onclick="SolicitarArmazem()">Solicitar</button>
@@ -53,3 +54,5 @@
 </body>
 
 </html>
+
+<script src="/public/Plataforma/SOLICITAR_ARMAZEM/solicitar.js"></script>

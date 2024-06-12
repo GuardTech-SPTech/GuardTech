@@ -117,19 +117,18 @@ body {
 .info-box {
     text-align: left;
     height: 100%;
-    width: 200px;
+    width: 180px;
     background-color: #F5F5F5;
     box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+    padding-left: 20px;
 }
 
 
 .info_text p{
     font-size: 13px;
-    position: relative;
-    left: 20px;
     max-width: 90%;
 }
 
@@ -142,6 +141,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
+    right: 30px;
 }
 
 .atual-box {
@@ -152,38 +153,38 @@ body {
     width: 460px;
     background-color: #F5F5F5;
     box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.3);
+    position: relative;
+    right: 55px;
 }
 
 .parametros-box {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 55%;
-    width: 100%;
+    justify-content: flex-start;
+    height: 51%;
+    width: 87%;
     background-color: #F5F5F5;
     box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
 
-.parametro-back {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 80px;
-    height: 55px;
-    background-color: #e0f19c;
-    margin-bottom: 15px;
-    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.3);
-}
-
-.temp-umi-box {
+.header-parametros {
+    width: 75%;
     display: flex;
     justify-content: space-around;
-    width: 100%;
-    position: relative;
-    bottom: 20px;
+    align-items: center;
 }
 
+.header-parametros img {
+    height: 20px;
+    width: 20px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.header-parametros img:hover {
+    transform: scale(1.1);
+}
 .parametros-box p {
     margin: 0;
     position: relative;
@@ -192,27 +193,57 @@ body {
     font-weight: 600;
 }
 
-.parametro-temp {
+.box-parametros-cards {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100px;
 }
 
-.parametro-umi {
+.display-hidden {
+    display: none;
+}
+
+.box-parametros-cards div {
+    width: 140px;
+    height: 80px;
+    margin-right: 10px;
+    position: relative;
+    left: 7px;
     display: flex;
-    text-align: center;
-    flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
-    width: 100px;
+    flex-direction: column;
 }
 
-.left-box {
+.box-parametros-cards div small {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.box-parametros-cards div span {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.box-parametros-cards div .container-cards-parametro {
+    height: 20px;
+    width: 70px;
     display: flex;
-    flex-direction: column;
-    width: 30%;
-    margin-right: 20px;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 0;
+}
+
+.box-parametros-cards .card-parametro1 {
+    background-color: #e0f19c;
+}
+.box-parametros-cards .card-parametro2 {
+    background-color: #F1E39C;
+}
+.box-parametros-cards .card-parametro3 {
+    background-color: #F1A69C;
 }
 
 .extra-boxes {
@@ -225,7 +256,7 @@ body {
     right: 6px;
 }
 
-.clima-box {
+.sensor-box {
     height: 100%;
     width: 240px;
     background-color: #F5F5F5; 
@@ -234,9 +265,12 @@ body {
     margin-left: 10px;
 
 }
-.clima-box h1{
+.sensor-box p{
+    margin: 5px;
+    margin-left: 15px;
     display: flex;
-    justify-content: center;
+    text-align: justify;
+    /* justify-content: center; */
 }
 
 .horario-box {
@@ -244,7 +278,7 @@ body {
     flex-direction: column;
     align-items: center;
     height: 100%;
-    width: 200px;
+    width: 255px;
     background-color: #F5F5F5; 
     box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.3);   
 }
@@ -375,25 +409,6 @@ img#imagemfazenda {
     height: 70px;
 }
 
-.clima_elements {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    text-align: center;
-    position: relative;
-    bottom: 20px;
-}
-.clima_elements img{
-    width: 40px;
-    height: 40px;
-}
-
-.clima_elements h1 {
-    color: black;
-    font-size: 16px;
-}
-
 .max_min {
     display: flex;
     flex-direction: column;
@@ -432,4 +447,27 @@ img#imagemfazenda {
 
 .min p {
     font-size: 12px;
+}
+
+.sensorHeader {
+    display: flex;  
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.sensorHeader select {
+    width: 100px;
+    color: #2a4c09;
+    font-family: Inter;
+    font-size: 18px; 
+    font-weight: 700;
+    list-style: none;
+    appearance: none;
+    background-color: #e0f19c;
+    border: none;
+    padding: 8px; 
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    box-shadow: 1px 2px 2px 1px rgba(0, 0, 0, 0.3);
 }

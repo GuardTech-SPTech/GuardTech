@@ -9,7 +9,14 @@
     <link rel="icon" href="imagens/sergio.usa.na.aba.ico">
 </head>
 
-<body>
+
+<!--MODAL DE ALERTA DE ERRO NO CASO DE NÃO HOUVER DADOS NA RESPECTIVA CONSULTA-->
+
+<dialog>
+    <span>SEM DADOS PARA ESTA CONSULTA!</span>
+</dialog>
+
+<body onload="updateChart('meses')">
     <div class="screen">
         <div class="header">
             <p onclick="voltarHome()">Voltar</p>
@@ -25,20 +32,29 @@
             </div>
             <div class="nav-bar-R">
                 <ul>
-                    <li><a href="../dash teste/index.html">Monitoramento</a></li>
+                    <li><a href="../Monitoramento1/index.html">Monitoramento</a></li>
                     <li><a href="">Histórico</a></li>
                 </ul>
             </div>
         </div>
         <div class="container">
-            <div class="imob">
-                <div class="dentroImob">
-                    <select class="select1" onchange="updateChart(this.value)">
-                        <option value="meses">Meses</option>
-                        <option value="ano">Ano</option>
-                        <option value="semana">Semana</option>
-                        <option value="dia">Dia</option>
-                    </select>
+            <div class="header-container">
+                <div class="imob">
+                    <div class="dentroImob">
+                        <select class="select1" name="sensores" onchange="updateSensorSelecionado(this.value)" id="select_sensores">
+                        </select>
+                    </div>
+                </div>
+                <div class="imob">
+                    <div class="dentroImob">
+    
+                        <select class="select1" id="select_periodo" onchange="updateChart(this.value)">
+                            <option value="meses">Meses</option>
+                            <option value="ano">Ano</option>
+                            <option value="semana">Semana</option>
+                            <option value="dia">Dia</option>
+                        </select>
+                    </div>
                 </div>
             </div>
             <canvas id="myChart"></canvas>
@@ -46,61 +62,11 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./script.js"></script>
     <script>
         function voltarHome() {
             window.location.href = '../SITE/index.html';
         }
-
-        document.addEventListener("DOMContentLoaded", function () {
-            const ctx = document.getElementById('myChart').getContext('2d');
-            const myChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'],
-                    datasets: [{
-                        label: 'Temperatura',
-                        data: [20, 22, 25, 27, 28, 30],
-                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        borderWidth: 1
-                    }, {
-                        label: 'Umidade',
-                        data: [60, 55, 50, 45, 40, 35],
-                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                        borderColor: 'rgba(54, 162, 235, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-
-            window.updateChart = function (option) {
-                if (option === 'meses') {
-                    myChart.data.labels = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'];
-                    myChart.data.datasets[0].data = [20, 22, 25, 27, 28, 30];
-                    myChart.data.datasets[1].data = [60, 55, 50, 45, 40, 35];
-                } else if (option === 'ano') {
-                    myChart.data.labels = ['2020', '2021', '2022', '2023', '2024'];
-                    myChart.data.datasets[0].data = [25, 26, 28, 30, 32];
-                    myChart.data.datasets[1].data = [55, 50, 45, 40, 35];
-                } else if (option === 'semana') {
-                    myChart.data.labels = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'];
-                    myChart.data.datasets[0].data = [28, 30, 31, 29, 27, 26, 25];
-                    myChart.data.datasets[1].data = [40, 35, 38, 42, 45, 50, 55];
-                } else if (option === 'dia') {
-                    myChart.data.labels = ['00:00', '03:00', '06:00', '09:00', '12:00', '15:00', '18:00', '21:00'];
-                    myChart.data.datasets[0].data = [22, 23, 24, 25, 26, 27, 28, 29];
-                    myChart.data.datasets[1].data = [50, 48, 46, 45, 44, 43, 42, 41];
-                }
-                myChart.update();
-            };
-        });
     </script>
 </body>
 

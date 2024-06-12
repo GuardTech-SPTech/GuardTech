@@ -65,17 +65,17 @@ function cadastrarUsuario() {
 
     if (!temMaiscula) {
         alert_senha.style.display = 'block';
-        alert_senha.innerHTML = 'A senha deve conter pelo menos uma letra maiscula';
+        alert_senha.innerHTML = 'A senha deve conter pelo menos uma letra maiúscula';
     }
 
     if (!temMinuscula) {
         alert_senha.style.display = 'block';
-        alert_senha.innerHTML = 'A senha deve conter pelo menos uma letra minuscula';
+        alert_senha.innerHTML = 'A senha deve conter pelo menos uma letra minúscula';
     }
 
     if (!temNum) {
         alert_senha.style.display = 'block';
-        alert_senha.innerHTML = 'A senha deve conter pelo menos um numero';
+        alert_senha.innerHTML = 'A senha deve conter pelo menos um número';
     }
 
     if (!temEspecial) {

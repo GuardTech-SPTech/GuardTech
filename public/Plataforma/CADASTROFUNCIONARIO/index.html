@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/style.css">
+    <title>Cadastre seu Funcionário</title>
+    <link rel="icon" href="assets/sergio.usa.na.aba.ico">
+</head>
+<body>
+    <div class="container-form">
+        <div class="area-logo">
+            <div class="box-logo">
+                <h2 class="titulo-logo">Bem-Vindo a GuardTech+</h2>
+                <div class="logo">
+                    <img src="assets/logo sem (claro) sem escrita 1.png" alt="">
+                </div>
+                <p class="flush"><a href="../SITE/index.html">Voltar</a></p>
+            </div>
+        </div>
+        <div class="area-form">
+            <div class="desc-form">
+                <p class="titulo-form">Cadastre-se</p>
+            </div>
+            <div class="form">
+                <input type="text" id="input_nome" placeholder="NOME COMPLETO">
+                <input type="text" id="input_username" placeholder="USERNAME">
+                <input type="email" id="input_email" placeholder="EMAIL">
+                <input type="text" id="input_cpf" placeholder="CPF">
+                <input type="password" id="input_senha" placeholder="SENHA">
+                <select id="select_tipo_funcionario">
+                    <option value="" disabled selected>FUNÇÃO</option>
+                    <option value=3>OPERADOR</option>
+                    <option value=2>ADMINISTRADOR</option>
+                    <option value=1>TÉCNICO</option>
+                </select>
+            </div>
+            <div class="area-button">
+                <button onclick="cadastrarFuncionario()">Cadastrar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/cad.js"></script>
+</body>
+</html>

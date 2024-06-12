@@ -4,6 +4,7 @@ body {
     margin: 0;
     font-family: "Inter", sans-serif;
 }
+
 .screen {
     width: 100%;
     height: 100vh;
@@ -12,6 +13,7 @@ body {
     justify-content: flex-start;
     align-items: center;
 }
+
 .header {
     background-color: #e0f19c;
     width: 100%;
@@ -20,6 +22,7 @@ body {
     justify-content: space-around;
     align-items: center;
 }
+
 .logo {
     height: 135px;
     width: 135px;
@@ -27,6 +30,7 @@ body {
     left: 80px;
     bottom: 5px;
 }
+
 .header h2 {
     color: #2a4c09;
     font-size: 32px;
@@ -34,6 +38,7 @@ body {
     left: 56px;
     bottom: 5px;
 }
+
 .header p {
     color: #747472;
     font-weight: 600;
@@ -41,6 +46,7 @@ body {
     right: 20px;
     bottom: 5px;
 }
+
 .box-nav-bar {
     display: flex;
     justify-content: space-between;
@@ -50,29 +56,34 @@ body {
     position: relative;
     bottom: 25px;
 }
+
 .nav-bar-L {
-    display: flex; 
+    display: flex;
     background-color: #F5F5F5;
     width: 49%;
     height: 90%;
     box-shadow: -1px 2px 2px 1px rgba(0, 0, 0, 0.3);
 }
+
 .box-nav-bar ul {
     display: flex;
     width: 90%;
     justify-content: space-around;
     align-items: center;
     list-style: none;
-    
+
 }
+
 .box-nav-bar a {
     text-decoration: none;
     color: #868686;
 }
+
 .box-nav-bar a:hover {
     transition: 0.5s;
     color: #2a4c09;
 }
+
 .nav-bar-R {
     display: flex;
     background-color: #F5F5F5;
@@ -132,7 +143,7 @@ body {
 }
 
 .boxTemperatura {
-    margin-top: -25px;  
+    margin-top: -25px;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -163,7 +174,7 @@ body {
 }
 
 .boxUmidade {
-    margin-top: -25px; 
+    margin-top: -25px;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -231,7 +242,7 @@ body {
     flex-direction: column;
     width: 50%;
     align-items: center;
-    margin-top: -25px; 
+    margin-top: -25px;
 }
 
 .boxArmazem p {
@@ -254,13 +265,13 @@ body {
     color: #000;
 }
 
-.boxAlerta{
+.boxAlerta {
     display: flex;
     justify-content: center;
     flex-direction: column;
     width: 50%;
     align-items: center;
-    margin-top: -25px; 
+    margin-top: -25px;
 }
 
 .boxAlerta p {
@@ -307,7 +318,7 @@ body {
 
 .box3 {
     padding: 10px;
-    width: 500px;
+    width: 420px;
     height: 250px;
     background-color: #F5F5F5;
     border-radius: 20px;
@@ -316,14 +327,15 @@ body {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    
-    
+
+
 }
 
 
 .indicador {
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
     border-radius: 20px;
-    width: 70px;
+    width: 85px;
     height: 30px;
     background-color: grey;
     display: flex;
@@ -343,7 +355,7 @@ body {
     display: grid;
 }
 
-.sensor{
+.sensor {
     box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.1);
     background-color: #c8c8c8;
     display: flex;
@@ -365,4 +377,51 @@ body {
     width: 200px;
     display: flex;
     justify-content: space-around;
-} 
+}
+
+dialog {
+    background-color: transparent;
+    border: none;
+    top: -380px;
+    position: relative;
+    left: 600px;
+    width: 250px;
+}
+
+.gridAlertas {
+    display: grid;
+}
+
+.alerta {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    height: 120px;
+    padding: 10px;
+    background-color: rgb(245, 245, 245, 0.5);
+    color: #868686;
+    font-weight: 600;
+    margin: 10px;
+}
+
+.alerta p {
+    margin: 3px;
+}
+
+.alerta:hover {
+    transition: ease 0.3s;
+    background-color: rgb(245, 245, 245);
+}
+
+.indicador_alerta {
+    display: block;
+    background-color: red;
+    width: 150px;
+    height: 15px;
+    color: transparent;
+    border-radius: 15px;
+}

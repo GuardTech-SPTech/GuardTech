@@ -1,9 +1,11 @@
-var aquarioModel = require("../models/aquarioModel");
+var armazemModel = require("../models/armazemModel");
 
 function buscarArmazemPorEmpresa(req, res) {
-  var idUsuario = req.params.idUsuario;
 
-  aquarioModel.buscarArmazemPorEmpresa(idUsuario).then((resultado) => {
+  console.log(req.params)
+  var idEmpresa = req.params.empresaId;
+
+  armazemModel.buscarArmazemPorEmpresa(idEmpresa).then((resultado) => {
     if (resultado.length > 0) {
       res.status(200).json(resultado);
       console.log(resultado);
@@ -13,6 +15,25 @@ function buscarArmazemPorEmpresa(req, res) {
   }).catch(function (erro) {
     console.log(erro);
     console.log("Houve um erro ao buscar os armazens: ", erro.sqlMessage);
+    res.status(500).json(erro.sqlMessage);
+  });
+}
+
+function buscarArmazemPorEmpresatoPerfil(req, res) {
+
+  console.log(req.params)
+  var idEmpresa = req.params.empresaId;
+
+  armazemModel.buscarArmazemporEmpresatoPerfil(idEmpresa).then((resultado) => {
+    if (resultado.length > 0) {
+      res.status(200).json(resultado);
+      console.log(resultado);
+    } else {
+      res.status(204).json([]);
+    }
+  }).catch(function (erro) {
+    console.log(erro);
+    console.log("Houve um erro ao buscar os armazens para o perfil: ", erro.sqlMessage);
     res.status(500).json(erro.sqlMessage);
   });
 }
@@ -29,7 +50,7 @@ function cadastrar(req, res) {
   } else {
 
 
-    aquarioModel.cadastrar(descricao, idUsuario)
+    armazemModel.cadastrar(descricao, idUsuario)
       .then((resultado) => {
         res.status(201).json(resultado);
       }
@@ -46,5 +67,6 @@ function cadastrar(req, res) {
 
 module.exports = {
   buscarArmazemPorEmpresa,
+  buscarArmazemPorEmpresatoPerfil,
   cadastrar
 }

@@ -12,9 +12,10 @@
     <script src="http://www.chartjs.org/dist/2.7.1/Chart.js"></script>
     <script src="http://www.chartjs.org/samples/latest/utils.js"></script>
     <script src="../Monitoramento1/alerta.js"></script>
+    <script src="https://kit.fontawesome.com/1f12696c43.js" crossorigin="anonymous"></script>
 </head>
 
-<body onload="atualizacaoPeriodicaMedia()">
+<body onload="buscarDados(), atualizacaoPeriodica()">
     <div class="screen">
         <div class="header">
             <p onclick="voltarHome()">Voltar</p>
@@ -42,30 +43,22 @@
                 <h1>Informações<br>Armazém</h1>
                 <img src="imagens/fazenda.png" id="imagemfazenda">
                 <div class="info_text">
-                    <p><b>Nome:</b> Armazém XPTO</p>
-                    <p><b>Endereço:</b> Rua Haddock Lobo, Nº 535</p>
-                    <p><b>Tipo:</b> Silo</p>
-                    <p><b>Prazo:</b> Curto</p>
+                    <p><b>Nome:</b> <span id="nome"></span></p>
+                    <p><b>Endereço:</b> <span id="endereco"></span></p>
+                    <p><b>Tipo:</b> <span id="tipo"></span></p>
+                    <p><b>Prazo:</b> <span id="prazo"></span></p>
                 </div>
             </div>
-           <div class="left-box">
+            <div class="left-box">
                 <div class="extra-boxes">
-                    <div class="clima-box">
-                        <h1>Clima</h1>
-                        <div class="clima_elements">
-                            <img src="imagens/sol.png">
-                            <h1>26°C<br>Ensolarado</h1>
-                            <div class="max_min">
-                                <div class="max">
-                                    <img src="imagens/seta-esquerda.png" alt="">
-                                    <p>30ºC</p>
-                                </div>
-                                <div class="min">
-                                    <img src="imagens/seta-para-cima (1).png" alt="">
-                                    <p>20ºC</p>
-                                </div>
-                            </div>
+                    <div class="sensor-box">
+                        <div class="sensorHeader">
+                            <h1>Sensores</h1>
+                            <select name="" id="select_sensores">
+                            </select>
                         </div>
+                        <p>Modelo: <span id="modelo_sensor"></span></p>
+                        <p>Posição: <span id="posicao_sensor"></span></p>
                     </div>
                     <div class="horario-box">
                         <h1>Relógio (GMT-3)</h1>
@@ -77,22 +70,56 @@
                     </div>
                 </div>
                 <div class="parametros-box">
-                    <h1>Parâmetros</h1>
-                    <p>Ideais</p>
-                    <div class="temp-umi-box">
-                        <div class="parametro-temp">
-                            <div class="parametro-back">
-                                <h2>14°</h2>
+                    <div class="header-parametros">
+                        <img src="./imagens/temperatura-baixa.png" onclick="mostrarParametrosTemp()">
+                        <h1>Parâmetros</h1>
+                        <img src="./imagens/ponto-de-condensacao-da-agua.png" onclick="mostrarParametrosUmi()">
+                    </div>
+                    <div class="box-parametros-cards" id="parametros-temp">
+                        <div class="card-parametro1">
+                            <small>Ideal</small>
+                            <div class="container-cards-parametro">
+                                <i class="fa-solid fa-angle-down"></i>
+                                <span id="temp_ideal">14°</span>
                             </div>
-                            <p>Temperatura</p>
                         </div>
-                        <div class="parametro-umi">
-                            <div class="parametro-back">
-                                <h2>18%</h2>
+                        <div class="card-parametro2">
+                            <small>Alerta</small>
+                            <div class="container-cards-parametro">
+                                <i class="fa-solid fa-angle-down"></i>
+                                <span id="temp_alerta">18°</span>
                             </div>
-                            <p>Umidade</p>
                         </div>
-                        
+                        <div class="card-parametro3">
+                            <small>Perigo</small>
+                            <div class="container-cards-parametro">
+                                <i class="fa-solid fa-angle-up"></i>
+                                <span id="temp_perigo">18°</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="display-hidden" id="parametros-umi">
+                        <div class="card-parametro1">
+                            <small>Ideal</small>
+                            <div class="container-cards-parametro">
+                                <i class="fa-solid fa-angle-down"></i>
+                                <span id="umi_ideal">18%</span>
+                            </div>
+                        </div>
+                        <div class="card-parametro2">
+                            <small>Alerta</small>
+                            <div class="container-cards-parametro">
+                                <i class="fa-solid fa-angle-down"></i>
+                                <span id="umi_alerta">25%</span>
+                            </div>
+                        </div>
+                        <div class="card-parametro3">
+                            <small>Perigo</small>
+                            <div class="container-cards-parametro">
+                                <i class="fa-solid fa-angle-up"></i>
+                                <span id="umi_perigo">25%</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -131,7 +158,7 @@
                 </div>
             </div>
         </div>
-        
+
 
         <div class="chart-boxes">
             <div class="chart-temp">
@@ -147,6 +174,112 @@
 </html>
 
 <script>
+
+    function buscarDados() {
+        const idArmazemVar = sessionStorage.getItem('ARMAZEM_SELECIONADO');
+
+        fetch("../../medidas/armazem", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idArmazemServer: idArmazemVar
+
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log('esta ok')
+                console.log("RESPOSTA", resposta);
+
+                resposta.json().then(json => {
+                    console.log('json da resposta', json);
+                    console.log(json.username, json.nomeCompleto)
+                    sessionStorage.NOME_ARMAZEM = json.nomeArmazem;
+                    sessionStorage.ENDERECO_ARMAZEM = json.enderecoArmazem;
+                    sessionStorage.TIPO_ARMAZEM = json.tipoArmazem;
+                    sessionStorage.PRAZO_ARMAZEM = json.prazoArmazem;
+                    sessionStorage.SENSORES = JSON.stringify(json.sensores)
+
+                    carrgarDados()
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    // finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+
+    function carrgarDados() {
+        const nome = sessionStorage.NOME_ARMAZEM
+        const endereco = sessionStorage.ENDERECO_ARMAZEM
+        const tipo = sessionStorage.TIPO_ARMAZEM
+        const prazo = sessionStorage.PRAZO_ARMAZEM
+
+        const addnome = document.getElementById('nome')
+        const addendereco = document.getElementById('endereco')
+        const addtipo = document.getElementById('tipo')
+        const addprazo = document.getElementById('prazo')
+        const addSensorModelo = document.getElementById('modelo_sensor')
+        const addSensorPosicao = document.getElementById('posicao_sensor')
+
+        addnome.innerHTML = nome
+        addendereco.innerHTML = endereco
+        addprazo.innerHTML = prazo
+        addtipo.innerHTML = tipo
+
+        const sensores = JSON.parse(sessionStorage.SENSORES)
+        const sensorSelecionado = sessionStorage.getItem('SENSOR_SELECIONADO')
+        const selectSensores = document.getElementById("select_sensores")
+        let contadorSensor = 1
+        sensores.forEach(sensor => {
+            selectSensores.innerHTML += `
+            <option value="${sensor.idSensor}">Sensor ${contadorSensor}</option>
+            `
+
+            if (sensor.idSensor == sensorSelecionado) {
+                addSensorModelo.innerHTML = sensor.modelo
+                addSensorPosicao.innerHTML = sensor.posicao
+            }
+            contadorSensor++
+        });
+
+        selectSensores.value = sensorSelecionado;
+        selectSensores.addEventListener('change', atulizarDadosSensores)
+    }
+
+    function atulizarDadosSensores() {
+        const addSensorModelo = document.getElementById('modelo_sensor')
+        const addSensorPosicao = document.getElementById('posicao_sensor')
+        const sensores = JSON.parse(sessionStorage.SENSORES)
+        const selectedIndex = event.target.selectedIndex;
+        const selectedOption = event.target.options[selectedIndex];
+        const idSensorSelect = selectedOption.value;
+        const selectedText = selectedOption.text;
+
+        sensores.forEach(sensor => {
+            if (sensor.idSensor == idSensorSelect) {
+                addSensorModelo.innerHTML = sensor.modelo
+                addSensorPosicao.innerHTML = sensor.posicao
+            }
+
+            sessionStorage.setItem('SENSOR_SELECIONADO', idSensorSelect)
+        });
+    }
+
     //Relogio 
     const horas = document.getElementById('relogio');
     const minutos = document.getElementById('minutos');
@@ -203,6 +336,46 @@
 
     var mediatemp = 0;
 
+    const tipoArmazem = sessionStorage.getItem('TIPO_ARMAZEM')
+
+    const parametrosArmazemCurto = {
+        temperaturaIdeal: 14,
+        temperaturaAlerta: 18,
+        temperaturaPerigo: 18,
+        umidadeIdeal: 18,
+        umidadeAlerta: 25,
+        umidadePerigo: 25
+    }
+
+    const parametrosArmazemLongo = {
+        temperaturaIdeal: 10,
+        temperaturaAlerta: 14,
+        temperaturaPerigo: 14,
+        umidadeIdeal: 13,
+        umidadeAlerta: 20,
+        umidadePerigo: 20
+    }
+
+    let parametroIdealTemperatura = 0
+    let parametroIdealUmidade = 0
+    let parametroAlertaTemperatura = 0
+    let parametroAlertaUmidade = 0
+
+    if (tipoArmazem == 'curto') {
+        plotarParametrosCurto()
+        parametroIdealTemperatura = parametrosArmazemCurto.temperaturaIdeal
+        parametroIdealUmidade = parametrosArmazemCurto.umidadeIdeal
+        parametroAlertaTemperatura = parametrosArmazemCurto.temperaturaAlerta
+        parametroAlertaUmidade = parametrosArmazemCurto.umidadeAlerta
+
+    } else if (tipoArmazem == 'longo') {
+        plotarParametrosLongo()
+        parametroIdealTemperatura = parametrosArmazemLongo.temperaturaIdeal
+        parametroIdealUmidade = parametrosArmazemLongo.umidadeIdeal
+        parametroAlertaTemperatura = parametrosArmazemLongo.temperaturaAlerta
+        parametroAlertaUmidade = parametrosArmazemLongo.umidadeAlerta
+    }
+
     // Função para adicionar um novo dado de temperatura
     function AdicionarDadoDeTemperatura(temperatura, momento) {
         // Gera um novo dado de temperatura aleatório entre 0 e 30 graus Celsius
@@ -216,7 +389,7 @@
         // Adiciona o novo dado ao array de dados de temperatura
         // DadoTemperatura.push(novaTemperatura);
         // Adiciona a hora atual ao array de labels 
-        grafico_temperatura.data.labels.push(momento); 
+        grafico_temperatura.data.labels.push(momento);
 
         // Adiciona o novo dado ao conjunto de dados do gráfico
         grafico_temperatura.data.datasets[0].data.push(novaTemperatura);
@@ -230,9 +403,9 @@
 
         temperatura_atual.innerHTML = `${novaTemperatura}ºC`
 
-        if (novaTemperatura <= 14) {
+        if (novaTemperatura <= parametroIdealTemperatura) {
             alerta_temperatura.style.backgroundColor = '#c4ee8e'
-        } else if (novaTemperatura <= 18) {
+        } else if (novaTemperatura <= parametroAlertaTemperatura) {
             alerta_temperatura.style.backgroundColor = '#eccf4d'
         } else {
             alerta_temperatura.style.backgroundColor = '#e66666'
@@ -256,7 +429,7 @@
             }
 
             //zerando dados
-            mediatemp = 0 
+            mediatemp = 0
             grafico_temperatura.data.datasets[0].data = []
             grafico_temperatura.data.labels = []
             grafico_temperatura.update();
@@ -297,6 +470,7 @@
                 y: {
                     beginAtZero: true
                 }
+
             }
         }
     });
@@ -313,7 +487,7 @@
         // Adiciona o novo dado ao array de dados de temperatura
         DadoUmidade.push(novaUmidade);
         // Adiciona a contagem atual ao array de labels
-        grafico_umidade.data.labels.push(momento); 
+        grafico_umidade.data.labels.push(momento);
 
         // Adiciona o novo dado ao conjunto de dados do gráfico
         grafico_umidade.data.datasets[0].data.push(novaUmidade);
@@ -321,16 +495,15 @@
         // Atualiza o gráfico
         grafico_umidade.update();
 
-        
-
-
         let alerta_umidade = document.getElementById('indicador_umidade')
         let umi_atual = document.getElementById('umidade_atual')
         umi_atual.innerHTML = `${novaUmidade}%`
 
-        if (novaUmidade <= 18) {
+
+
+        if (novaUmidade <= parametroIdealUmidade) {
             alerta_umidade.style.backgroundColor = '#c4ee8e'
-        } else if (novaUmidade <= 25) {
+        } else if (novaUmidade <= parametroIdealTemperatura) {
             alerta_umidade.style.backgroundColor = '#eccf4d'
         } else {
             alerta_umidade.style.backgroundColor = '#e66666'
@@ -350,7 +523,7 @@
 
             console.log(media)
 
-            if(media <= 18) {
+            if (media <= 18) {
                 cor_umidade.style.backgroundColor = '#c4ee8e'
             } else if (media <= 25) {
                 cor_umidade.style.backgroundColor = '#eccf4d'
@@ -358,15 +531,15 @@
                 cor_umidade.style.backgroundColor = '#e66666'
             }
 
-            medumidade = 0 
+            medumidade = 0
             grafico_umidade.data.datasets[0].data = []
             grafico_umidade.data.labels = []
             grafico_umidade.update();
 
-            
+
 
         }
-        
+
     }
 
     // // Função para adicionar um novo dado de temperatura
@@ -420,17 +593,50 @@
     //         grafico_umidade.data.labels = []
     //         grafico_umidade.update();
 
-            
+
 
     //     }
-        
+
     // }
-   
-    function voltarHome(){
-  window.location.href = '../SITE/index.html';}
+
+    function voltarHome() {
+        window.location.href = '../SITE/index.html';
+    }
     // Chama a função para adicionar dados de temperatura a cada 2 segundos
     // setInterval(AdicionarDadoDeUmidade, 10000); // Adiciona um dado a cada 10 segundos
 
+    const parametrosTemp = document.getElementById('parametros-temp')
+    const parametrosUmi = document.getElementById('parametros-umi')
 
+    function mostrarParametrosUmi() {
+        parametrosTemp.classList.remove('box-parametros-cards')
+        parametrosTemp.classList.add('display-hidden')
+        parametrosUmi.classList.remove('display-hidden')
+        parametrosUmi.classList.add('box-parametros-cards')
+    }
 
+    function mostrarParametrosTemp() {
+        parametrosTemp.classList.remove('display-hidden')
+        parametrosTemp.classList.add('box-parametros-cards')
+        parametrosUmi.classList.remove('box-parametros-cards')
+        parametrosUmi.classList.add('display-hidden')
+    }
+
+    function plotarParametrosCurto() {
+        temp_ideal.innerHTML = parametrosArmazemCurto.temperaturaIdeal + 'º'
+        temp_alerta.innerHTML = parametrosArmazemCurto.temperaturaAlerta + 'º'
+        temp_perigo.innerHTML = parametrosArmazemCurto.temperaturaPerigo + 'º'
+        umi_ideal.innerHTML = parametrosArmazemCurto.umidadeIdeal + '%'
+        umi_alerta.innerHTML = parametrosArmazemCurto.umidadeAlerta + '%'
+        umi_perigo.innerHTML = parametrosArmazemCurto.umidadePerigo + '%'
+    }
+
+    function plotarParametrosLongo() {
+        temp_ideal.innerHTML = parametrosArmazemLongo.temperaturaIdeal + 'º'
+        temp_alerta.innerHTML = parametrosArmazemLongo.temperaturaAlerta + 'º'
+        temp_perigo.innerHTML = parametrosArmazemLongo.temperaturaPerigo + 'º'
+        umi_ideal.innerHTML = parametrosArmazemLongo.umidadeIdeal + '%'
+        umi_alerta.innerHTML = parametrosArmazemLongo.umidadeAlerta + '%'
+        umi_perigo.innerHTML = parametrosArmazemLongo.umidadePerigo + '%'
+    }
 </script>
