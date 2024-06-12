@@ -46,7 +46,7 @@ body {
     display: flex;
     justify-content: center;
     flex-direction: row;
-    width: 100%;
+    width: 50%;
     height: 10%;
     position: relative;
     bottom: 25px;
@@ -61,7 +61,7 @@ body {
 .box-nav-bar ul {
     display: flex;
     width: 90%;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     list-style: none;
     

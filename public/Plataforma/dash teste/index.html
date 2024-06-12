@@ -80,21 +80,21 @@
                             <small>Ideal</small>
                             <div class="container-cards-parametro">
                                 <i class="fa-solid fa-angle-down"></i>
-                                <span>14°</span>
+                                <span id="temp_ideal">14°</span>
                             </div>
                         </div>
                         <div class="card-parametro2">
                             <small>Alerta</small>
                             <div class="container-cards-parametro">
                                 <i class="fa-solid fa-angle-down"></i>
-                                <span>18°</span>
+                                <span id="temp_alerta">18°</span>
                             </div>
                         </div>
                         <div class="card-parametro3">
                             <small>Perigo</small>
                             <div class="container-cards-parametro">
                                 <i class="fa-solid fa-angle-up"></i>
-                                <span>18°</span>
+                                <span id="temp_perigo">18°</span>
                             </div>
                         </div>
                     </div>
@@ -103,21 +103,21 @@
                             <small>Ideal</small>
                             <div class="container-cards-parametro">
                                 <i class="fa-solid fa-angle-down"></i>
-                                <span>18%</span>
+                                <span id="umi_ideal">18%</span>
                             </div>
                         </div>
                         <div class="card-parametro2">
                             <small>Alerta</small>
                             <div class="container-cards-parametro">
                                 <i class="fa-solid fa-angle-down"></i>
-                                <span>25%</span>
+                                <span id="umi_alerta">25%</span>
                             </div>
                         </div>
                         <div class="card-parametro3">
                             <small>Perigo</small>
                             <div class="container-cards-parametro">
                                 <i class="fa-solid fa-angle-up"></i>
-                                <span>25%</span>
+                                <span id="umi_perigo">25%</span>
                             </div>
                         </div>
                     </div>
@@ -336,6 +336,46 @@
 
     var mediatemp = 0;
 
+    const tipoArmazem = sessionStorage.getItem('TIPO_ARMAZEM')
+
+    const parametrosArmazemCurto = {
+        temperaturaIdeal: 14,
+        temperaturaAlerta: 18,
+        temperaturaPerigo: 18,
+        umidadeIdeal: 18,
+        umidadeAlerta: 25,
+        umidadePerigo: 25
+    }
+
+    const parametrosArmazemLongo = {
+        temperaturaIdeal: 10,
+        temperaturaAlerta: 14,
+        temperaturaPerigo: 14,
+        umidadeIdeal: 13,
+        umidadeAlerta: 20,
+        umidadePerigo: 20
+    }
+
+    let parametroIdealTemperatura = 0
+    let parametroIdealUmidade = 0
+    let parametroAlertaTemperatura = 0
+    let parametroAlertaUmidade = 0
+
+    if (tipoArmazem == 'curto') {
+        plotarParametrosCurto()
+        parametroIdealTemperatura = parametrosArmazemCurto.temperaturaIdeal
+        parametroIdealUmidade = parametrosArmazemCurto.umidadeIdeal
+        parametroAlertaTemperatura = parametrosArmazemCurto.temperaturaAlerta
+        parametroAlertaUmidade = parametrosArmazemCurto.umidadeAlerta
+
+    } else if (tipoArmazem == 'longo') {
+        plotarParametrosLongo()
+        parametroIdealTemperatura = parametrosArmazemLongo.temperaturaIdeal
+        parametroIdealUmidade = parametrosArmazemLongo.umidadeIdeal
+        parametroAlertaTemperatura = parametrosArmazemLongo.temperaturaAlerta
+        parametroAlertaUmidade = parametrosArmazemLongo.umidadeAlerta
+    }
+
     // Função para adicionar um novo dado de temperatura
     function AdicionarDadoDeTemperatura(temperatura, momento) {
         // Gera um novo dado de temperatura aleatório entre 0 e 30 graus Celsius
@@ -360,9 +400,9 @@
 
         temperatura_atual.innerHTML = `${novaTemperatura}ºC`
 
-        if (novaTemperatura <= 14) {
+        if (novaTemperatura <= parametroIdealTemperatura) {
             alerta_temperatura.style.backgroundColor = '#c4ee8e'
-        } else if (novaTemperatura <= 18) {
+        } else if (novaTemperatura <= parametroAlertaTemperatura) {
             alerta_temperatura.style.backgroundColor = '#eccf4d'
         } else {
             alerta_temperatura.style.backgroundColor = '#e66666'
@@ -452,16 +492,15 @@
         // Atualiza o gráfico
         grafico_umidade.update();
 
-
-
-
         let alerta_umidade = document.getElementById('indicador_umidade')
         let umi_atual = document.getElementById('umidade_atual')
         umi_atual.innerHTML = `${novaUmidade}%`
 
-        if (novaUmidade <= 18) {
+
+
+        if (novaUmidade <= parametroIdealUmidade) {
             alerta_umidade.style.backgroundColor = '#c4ee8e'
-        } else if (novaUmidade <= 25) {
+        } else if (novaUmidade <= parametroIdealTemperatura) {
             alerta_umidade.style.backgroundColor = '#eccf4d'
         } else {
             alerta_umidade.style.backgroundColor = '#e66666'
@@ -578,5 +617,23 @@
         parametrosTemp.classList.add('box-parametros-cards')
         parametrosUmi.classList.remove('box-parametros-cards')
         parametrosUmi.classList.add('display-hidden')
+    }
+
+    function plotarParametrosCurto() {
+        temp_ideal.innerHTML = parametrosArmazemCurto.temperaturaIdeal + 'º'
+        temp_alerta.innerHTML = parametrosArmazemCurto.temperaturaAlerta + 'º'
+        temp_perigo.innerHTML = parametrosArmazemCurto.temperaturaPerigo + 'º'
+        umi_ideal.innerHTML = parametrosArmazemCurto.umidadeIdeal + '%'
+        umi_alerta.innerHTML = parametrosArmazemCurto.umidadeAlerta + '%'
+        umi_perigo.innerHTML = parametrosArmazemCurto.umidadePerigo + '%'
+    }
+
+    function plotarParametrosLongo() {
+        temp_ideal.innerHTML = parametrosArmazemLongo.temperaturaIdeal + 'º'
+        temp_alerta.innerHTML = parametrosArmazemLongo.temperaturaAlerta + 'º'
+        temp_perigo.innerHTML = parametrosArmazemLongo.temperaturaPerigo + 'º'
+        umi_ideal.innerHTML = parametrosArmazemLongo.umidadeIdeal + '%'
+        umi_alerta.innerHTML = parametrosArmazemLongo.umidadeAlerta + '%'
+        umi_perigo.innerHTML = parametrosArmazemLongo.umidadePerigo + '%'
     }
 </script>
