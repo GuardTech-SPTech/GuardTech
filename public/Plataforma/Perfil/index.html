@@ -12,7 +12,7 @@
 <body>
     <div class="screen">
         <div class="header">
-            <p onclick="voltarPerfil()">Voltar</p>
+            <p onclick="voltarHome()">Voltar</p>
             <h2>GUARDTECH+</h2>
             <img class="logo" src="images/guardsemescrita.png">
         </div>
@@ -25,7 +25,7 @@
             </div>
             <div class="nav-bar-R">
                 <ul>
-                    <li><a href="../dash teste/index.html">Monitoramento</a></li>
+                    <li><a href="../Monitoramento1/index.html">Monitoramento</a></li>
                     <li><a href="../HISTORICO/index.html">Histórico</a></li>
                 </ul>
             </div>
@@ -57,24 +57,24 @@
                     <div class="titulo-funcionario">
                         <h3>Funcionários</h3>
                     </div>
-                    <div class="container-funcionario">
-                        <div class="separar">
+                    <div  class="container-funcionario">
+                        <div id="div_funcionarios" class="separar">
                             <div class="box-funcionario">
                                 <div class="adicionar">
                                     <img onclick="abrirTelaCadastroFuncionario()" src="./images/adicionar 5.svg" alt="">
                                 </div>
                             </div>
 
-                            <div class="box-funcionario">
+                            <!-- <div class="box-funcionario">
                                 <div class="card-funcionario">
                                     <p>Walter Santos <br>
                                         <span>Operador</span>
                                     </p>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
 
-                        <div class="separar">
+                        <!-- <div class="separar">
                             <div class="box-funcionario">
                                 <div class="card-funcionario">
                                     <p>Carlos Miguel <br>
@@ -105,10 +105,7 @@
                                     </p>
                                 </div>
                             </div>
-                        </div>
-
-
-
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -147,9 +144,9 @@
 
 
 <script>
-    function voltarPerfil() {
-        window.location.href = '../Perfil/index.html';
-    }
+function voltarHome(){
+  window.location.href = '../SITE/index.html';
+}
 
     function abrirTelaCadastroArmazem() {
         window.location.href = '../SOLICITAR_ARMAZEM/index.html'
@@ -162,6 +159,36 @@
     nomeEmpresa.innerHTML = `${sessionStorage.NOME_EMPRESA}`;
     emailEmpresa.innerHTML = `${sessionStorage.EMAIL_USUARIO}`;
     telefoneEmpresa.innerHTML = `${sessionStorage.TELEFONE}`;
+
+    function mostrarFuncionario() {
+        fetch(`../../usuarios/funcionario/${sessionStorage.ID_EMPRESA}`, {
+            method: "GET",
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            resposta.json().then(json => {
+                console.log('json da resposta', json);
+            for(let posicao = 0; posicao < json.length; posicao++) {
+                div_funcionarios.innerHTML += `
+                <div class="box-funcionario">
+                    <div class="card-funcionario">
+                        <p>${json[posicao].username}<br>
+                            <span>${json[posicao].funcao}</span>
+                        </p>
+                    </div>
+                </div>`
+            }
+            });
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+
+    }
+
+    mostrarFuncionario()
 
     
 </script>
