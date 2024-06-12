@@ -9,7 +9,16 @@ function cadastrar(nome, cnpj){
 
 }
 
+function listarTelefoneEmpresa(fkEmpresa){
+    var instrucaoSql = `SELECT concat(ddd, ' ', prefixo, '-', sufixo) AS telefone from telefone where fkEmpresa = ${fkEmpresa};`
+
+    console.log("Executando a instrução sql:", instrucaoSql)
+
+    return database.executar(instrucaoSql)
+}
+
 
 module.exports = {
-    cadastrar
+    cadastrar,
+    listarTelefoneEmpresa
 }

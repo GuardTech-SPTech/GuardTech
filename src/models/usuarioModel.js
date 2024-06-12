@@ -2,12 +2,13 @@ var database = require("../database/config");
 
 function autenticar(nome, email, senha) {
     var instrucaoSql = `
-    SELECT concat(ddd, ' ', prefixo, '-', sufixo) AS telefone, e.nome AS 'empresa',
+    SELECT e.nome AS 'empresa',
 nomeCompleto, idFuncionario, idEmpresa as empresaId, username, email,  fkTipoFuncionario 
 FROM funcionario JOIN empresa as e ON funcionario.fkEmpresa = e.idEmpresa 
-JOIN telefone AS t ON e.idEmpresa = t.fkEmpresa
 WHERE funcionario.email = '${email}' AND funcionario.senha = '${senha}' AND username = '${nome}';
     `;
+
+    console.log("Executando a instrução sql", instrucaoSql)
     return database.executar(instrucaoSql);
 }
 

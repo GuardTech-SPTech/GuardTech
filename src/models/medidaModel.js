@@ -113,7 +113,7 @@ function buscarMedidasSemana(idSensor) {
 FROM 
     registro
 WHERE 
-    fkSensor =12
+    fkSensor = ${idSensor}
 GROUP BY 
     dia_da_semana_numero
 ORDER BY 
