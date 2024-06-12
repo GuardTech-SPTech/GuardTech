@@ -250,12 +250,6 @@ function atualizacaoPeriodica() {
 }
 
 
-<<<<<<< HEAD
-
-
-
-=======
-<<<<<<< HEAD
 
 function obterMediaDados(idArmazem){
     fetch(`/medidas/media/${idArmazem}`)
@@ -295,13 +289,8 @@ function alertarMedias(resposta) {
         document.getElementById(`umidade_atual`).innerHTML = umi + "°%";
     }
 
-<<<<<<< HEAD
-    AdicionarDadoDeUmidade(umi);
-    AdicionarDadoDeTemperatura(temp);
-=======
     AdicionarDadoDeUmidade(umi, moment);
     AdicionarDadoDeTemperatura(temp, moment)
->>>>>>> d82c5d1a9fdf177a1a5ab1076b2ee32205574b1e
 }
 
 
@@ -314,14 +303,4 @@ function atualizacaoPeriodicaMedia() {
 }
 
 
-
-
-
-
-
 let medumidade = 0
-
-
-=======
->>>>>>> 40d08ba6a873dc76ca4a51835d58f3ac03cdbf4b
->>>>>>> 8784dc9747c11b9664448fb4e6131deeecc8a975
