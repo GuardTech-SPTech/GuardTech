@@ -13,4 +13,9 @@ router.post("/autenticar", function (req, res) {
     usuarioController.autenticar(req, res);
 });
 
+router.get("/funcionario/:idEmpresa", function (req, res) {
+    console.log("Recebido pedido de lisagem de funcionário: ", req.body);
+    usuarioController.mostrarFuncionario(req, res);
+});
+
 module.exports = router;

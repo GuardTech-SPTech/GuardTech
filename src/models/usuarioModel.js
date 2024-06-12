@@ -21,8 +21,22 @@ function cadastrarFuncionario(nome, fkEmpresa, username, email, cpf, senha, tipo
     return database.executar(instrucaoSql);
 }
 
+function mostrarFuncionario(idEmpresa) {
+
+    var instrucaoSql = `
+    SELECT * FROM funcionario 
+    JOIN tipoFuncionario 
+    ON funcionario.fkTipoFuncionario = tipoFuncionario.idTipoFuncionario 
+    WHERE fkEmpresa = ${idEmpresa};
+    `;
+    console.log("Executando", instrucaoSql)
+    return database.executar(instrucaoSql);
+}
+
+
 
 module.exports = {
     autenticar,
-    cadastrarFuncionario
+    cadastrarFuncionario,
+    mostrarFuncionario
 };
