@@ -255,6 +255,11 @@ body {
     padding: 10px;
 }
 
+.suporte {
+    position: relative;
+    top: 1500px;
+    left: 550px;
+}
 .x {
     display: none;
 }

@@ -57,8 +57,8 @@
                             <select name="" id="select_sensores">
                             </select>
                         </div>
-                        <p>Modelo: <span id="modelo_sensor"></span></p>
-                        <p>Posição: <span id="posicao_sensor"></span></p>
+                        <p>Modelo:<span id="modelo_sensor"></span></p>
+                        <p>Posição:<span id="posicao_sensor"></span></p>
                     </div>
                     <div class="horario-box">
                         <h1>Relógio (GMT-3)</h1>
@@ -80,21 +80,21 @@
                             <small>Ideal</small>
                             <div class="container-cards-parametro">
                                 <i class="fa-solid fa-angle-down"></i>
-                                <span id="temp_ideal">14°</span>
+                                <span id="temp_ideal">0</span>
                             </div>
                         </div>
                         <div class="card-parametro2">
                             <small>Alerta</small>
                             <div class="container-cards-parametro">
                                 <i class="fa-solid fa-angle-down"></i>
-                                <span id="temp_alerta">18°</span>
+                                <span id="temp_alerta">0</span>
                             </div>
                         </div>
                         <div class="card-parametro3">
                             <small>Perigo</small>
                             <div class="container-cards-parametro">
                                 <i class="fa-solid fa-angle-up"></i>
-                                <span id="temp_perigo">18°</span>
+                                <span id="temp_perigo">0</span>
                             </div>
                         </div>
                     </div>
@@ -336,46 +336,6 @@
 
     var mediatemp = 0;
 
-    const tipoArmazem = sessionStorage.getItem('TIPO_ARMAZEM')
-
-    const parametrosArmazemCurto = {
-        temperaturaIdeal: 14,
-        temperaturaAlerta: 18,
-        temperaturaPerigo: 18,
-        umidadeIdeal: 18,
-        umidadeAlerta: 25,
-        umidadePerigo: 25
-    }
-
-    const parametrosArmazemLongo = {
-        temperaturaIdeal: 10,
-        temperaturaAlerta: 14,
-        temperaturaPerigo: 14,
-        umidadeIdeal: 13,
-        umidadeAlerta: 20,
-        umidadePerigo: 20
-    }
-
-    let parametroIdealTemperatura = 0
-    let parametroIdealUmidade = 0
-    let parametroAlertaTemperatura = 0
-    let parametroAlertaUmidade = 0
-
-    if (tipoArmazem == 'curto') {
-        plotarParametrosCurto()
-        parametroIdealTemperatura = parametrosArmazemCurto.temperaturaIdeal
-        parametroIdealUmidade = parametrosArmazemCurto.umidadeIdeal
-        parametroAlertaTemperatura = parametrosArmazemCurto.temperaturaAlerta
-        parametroAlertaUmidade = parametrosArmazemCurto.umidadeAlerta
-
-    } else if (tipoArmazem == 'longo') {
-        plotarParametrosLongo()
-        parametroIdealTemperatura = parametrosArmazemLongo.temperaturaIdeal
-        parametroIdealUmidade = parametrosArmazemLongo.umidadeIdeal
-        parametroAlertaTemperatura = parametrosArmazemLongo.temperaturaAlerta
-        parametroAlertaUmidade = parametrosArmazemLongo.umidadeAlerta
-    }
-
     // Função para adicionar um novo dado de temperatura
     function AdicionarDadoDeTemperatura(temperatura, momento) {
         // Gera um novo dado de temperatura aleatório entre 0 e 30 graus Celsius
@@ -417,12 +377,22 @@
             let media = (mediatemp / 7).toFixed(2)
             media_temperatura.innerHTML = `${media}ºC`
 
-            if (media <= 14) {
-                alerta_media.style.backgroundColor = '#c4ee8e'
-            } else if (media <= 18) {
-                alerta_media.style.backgroundColor = '#eccf4d'
+            if (prazoArmazem == 'longo') {
+                if (media <= 10) {
+                    alerta_media.style.backgroundColor = '#c4ee8e'
+                } else if (media <= 14) {
+                    alerta_media.style.backgroundColor = '#eccf4d'
+                } else {
+                    alerta_media.style.backgroundColor = '#e66666'
+                }
             } else {
-                alerta_media.style.backgroundColor = '#e66666'
+                if (media <= 14) {
+                    alerta_media.style.backgroundColor = '#c4ee8e'
+                } else if (media <= 18) {
+                    alerta_media.style.backgroundColor = '#eccf4d'
+                } else {
+                    alerta_media.style.backgroundColor = '#e66666'
+                }
             }
 
             //zerando dados
@@ -617,6 +587,13 @@
         parametrosTemp.classList.add('box-parametros-cards')
         parametrosUmi.classList.remove('box-parametros-cards')
         parametrosUmi.classList.add('display-hidden')
+    }
+
+    if (tipoArmazem == 'curto') {
+        plotarParametrosCurto()
+
+    } else if (tipoArmazem == 'longo') {
+        plotarParametrosLongo()
     }
 
     function plotarParametrosCurto() {

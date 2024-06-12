@@ -42,6 +42,44 @@ function obterMediaHora(idSensor) {
 
 }
 
+const tipoArmazem = sessionStorage.getItem('PRAZO_ARMAZEM')
+
+    const parametrosArmazemCurto = {
+        temperaturaIdeal: 14,
+        temperaturaAlerta: 18,
+        temperaturaPerigo: 18,
+        umidadeIdeal: 18,
+        umidadeAlerta: 25,
+        umidadePerigo: 25
+    }
+
+    const parametrosArmazemLongo = {
+        temperaturaIdeal: 10,
+        temperaturaAlerta: 14,
+        temperaturaPerigo: 14,
+        umidadeIdeal: 13,
+        umidadeAlerta: 20,
+        umidadePerigo: 20
+    }
+
+    let parametroIdealTemperatura = 0
+    let parametroIdealUmidade = 0
+    let parametroAlertaTemperatura = 0
+    let parametroAlertaUmidade = 0
+
+    if (tipoArmazem == 'curto') {
+        parametroIdealTemperatura = parametrosArmazemCurto.temperaturaIdeal
+        parametroIdealUmidade = parametrosArmazemCurto.umidadeIdeal
+        parametroAlertaTemperatura = parametrosArmazemCurto.temperaturaAlerta
+        parametroAlertaUmidade = parametrosArmazemCurto.umidadeAlerta
+
+    } else if (tipoArmazem == 'longo') {
+        parametroIdealTemperatura = parametrosArmazemLongo.temperaturaIdeal
+        parametroIdealUmidade = parametrosArmazemLongo.umidadeIdeal
+        parametroAlertaTemperatura = parametrosArmazemLongo.temperaturaAlerta
+        parametroAlertaUmidade = parametrosArmazemLongo.umidadeAlerta
+    }
+
 function plotarMedia(resposta, idSensor) {
     let sensorEscolhido = sessionStorage.getItem("SENSOR_SELECIONADO")
     if (sensorEscolhido == idSensor) {
@@ -58,17 +96,17 @@ function plotarMedia(resposta, idSensor) {
         mediaTemp.innerHTML = `${mediaTemperatura}ºC`
         mediaUmi.innerHTML = `${mediaUmidade}%`
 
-        if (mediaTemp <= 14) {
+        if (mediaTemperatura <= 10) {
             alerta_temperatura.style.backgroundColor = '#c4ee8e'
-        } else if (mediaTemp <= 18) {
+        } else if (mediaTemperatura <= 18) {
             alerta_temperatura.style.backgroundColor = '#eccf4d'
         } else {
             alerta_temperatura.style.backgroundColor = '#e66666'
         }
 
-        if (mediaUmidade <= 18) {
+        if (mediaUmidade <= parametroIdealUmidade) {
             alerta_umidade.style.backgroundColor = '#c4ee8e'
-        } else if (mediaUmidade <= 25) {
+        } else if (mediaUmidade <= parametroAlertaUmidade) {
             alerta_umidade.style.backgroundColor = '#eccf4d'
         } else {
             alerta_umidade.style.backgroundColor = '#e66666'
@@ -111,9 +149,9 @@ function alertar(resposta, idSensor) {
             alerta_temperatura.style.backgroundColor = '#e66666'
         }
     } else if (indicador_temperatura && idSensor == sensorEscolhido) {
-        if (temp <= 14) {
+        if (temp <= parametroIdealTemperatura) {
             indicador_temperatura.style.backgroundColor = '#c4ee8e'
-        } else if (temp <= 18) {
+        } else if (temp <= parametroAlertaTemperatura) {
             indicador_temperatura.style.backgroundColor = '#eccf4d'
         } else {
             indicador_temperatura.style.backgroundColor = '#e66666'
@@ -133,9 +171,9 @@ function alertar(resposta, idSensor) {
             alerta_umidade.style.backgroundColor = '#e66666'
         }
     } else if (indicador_umidade && idSensor == sensorEscolhido) {
-        if (umi <= 18) {
+        if (umi <= parametroIdealUmidade) {
             indicador_umidade.style.backgroundColor = '#c4ee8e'
-        } else if (umi <= 25) {
+        } else if (umi <= parametroAlertaUmidade) {
             indicador_umidade.style.backgroundColor = '#eccf4d'
         } else {
             indicador_umidade.style.backgroundColor = '#e66666'
@@ -144,6 +182,8 @@ function alertar(resposta, idSensor) {
 
     AdicionarDadoNoGrafico(resposta, idSensor)
 }
+
+
 
 function AdicionarDadoNoGrafico(resposta, idSensor) {
 
@@ -208,5 +248,8 @@ function atualizacaoPeriodica() {
     });
     setTimeout(atualizacaoPeriodica, 5000);
 }
+
+
+
 
 
