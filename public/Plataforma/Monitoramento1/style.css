@@ -365,12 +365,13 @@ body {
     width: 400px;
     height: 35px;
     margin: 5px;
+    cursor: pointer;
+    transition: 0.2s;
 }
 
 .sensor:hover {
-    height: 37px;
-    width: 405px;
-    transition: ease 0.3s;
+    height: 40px;
+    width: 410px;
 }
 
 .indicadores {
@@ -396,6 +397,11 @@ dialog::-webkit-scrollbar {
 
 .gridAlertas {
     display: grid;
+    cursor: pointer;
+}
+
+.imagem-cuidado {
+    width: 35px;
 }
 
 .alerta {
@@ -425,7 +431,7 @@ dialog::-webkit-scrollbar {
 
 .indicador_alerta {
     display: block;
-    background-color: red;
+    background-color: #e66666;
     width: 150px;
     height: 15px;
     color: transparent;

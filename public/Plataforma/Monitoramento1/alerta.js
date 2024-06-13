@@ -219,6 +219,7 @@ function exibirNotificacao(idSensor, corDoAlerta) {
             } else {
                 addNotificacoes.innerHTML += `
                 <div class="alerta" id='notificacao_${armazem.idArmazem}'>
+                <img class="imagem-cuidado" src="imagens/cuidado.png">
                 <p>O armazem '${armazem.descricao}' emitiu um alerta!</p>
                 <div class="indicador_alerta" style="background-color:${corDoAlerta};">.</div>
                 </div>  
