@@ -44,41 +44,41 @@ function obterMediaHora(idSensor) {
 
 const tipoArmazem = sessionStorage.getItem('PRAZO_ARMAZEM')
 
-    const parametrosArmazemCurto = {
-        temperaturaIdeal: 14,
-        temperaturaAlerta: 18,
-        temperaturaPerigo: 18,
-        umidadeIdeal: 18,
-        umidadeAlerta: 25,
-        umidadePerigo: 25
-    }
+const parametrosArmazemCurto = {
+    temperaturaIdeal: 14,
+    temperaturaAlerta: 18,
+    temperaturaPerigo: 18,
+    umidadeIdeal: 18,
+    umidadeAlerta: 25,
+    umidadePerigo: 25
+}
 
-    const parametrosArmazemLongo = {
-        temperaturaIdeal: 10,
-        temperaturaAlerta: 14,
-        temperaturaPerigo: 14,
-        umidadeIdeal: 13,
-        umidadeAlerta: 20,
-        umidadePerigo: 20
-    }
+const parametrosArmazemLongo = {
+    temperaturaIdeal: 10,
+    temperaturaAlerta: 14,
+    temperaturaPerigo: 14,
+    umidadeIdeal: 13,
+    umidadeAlerta: 20,
+    umidadePerigo: 20
+}
 
-    let parametroIdealTemperatura = 0
-    let parametroIdealUmidade = 0
-    let parametroAlertaTemperatura = 0
-    let parametroAlertaUmidade = 0
+let parametroIdealTemperatura = 0
+let parametroIdealUmidade = 0
+let parametroAlertaTemperatura = 0
+let parametroAlertaUmidade = 0
 
-    if (tipoArmazem == 'curto') {
-        parametroIdealTemperatura = parametrosArmazemCurto.temperaturaIdeal
-        parametroIdealUmidade = parametrosArmazemCurto.umidadeIdeal
-        parametroAlertaTemperatura = parametrosArmazemCurto.temperaturaAlerta
-        parametroAlertaUmidade = parametrosArmazemCurto.umidadeAlerta
+if (tipoArmazem == 'curto') {
+    parametroIdealTemperatura = parametrosArmazemCurto.temperaturaIdeal
+    parametroIdealUmidade = parametrosArmazemCurto.umidadeIdeal
+    parametroAlertaTemperatura = parametrosArmazemCurto.temperaturaAlerta
+    parametroAlertaUmidade = parametrosArmazemCurto.umidadeAlerta
 
-    } else if (tipoArmazem == 'longo') {
-        parametroIdealTemperatura = parametrosArmazemLongo.temperaturaIdeal
-        parametroIdealUmidade = parametrosArmazemLongo.umidadeIdeal
-        parametroAlertaTemperatura = parametrosArmazemLongo.temperaturaAlerta
-        parametroAlertaUmidade = parametrosArmazemLongo.umidadeAlerta
-    }
+} else if (tipoArmazem == 'longo') {
+    parametroIdealTemperatura = parametrosArmazemLongo.temperaturaIdeal
+    parametroIdealUmidade = parametrosArmazemLongo.umidadeIdeal
+    parametroAlertaTemperatura = parametrosArmazemLongo.temperaturaAlerta
+    parametroAlertaUmidade = parametrosArmazemLongo.umidadeAlerta
+}
 
 function plotarMedia(resposta, idSensor) {
     let sensorEscolhido = sessionStorage.getItem("SENSOR_SELECIONADO")
@@ -139,14 +139,21 @@ function alertar(resposta, idSensor) {
 
     let alerta_temperatura = document.getElementById(`indicador_temperatura_${idSensor}`)
     let indicador_temperatura = document.getElementById(`indicador_temp`)
+    let emitirNotificacao = false
+    let corDoAlerta = ''
 
     if (alerta_temperatura) {
         if (temp <= 14) {
             alerta_temperatura.style.backgroundColor = '#c4ee8e'
         } else if (temp <= 18) {
             alerta_temperatura.style.backgroundColor = '#eccf4d'
+            emitirNotificacao = true
+            corDoAlerta = '#eccf4d'
         } else {
             alerta_temperatura.style.backgroundColor = '#e66666'
+            emitirNotificacao = true
+            corDoAlerta = '#e66666'
+
         }
     } else if (indicador_temperatura && idSensor == sensorEscolhido) {
         if (temp <= parametroIdealTemperatura) {
@@ -155,9 +162,9 @@ function alertar(resposta, idSensor) {
             indicador_temperatura.style.backgroundColor = '#eccf4d'
         } else {
             indicador_temperatura.style.backgroundColor = '#e66666'
+
         }
     }
-
 
     let alerta_umidade = document.getElementById(`indicador_umidade_${idSensor}`)
     let indicador_umidade = document.getElementById(`indicador_umidade`)
@@ -167,8 +174,14 @@ function alertar(resposta, idSensor) {
             alerta_umidade.style.backgroundColor = '#c4ee8e'
         } else if (umi <= 25) {
             alerta_umidade.style.backgroundColor = '#eccf4d'
+            emitirNotificacao = true
+            if (!corDoAlerta == '#e66666')
+                corDoAlerta = '#eccf4d'
         } else {
             alerta_umidade.style.backgroundColor = '#e66666'
+            emitirNotificacao = true
+            corDoAlerta = '#e66666'
+
         }
     } else if (indicador_umidade && idSensor == sensorEscolhido) {
         if (umi <= parametroIdealUmidade) {
@@ -180,32 +193,71 @@ function alertar(resposta, idSensor) {
         }
     }
 
+    if (emitirNotificacao) {
+        exibirNotificacao(idSensor, corDoAlerta)
+    }
+
     AdicionarDadoNoGrafico(resposta, idSensor)
 }
 
+function exibirNotificacao(idSensor, corDoAlerta) {
+
+    const addNotificacoes = document.getElementById('gridNotificacoes')
+    const armazens = JSON.parse(sessionStorage.getItem('ARMAZENS'))
+
+
+    armazens.forEach(armazem => {
+        if (armazem.idSensor == idSensor) {
+            let notificacao = document.getElementById(`notificacao_${armazem.idArmazem}`);
+            if (notificacao) {
+                let corNotificacao = notificacao.querySelector('.indicador_alerta');
+
+                if (corNotificacao.style.backgroundColor !== corDoAlerta) {
+                    corNotificacao.style.backgroundColor = corDoAlerta;
+                }
+
+            } else {
+                addNotificacoes.innerHTML += `
+                <div class="alerta" id='notificacao_${armazem.idArmazem}'>
+                <p>O armazem '${armazem.descricao}' emitiu um alerta!</p>
+                <div class="indicador_alerta" style="background-color:${corDoAlerta};">.</div>
+                </div>  
+                `
+            }
+        }
+    })
+
+    const notificacoes = document.querySelectorAll('.alerta')
+    console.log(notificacoes)
+    notificacoes.forEach(notificacao => {
+        notificacao.addEventListener('click', function () {
+            this.remove()
+        })
+    })
+}
 
 
 function AdicionarDadoNoGrafico(resposta, idSensor) {
 
     let sensorEscolhido = sessionStorage.getItem("SENSOR_SELECIONADO")
 
-    if(sensorEscolhido == idSensor) {
+    if (sensorEscolhido == idSensor) {
         const temperatura = resposta[0].temperatura
         const umidade = resposta[0].umidade
         const momento = resposta[0].momento_grafico
-    
+
         grafico_temperatura.data.labels.push(momento)
         grafico_temperatura.data.datasets[0].data.push(temperatura)
-        
+
         grafico_umidade.data.labels.push(momento)
         grafico_umidade.data.datasets[0].data.push(umidade)
 
-        if(grafico_temperatura.data.labels.length > 7) {
-            grafico_temperatura.data.labels.splice(0,1)
-            grafico_temperatura.data.datasets[0].data.splice(0,1)
+        if (grafico_temperatura.data.labels.length > 7) {
+            grafico_temperatura.data.labels.splice(0, 1)
+            grafico_temperatura.data.datasets[0].data.splice(0, 1)
 
-            grafico_umidade.data.labels.splice(0,1)
-            grafico_umidade.data.datasets[0].data.splice(0,1)
+            grafico_umidade.data.labels.splice(0, 1)
+            grafico_umidade.data.datasets[0].data.splice(0, 1)
         }
 
         grafico_umidade.update()
@@ -251,30 +303,30 @@ function atualizacaoPeriodica() {
 
 
 
-function obterMediaDados(idArmazem){
+function obterMediaDados(idArmazem) {
     fetch(`/medidas/media/${idArmazem}`)
-    .then(resposta => {
-        if (resposta.status == 200) {
-            resposta.json().then(resposta => {
+        .then(resposta => {
+            if (resposta.status == 200) {
+                resposta.json().then(resposta => {
 
-                console.log(sessionStorage.ARMAZENS)
+                    console.log(sessionStorage.ARMAZENS)
 
-                console.log(`media dos dados recebidos: ${JSON.stringify(resposta)}`);
+                    console.log(`media dos dados recebidos: ${JSON.stringify(resposta)}`);
 
-                alertarMedias(resposta, idArmazem);
-            });
-        } else {
-            console.error(`Nenhum dado encontrado para o id ${idArmazem} ou erro na API`);
-        }
-    })
-    .catch(function (error) {
-        console.error(`Erro na obtenção dos dados do aquario p/ gráfico: ${error.message}`);
-    });
+                    alertarMedias(resposta, idArmazem);
+                });
+            } else {
+                console.error(`Nenhum dado encontrado para o id ${idArmazem} ou erro na API`);
+            }
+        })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados do aquario p/ gráfico: ${error.message}`);
+        });
 }
 
 function alertarMedias(resposta) {
     console.log(resposta)
-   
+
 
     var temp = resposta[0].media_temperatura;
     console.log(temp)

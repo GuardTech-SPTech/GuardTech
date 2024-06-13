@@ -384,8 +384,14 @@ dialog {
     border: none;
     top: -380px;
     position: relative;
-    left: 600px;
-    width: 250px;
+    left: 680px;
+    width: 280px;
+    overflow-y: scroll;
+    min-height: 620px;
+}
+
+dialog::-webkit-scrollbar {
+    display: none;
 }
 
 .gridAlertas {
