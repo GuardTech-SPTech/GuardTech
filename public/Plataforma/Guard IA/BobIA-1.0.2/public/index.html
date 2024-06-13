@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plataforma | GuardTech+</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="imagens/sergio.usa.na.aba.ico">
+    <link rel="icon" href="img/sergio.usa.na.aba.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 
 <body>
@@ -20,7 +21,7 @@
             <div class="nav-bar-center">
                 <ul>
                     <li><a href="">Guard IA</a></li>
-                  </ul>
+                </ul>
             </div>
         </div>
         <div class="big-box">
@@ -28,15 +29,20 @@
                 <div id="resposta" class="display-hidden"></div>
             </div>
             <div class="box-pergunta">
-                <input id="pergunta" onclick="trocarClasse()" type="text" placeholder="Digite sua pergunta..." >
+                <input id="pergunta" onclick="trocarClasse()" type="text" placeholder="Digite sua pergunta...">
                 <button onclick="gerarResposta()">
                     <i class="fas fa-play"></i>
                 </button>
             </div>
         </div>
+        <div class="manual">
+            <small>Acesse o manual de Instalação</small>
+            <a href="./img/Manual de Instalação - GUARDTECH.pdf" download="manual.pdf"><img src="./img/manual.png"alt=""></a>
+        </div>
+
 
         <script>
-                
+
             function trocarClasse() {
                 let elemento = document.getElementById('resposta')
 
@@ -59,10 +65,10 @@
                 const data = await response.json();
 
                 let elemento = document.getElementById('resposta')
-                
+
                 elemento.classList.remove('display-hidden')
                 elemento.classList.add('resposta')
-                
+
                 document.getElementById('resposta').innerText = data.resultado;
             }
 
