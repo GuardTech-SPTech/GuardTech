@@ -1,13 +1,13 @@
-<!DOCTYPE html>
+notas: <!DOCTYPE html>
 <html lang="en">
-    
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="assets/style.css">
-        <title>Cadastre-se</title>
-        <link rel="icon" href="assets/sergio.usa.na.aba.ico">
-        <script src="assets/js/cad.js"></script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/style.css">
+    <title>Cadastre-se</title>
+    <link rel="icon" href="assets/sergio.usa.na.aba.ico">
+    <script src="assets/js/cad.js"></script>
 </head>
 
 <body>
@@ -28,16 +28,16 @@
             <div class="form">
                 <input type="text" id="input_empresa" placeholder="EMPRESA">
                 <div class="box-endereco">
-                    <input name="cep" type="text" id="input_cep" size="10" maxlength="9"
-                        placeholder="CEP">
+                    <input name="cep" type="text" id="input_cep" size="10" maxlength="9" placeholder="CEP">
                     <input type="text" id="input_num" placeholder="NUMERO">
                 </div>
                 <small class="alert" id="alert_cep"></small>
                 <input type="text" id="input_logradouro" placeholder="LOGRADOURO">
                 <input type="text" id="input_bairro" placeholder="BAIRRO">
                 <input type="text" id="input_cidade" placeholder="CIDADE">
-                <small class="alert" id="alert_cnpj">CNPJ invalido!</small>
+                <small class="alert" id="alert_cnpj">CNPJ inválido!</small>
                 <input type="text" onkeyup="showCNPJ()" id="input_cnpj" placeholder="CNPJ">
+                <input type="text" id="input_telefone" placeholder="TELEFONE">
                 <input type="text" id="input_estado" placeholder="ESTADO">
                 <input type="text" id="input_complemento" placeholder="COMPLEMENTO">
             </div>
@@ -47,16 +47,12 @@
         </div>
     </div>
 
-
     <script>
-
-
         const cep = document.querySelector('#input_cep')
         const logradouro = document.querySelector('#input_logradouro')
         const cidade = document.querySelector('#input_cidade')
         const bairro = document.querySelector('#input_bairro')
         const mensagem = document.querySelector('#alert_cep')
-
 
         const CaracteresPermitidos = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-']
 
@@ -67,15 +63,12 @@
         }
 
         cep.addEventListener('focusout', async () => {
-
             let confirmacaoCep = false
 
             // Verificando o campo CEP
-
             if (cep.value.length >= 8 && cep.value.length <= 9) {
                 for (let numeroChar = 0; numeroChar < cep.value.length; numeroChar++) {
                     let caracter = cep.value[numeroChar]
-
                     if (CaracteresPermitidos.indexOf(caracter) != -1) {
                         confirmacaoCep = true;
                     } else {
@@ -99,63 +92,82 @@
                 clearInput()
             }
 
-
             if (confirmacaoCep) {
-
                 mensagem.style.display = 'none'
-
-
-
                 const response = await fetch(`https://viacep.com.br/ws/${cep.value}/json/`)
-
                 const responseCep = await response.json();
 
                 logradouro.value = responseCep.logradouro;
                 cidade.value = responseCep.localidade;
                 bairro.value = responseCep.bairro;
 
-                logradouro.setAttribute('readonly' , '')
-                cidade.setAttribute('readonly' , '')
+                logradouro.setAttribute('readonly', '')
+                cidade.setAttribute('readonly', '')
                 bairro.setAttribute('readonly', '')
             }
-
-
         })
-       
 
+        function validateCNPJ(cnpj) {
+            cnpj = cnpj.replace(/[^\d]+/g, '');
+
+            if (cnpj.length !== 14) return false;
+
+            // Elimina CNPJs inválidos conhecidos
+            if (/^(\d)\1+$/.test(cnpj)) return false;
+
+            // Valida DVs
+            let length = cnpj.length - 2;
+            let numbers = cnpj.substring(0, length);
+            let digits = cnpj.substring(length);
+            let sum = 0;
+            let pos = length - 7;
+
+            for (let i = length; i >= 1; i--) {
+                sum += numbers.charAt(length - i) * pos--;
+                if (pos < 2) pos = 9;
+            }
+
+            let result = sum % 11 < 2 ? 0 : 11 - sum % 11;
+            if (result != digits.charAt(0)) return false;
+
+            length = length + 1;
+            numbers = cnpj.substring(0, length);
+            sum = 0;
+            pos = length - 7;
+
+            for (let i = length; i >= 1; i--) {
+                sum += numbers.charAt(length - i) * pos--;
+                if (pos < 2) pos = 9;
+            }
+
+            result = sum % 11 < 2 ? 0 : 11 - sum % 11;
+            if (result != digits.charAt(1)) return false;
+
+            return true;
+        }
 
         function showCNPJ() {
             const cnpj = input_cnpj.value;
-
-
-            if (cnpj == '' || cnpj[2] != '.' || cnpj[6] != '.' || cnpj[15] != '-' || cnpj[10] != '/' || cnpj.indexOf('0001') <= cnpj[10]) {
-                alert_cnpj.style.display = 'block'
+            if (validateCNPJ(cnpj)) {
+                alert_cnpj.style.display = 'none';
             } else {
-                alert_cnpj.style.display = 'none'
+                alert_cnpj.style.display = 'block';
             }
-
         }
 
-        // function showCep() {
-        //     const cep = input_cep.value;
+        const telefone = document.getElementById('input_telefone');
 
-        //     if (cep == '' || cep.length != 9) {
-        //         alert_cep.style.display = 'block'
-        //     } else {
-        //         alert_cep.style.display = 'none'
-        //     }
+        telefone.addEventListener('keyup', function () {
+            const numero = telefone.value.replace(/\D/g, '');
+            telefone.value = mascaraCelular(numero);
+        });
 
-        // }
+        function mascaraCelular(numero) {
+            return numero.replace(/^(\d{2})(\d{5})(\d{4})$/, "($1) $2-$3");
+        }
 
 
-        // function showConfirm() {
-        //     const senha = input_senha.value;
-        //     const confirm = input_confirm.value;
-
-        //     if (senha != confirm) {
-        //         alert_confirm.style.display = 'block'
-        //     } else {
-        //         alert_confirm.style.display = 'none'
-        //     }
-        // }
     </script>
+</body>
+
+</html>

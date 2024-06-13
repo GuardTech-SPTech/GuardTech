@@ -4,7 +4,7 @@ function cadastrar(req, res){
     var idEmpresa  = req.body.idEmpresaServer
     var cep = req.body.cepServer;
     var numero = req.body.numeroServer;
-    var logradouro = req.body.logradouroSever
+    var logradouro = req.body.logradouroServer
     var bairro = req.body.bairroServer
     var cidade = req.body.cidadeServer
     var estado = req.body.estadoServer
