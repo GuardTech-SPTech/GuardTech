@@ -218,6 +218,7 @@ body {
 .area-funcionario .foto-funcionario img {
     width: 80px;
     height: 80px;
+    cursor: pointer;
 }
 
 .area-funcionario .titulo-funcionario{
@@ -289,6 +290,7 @@ body {
 .adicionar img {
     width: 50px;
     height: 50px;
+    cursor: pointer;
 }
 
 ::-webkit-scrollbar {
